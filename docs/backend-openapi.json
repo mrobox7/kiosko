@@ -1,0 +1,984 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Restaurant Reservation API",
+    "description": "Backend service for the restaurant reception agent exercise. Provides tables, menu, reservations, orders, and customer profile data. Treat this as a black box and do not modify it.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["meta"],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        }
+      }
+    },
+    "/tables": {
+      "get": {
+        "tags": ["tables"],
+        "summary": "List Tables",
+        "operationId": "list_tables_tables_get",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Location"
+            }
+          },
+          {
+            "name": "min_capacity",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "integer" }, { "type": "null" }],
+              "title": "Min Capacity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/TableOut" },
+                  "title": "Response List Tables Tables Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tables/{table_id}": {
+      "get": {
+        "tags": ["tables"],
+        "summary": "Get Table",
+        "operationId": "get_table_tables__table_id__get",
+        "parameters": [
+          {
+            "name": "table_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Table Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/TableOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "tags": ["customers"],
+        "summary": "Create Customer",
+        "operationId": "create_customer_customers_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CustomerCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CustomerOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/lookup": {
+      "get": {
+        "tags": ["customers"],
+        "summary": "Lookup Customer",
+        "description": "Find a customer by phone or email. Returns 404 if no match.",
+        "operationId": "lookup_customer_customers_lookup_get",
+        "parameters": [
+          {
+            "name": "phone",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Phone"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Email"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CustomerOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customer_id}": {
+      "get": {
+        "tags": ["customers"],
+        "summary": "Get Customer",
+        "operationId": "get_customer_customers__customer_id__get",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Customer Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CustomerOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customer_id}/preferences": {
+      "patch": {
+        "tags": ["customers"],
+        "summary": "Update Preferences",
+        "description": "Shallow-merge the given keys into the customer's preferences JSON.",
+        "operationId": "update_preferences_customers__customer_id__preferences_patch",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Customer Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/PreferencesUpdate" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CustomerOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customer_id}/reservations": {
+      "get": {
+        "tags": ["customers"],
+        "summary": "Get Customer Reservations",
+        "operationId": "get_customer_reservations_customers__customer_id__reservations_get",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Customer Id" }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Status"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/ReservationOut" },
+                  "title": "Response Get Customer Reservations Customers  Customer Id  Reservations Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/{customer_id}/orders": {
+      "get": {
+        "tags": ["customers"],
+        "summary": "Get Customer Orders",
+        "operationId": "get_customer_orders_customers__customer_id__orders_get",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Customer Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/OrderOut" },
+                  "title": "Response Get Customer Orders Customers  Customer Id  Orders Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu": {
+      "get": {
+        "tags": ["menu"],
+        "summary": "List Menu",
+        "operationId": "list_menu_menu_get",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Category"
+            }
+          },
+          {
+            "name": "tags_any",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "description": "Match items having ANY of these tags",
+              "title": "Tags Any"
+            },
+            "description": "Match items having ANY of these tags"
+          },
+          {
+            "name": "tags_all",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "description": "Match items having ALL of these tags",
+              "title": "Tags All"
+            },
+            "description": "Match items having ALL of these tags"
+          },
+          {
+            "name": "exclude_tags",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "description": "Exclude items having ANY of these tags",
+              "title": "Exclude Tags"
+            },
+            "description": "Exclude items having ANY of these tags"
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "number" }, { "type": "null" }],
+              "title": "Max Price"
+            }
+          },
+          {
+            "name": "available_only",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true,
+              "title": "Available Only"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/MenuItemOut" },
+                  "title": "Response List Menu Menu Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/{item_id}": {
+      "get": {
+        "tags": ["menu"],
+        "summary": "Get Menu Item",
+        "operationId": "get_menu_item_menu__item_id__get",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Item Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/MenuItemOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations": {
+      "post": {
+        "tags": ["reservations"],
+        "summary": "Create Reservation",
+        "operationId": "create_reservation_reservations_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ReservationCreate" }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ReservationOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations/{reservation_id}": {
+      "get": {
+        "tags": ["reservations"],
+        "summary": "Get Reservation",
+        "operationId": "get_reservation_reservations__reservation_id__get",
+        "parameters": [
+          {
+            "name": "reservation_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Reservation Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ReservationOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["reservations"],
+        "summary": "Cancel Reservation",
+        "operationId": "cancel_reservation_reservations__reservation_id__delete",
+        "parameters": [
+          {
+            "name": "reservation_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Reservation Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ReservationOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reservations/{reservation_id}/orders": {
+      "post": {
+        "tags": ["orders"],
+        "summary": "Add Order",
+        "operationId": "add_order_reservations__reservation_id__orders_post",
+        "parameters": [
+          {
+            "name": "reservation_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Reservation Id" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrderCreate" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/OrderOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["orders"],
+        "summary": "List Orders",
+        "operationId": "list_orders_reservations__reservation_id__orders_get",
+        "parameters": [
+          {
+            "name": "reservation_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Reservation Id" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/OrderOut" },
+                  "title": "Response List Orders Reservations  Reservation Id  Orders Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{order_id}": {
+      "delete": {
+        "tags": ["orders"],
+        "summary": "Remove Order",
+        "operationId": "remove_order_orders__order_id__delete",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer", "title": "Order Id" }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Successful Response" },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/availability": {
+      "get": {
+        "tags": ["availability"],
+        "summary": "Check Availability",
+        "operationId": "check_availability_availability_get",
+        "parameters": [
+          {
+            "name": "slot_datetime",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "title": "Slot Datetime"
+            }
+          },
+          {
+            "name": "party_size",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "title": "Party Size" }
+          },
+          {
+            "name": "location",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [{ "type": "string" }, { "type": "null" }],
+              "title": "Location"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/AvailabilityOut" }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AvailabilityOut": {
+        "properties": {
+          "slot_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Slot Datetime"
+          },
+          "party_size": { "type": "integer", "title": "Party Size" },
+          "available_tables": {
+            "items": { "$ref": "#/components/schemas/AvailableTable" },
+            "type": "array",
+            "title": "Available Tables"
+          }
+        },
+        "type": "object",
+        "required": ["slot_datetime", "party_size", "available_tables"],
+        "title": "AvailabilityOut"
+      },
+      "AvailableTable": {
+        "properties": {
+          "table_id": { "type": "integer", "title": "Table Id" },
+          "table_number": { "type": "integer", "title": "Table Number" },
+          "capacity": { "type": "integer", "title": "Capacity" },
+          "location": { "type": "string", "title": "Location" }
+        },
+        "type": "object",
+        "required": ["table_id", "table_number", "capacity", "location"],
+        "title": "AvailableTable"
+      },
+      "CustomerCreate": {
+        "properties": {
+          "name": { "type": "string", "title": "Name" },
+          "phone": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Phone"
+          },
+          "email": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Email"
+          },
+          "preferences": { "type": "object", "title": "Preferences" }
+        },
+        "type": "object",
+        "required": ["name"],
+        "title": "CustomerCreate"
+      },
+      "CustomerOut": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "name": { "type": "string", "title": "Name" },
+          "phone": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Phone"
+          },
+          "email": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Email"
+          },
+          "preferences": { "type": "object", "title": "Preferences" },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "phone",
+          "email",
+          "preferences",
+          "created_at"
+        ],
+        "title": "CustomerOut"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": { "$ref": "#/components/schemas/ValidationError" },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "MenuItemOut": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "name": { "type": "string", "title": "Name" },
+          "description": { "type": "string", "title": "Description" },
+          "price": { "type": "number", "title": "Price" },
+          "tags": {
+            "items": { "type": "string" },
+            "type": "array",
+            "title": "Tags"
+          },
+          "category": {
+            "type": "string",
+            "enum": ["starter", "main", "dessert"],
+            "title": "Category"
+          },
+          "available": { "type": "boolean", "title": "Available" }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "price",
+          "tags",
+          "category",
+          "available"
+        ],
+        "title": "MenuItemOut"
+      },
+      "OrderCreate": {
+        "properties": {
+          "menu_item_id": { "type": "integer", "title": "Menu Item Id" },
+          "quantity": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Quantity",
+            "default": 1
+          }
+        },
+        "type": "object",
+        "required": ["menu_item_id"],
+        "title": "OrderCreate"
+      },
+      "OrderOut": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "reservation_id": { "type": "integer", "title": "Reservation Id" },
+          "menu_item_id": { "type": "integer", "title": "Menu Item Id" },
+          "quantity": { "type": "integer", "title": "Quantity" },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "reservation_id",
+          "menu_item_id",
+          "quantity",
+          "created_at"
+        ],
+        "title": "OrderOut"
+      },
+      "PreferencesUpdate": {
+        "properties": {
+          "preferences": { "type": "object", "title": "Preferences" }
+        },
+        "type": "object",
+        "required": ["preferences"],
+        "title": "PreferencesUpdate",
+        "description": "Partial-merge update for the customer's preferences JSON blob."
+      },
+      "ReservationCreate": {
+        "properties": {
+          "customer_id": { "type": "integer", "title": "Customer Id" },
+          "table_id": { "type": "integer", "title": "Table Id" },
+          "slot_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Slot Datetime"
+          },
+          "party_size": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Party Size"
+          },
+          "special_requests": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Special Requests"
+          }
+        },
+        "type": "object",
+        "required": ["customer_id", "table_id", "slot_datetime", "party_size"],
+        "title": "ReservationCreate"
+      },
+      "ReservationOut": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "customer_id": { "type": "integer", "title": "Customer Id" },
+          "table_id": { "type": "integer", "title": "Table Id" },
+          "slot_datetime": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Slot Datetime"
+          },
+          "party_size": { "type": "integer", "title": "Party Size" },
+          "special_requests": {
+            "anyOf": [{ "type": "string" }, { "type": "null" }],
+            "title": "Special Requests"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["confirmed", "cancelled", "completed"],
+            "title": "Status"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "customer_id",
+          "table_id",
+          "slot_datetime",
+          "party_size",
+          "special_requests",
+          "status",
+          "created_at"
+        ],
+        "title": "ReservationOut"
+      },
+      "TableOut": {
+        "properties": {
+          "id": { "type": "integer", "title": "Id" },
+          "table_number": { "type": "integer", "title": "Table Number" },
+          "capacity": { "type": "integer", "title": "Capacity" },
+          "location": {
+            "type": "string",
+            "enum": ["indoor", "outdoor"],
+            "title": "Location"
+          }
+        },
+        "type": "object",
+        "required": ["id", "table_number", "capacity", "location"],
+        "title": "TableOut"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": { "anyOf": [{ "type": "string" }, { "type": "integer" }] },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": { "type": "string", "title": "Message" },
+          "type": { "type": "string", "title": "Error Type" }
+        },
+        "type": "object",
+        "required": ["loc", "msg", "type"],
+        "title": "ValidationError"
+      }
+    }
+  }
+}
