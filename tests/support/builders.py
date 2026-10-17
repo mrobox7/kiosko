@@ -9,6 +9,7 @@ from app.backend.models import Customer
 from app.guards.rules import RulesGuard
 from app.llm.base import LLMResponse
 from app.llm.fake import FakeLLM
+from app.memory.service import MemoryService
 from app.session.session import Session
 from app.tools.base import ToolContext
 from app.tools.registry import ToolRegistry
@@ -56,5 +57,7 @@ def make_session(
             token_budget=guard.get("token_budget", 200_000),
         ),
         clock=clock,
+        memory=MemoryService(backend.client),
+        summary_turns=guard.get("summary_turns", 3),
     )
     return session, llm, backend

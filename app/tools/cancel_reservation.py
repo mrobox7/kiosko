@@ -29,5 +29,10 @@ class CancelReservation(Tool[CancelReservationArgs]):
     def run(self, ctx: ToolContext, args: CancelReservationArgs) -> ToolResult:
         own_reservation(ctx, args.reservation_id)
         r = ctx.backend.cancel_reservation(args.reservation_id)
-        entry = ctx.ledger(self.name, "cancelled", r.id, f"Reservation #{r.id} cancelled")
+        entry = ctx.ledger(self.name, "cancelled", r.id)
         return ToolResult(ok=True, data=reservation_view(r), writes=[entry])
+
+    def compact(self, result: ToolResult, args: CancelReservationArgs) -> str:
+        if not result.ok:
+            return super().compact(result, args)
+        return f"Reservation #{result.data['id']} cancelled"

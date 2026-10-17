@@ -20,6 +20,7 @@ class ToolOutcome(BaseModel):
     call_id: str
     content: str
     is_error: bool = False
+    compact: str = ""  # one-line form for the turn summary; never sent to the model
 
 
 class Message(BaseModel):

@@ -38,6 +38,14 @@ class GetReservationOrders(Tool[GetReservationOrdersArgs]):
                         "quantity": o.quantity,
                     }
                     for o in orders
-                ]
+                ],
             }
         )
+
+    def compact(self, result: ToolResult, args: GetReservationOrdersArgs) -> str:
+        if not result.ok:
+            return super().compact(result, args)
+        orders = [
+            f"order {o['order_id']} {o['name']} x{o['quantity']}" for o in result.data["orders"]
+        ]
+        return f"booking #{args.reservation_id}: " + ("; ".join(orders) or "no orders")

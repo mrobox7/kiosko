@@ -72,6 +72,18 @@ class ToolRegistry:
             for t in sorted(self._tools.values(), key=lambda t: t.name)
         ]
 
+    def compact(self, name: str, raw_args: dict[str, Any], result: ToolResult) -> str:
+        """The tool's one-line form of a call. Never raises: a broken or missing compactor, or
+        arguments that no longer validate, degrade to ok / error, because the summary must
+        not break a turn."""
+        tool = self._tools.get(name)
+        try:
+            if tool is not None:
+                return tool.compact(result, tool.args_model.model_validate(raw_args))
+        except Exception:  # boundary: tools must never raise into the loop
+            logger.exception("Tool %s failed to compact its result", name)
+        return f"error: {result.error.code}" if result.error else ("ok" if result.ok else "error")
+
     def dispatch(
         self,
         name: str,

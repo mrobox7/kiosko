@@ -22,6 +22,7 @@ def test_all_stage2_tools_registered() -> None:
     assert names == {
         "list_menu", "check_availability", "list_my_reservations", "create_reservation",
         "cancel_reservation", "add_order_items", "get_reservation_orders", "remove_order_item",
+        "update_preferences", "get_my_order_history", "recommend_items",
     }  # fmt: skip
 
 

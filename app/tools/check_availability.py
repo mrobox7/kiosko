@@ -34,3 +34,13 @@ class CheckAvailability(Tool[CheckAvailabilityArgs]):
         return ToolResult.success(
             {"slot_datetime": args.slot_datetime.isoformat(), "tables": tables}
         )
+
+    def compact(self, result: ToolResult, args: CheckAvailabilityArgs) -> str:
+        if not result.ok:
+            return super().compact(result, args)
+        slot = result.data["slot_datetime"][:16].replace("T", " ")
+        tables = [
+            f"table {t['table_id']} (seats {t['capacity']}, {t['location']})"
+            for t in result.data["tables"]
+        ]
+        return f"free {slot}: " + ", ".join(tables) if tables else f"no tables free {slot}"

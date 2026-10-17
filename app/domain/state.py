@@ -18,7 +18,7 @@ class WorkingState(BaseModel):
     table_id: int | None = None
 
 
-LedgerAction = Literal["created", "cancelled", "added", "removed"]
+LedgerAction = Literal["created", "cancelled", "added", "removed", "preferences_updated"]
 
 
 class LedgerEntry(BaseModel):
@@ -27,7 +27,6 @@ class LedgerEntry(BaseModel):
     tool: str
     action: LedgerAction
     entity_id: int
-    summary: str
     timestamp: datetime
     state: WorkingState | None = None
 

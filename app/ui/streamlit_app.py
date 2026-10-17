@@ -6,6 +6,7 @@ import streamlit as st
 
 from app.session.factory import Runtime, build_runtime
 from app.session.identification import IdentificationError
+from app.session.prompts import greeting
 from app.session.session import Session
 
 st.set_page_config(page_title="DishPatch", page_icon="🍽️")
@@ -27,7 +28,7 @@ except ValueError as exc:
 
 def start_chat(session: Session) -> None:
     st.session_state.session = session
-    st.session_state.transcript = []
+    st.session_state.transcript = [{"role": "assistant", "text": greeting(session.customer.name)}]
 
 
 session: Session | None = st.session_state.get("session")
@@ -50,6 +51,14 @@ if session is None:
 
 with st.sidebar:
     st.write(f"Signed in as **{session.customer.name}**")
+    st.subheader("Remembered")
+    if session.profile.memory_unavailable:
+        st.warning("Saved preferences could not be loaded, so this chat starts without them.")
+    elif facts := session.profile.facts():
+        for label, value in facts:
+            st.write(f"**{label}:** {value}")
+    else:
+        st.caption("Nothing saved yet.")
     if st.button("New chat"):
         start_chat(runtime.start_session(session.customer))
         st.rerun()

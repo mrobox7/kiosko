@@ -14,6 +14,7 @@ from app.config import settings
 from app.domain.state import Clock
 from app.guards.rules import RulesGuard
 from app.llm.openai_compat import OpenAICompatLLM
+from app.memory.service import MemoryService
 from app.session.identification import identify
 from app.session.session import Session
 from app.tools.base import ToolContext
@@ -40,6 +41,8 @@ class Runtime:
                 token_budget=settings.session_token_budget,
             ),
             clock=self.clock,
+            memory=MemoryService(self.backend),
+            summary_turns=settings.summary_turns,
         )
 
     def login(self, *, name: str = "", phone: str = "", email: str = "") -> Session:

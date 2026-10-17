@@ -34,7 +34,6 @@ class ToolContext:
         tool: str,
         action: LedgerAction,
         entity_id: int,
-        summary: str,
         state: WorkingState | None = None,
     ) -> LedgerEntry:
         """A ledger entry stamped with the injected clock."""
@@ -42,7 +41,6 @@ class ToolContext:
             tool=tool,
             action=action,
             entity_id=entity_id,
-            summary=summary,
             timestamp=self.clock(),
             state=state,
         )
@@ -60,3 +58,10 @@ class Tool[A: BaseModel](ABC):
     @abstractmethod
     def run(self, ctx: ToolContext, args: A) -> ToolResult:
         """Execute with validated arguments."""
+
+    def compact(self, result: ToolResult, args: A) -> str:
+        """One line for the turn summary, built from the result and the call's arguments.
+        The default is ok / the error code; override where later turns need ids or values."""
+        if result.ok:
+            return "ok"
+        return f"error: {result.error.code}" if result.error else "error"

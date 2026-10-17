@@ -153,3 +153,18 @@ class BackendClient:
     def delete_order(self, order_id: int) -> None:
         """DELETE /orders/{id}."""
         self._request("DELETE", f"/orders/{order_id}")
+
+    def get_customer(self, customer_id: int) -> Customer:
+        """GET /customers/{id}."""
+        return Customer.model_validate(self._request("GET", f"/customers/{customer_id}"))
+
+    def patch_preferences(self, customer_id: int, preferences: dict[str, Any]) -> Customer:
+        """PATCH /customers/{id}/preferences. The backend merges shallowly, so callers
+        send every top-level key they want to keep."""
+        body = {"preferences": preferences}
+        data = self._request("PATCH", f"/customers/{customer_id}/preferences", body=body)
+        return Customer.model_validate(data)
+
+    def get_menu_item(self, item_id: int) -> MenuItem:
+        """GET /menu/{id}."""
+        return MenuItem.model_validate(self._request("GET", f"/menu/{item_id}"))

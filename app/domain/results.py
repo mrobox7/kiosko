@@ -15,6 +15,7 @@ BACKEND_REJECTED = "backend_rejected"
 BACKEND_UNAVAILABLE = "backend_unavailable"
 INTERNAL_ERROR = "internal_error"
 NOT_PERMITTED = "not_permitted"
+ALLERGY_CONFLICT = "allergy_conflict"
 TOOL_CALL_BUDGET = "tool_call_budget"
 
 
@@ -55,3 +56,4 @@ class LoopResult(BaseModel):
     new_messages: list[Message]
     stop_reason: StopReason
     writes: list[LedgerEntry] = Field(default_factory=list)
+    changes: list[str] = Field(default_factory=list)  # compact line of each call that wrote

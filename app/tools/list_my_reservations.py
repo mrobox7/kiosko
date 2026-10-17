@@ -30,3 +30,13 @@ class ListMyReservations(Tool[ListMyReservationsArgs]):
     def run(self, ctx: ToolContext, args: ListMyReservationsArgs) -> ToolResult:
         items = ctx.backend.list_customer_reservations(ctx.require_customer(), args.status)
         return ToolResult.success({"reservations": [reservation_view(r) for r in items]})
+
+    def compact(self, result: ToolResult, args: ListMyReservationsArgs) -> str:
+        if not result.ok:
+            return super().compact(result, args)
+        bookings = [
+            f"#{r['id']} {r['slot_datetime'][:16].replace('T', ' ')} party {r['party_size']}"
+            f" table {r['table_id']} {r['status']}"
+            for r in result.data["reservations"]
+        ]
+        return "; ".join(bookings) or "no reservations"

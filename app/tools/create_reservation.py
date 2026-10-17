@@ -37,12 +37,12 @@ class CreateReservation(Tool[CreateReservationArgs]):
             party_size=r.party_size,
             table_id=r.table_id,
         )
-        entry = ctx.ledger(
-            self.name,
-            "created",
-            r.id,
-            f"Reservation #{r.id} for {r.party_size} at {r.slot_datetime:%Y-%m-%d %H:%M}"
-            f" (table {r.table_id})",
-            state,
-        )
+        entry = ctx.ledger(self.name, "created", r.id, state)
         return ToolResult(ok=True, data=reservation_view(r), writes=[entry])
+
+    def compact(self, result: ToolResult, args: CreateReservationArgs) -> str:
+        if not result.ok:
+            return super().compact(result, args)
+        r = result.data
+        slot = r["slot_datetime"][:16].replace("T", " ")
+        return f"Reservation #{r['id']} for {r['party_size']} at {slot} (table {r['table_id']})"

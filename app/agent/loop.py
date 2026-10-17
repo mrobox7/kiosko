@@ -57,13 +57,16 @@ class AgentLoop:
         messages = list(history)
         new: list[Message] = []
         writes: list[LedgerEntry] = []
+        changes: list[str] = []
         tool_calls_used = 0
         specs = self._registry.specs()
         emit(listener, TurnStarted(messages=len(messages)))
 
         def finish(text: str, reason: StopReason, detail: str = "") -> LoopResult:
             emit(listener, TurnEnded(stop_reason=reason, detail=detail))
-            return LoopResult(text=text, new_messages=new, stop_reason=reason, writes=writes)
+            return LoopResult(
+                text=text, new_messages=new, stop_reason=reason, writes=writes, changes=changes
+            )
 
         for _ in range(self._max_iterations):
             started = time.perf_counter()
@@ -100,6 +103,8 @@ class AgentLoop:
                 outcome, result = self._run_call(call, ctx, listener, over_budget=over_budget)
                 outcomes.append(outcome)
                 writes.extend(result.writes)
+                if result.writes:
+                    changes.append(outcome.compact)
             results = Message(role="user", tool_outcomes=outcomes)
             messages.append(results)
             new.append(results)
@@ -126,4 +131,10 @@ class AgentLoop:
                 name=call.name, ok=result.ok, summary=content[:160], latency_ms=_ms(started)
             ),
         )
-        return ToolOutcome(call_id=call.id, content=content, is_error=not result.ok), result
+        outcome = ToolOutcome(
+            call_id=call.id,
+            content=content,
+            is_error=not result.ok,
+            compact=self._registry.compact(call.name, call.arguments, result),
+        )
+        return outcome, result

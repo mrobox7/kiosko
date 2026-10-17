@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     max_tool_calls_per_turn: int = 12
     tool_result_max_chars: int = 4000
     max_message_chars: int = 1000
+    summary_turns: int = 3
     rate_limit_turns_per_min: int = 10
     session_token_budget: int = 200_000
     restaurant_timezone: str = "Asia/Kolkata"

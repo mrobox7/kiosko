@@ -47,3 +47,15 @@ class ListMenu(Tool[ListMenuArgs]):
         if len(items) > MAX_ITEMS:
             data["note"] = f"Showing {MAX_ITEMS} of {len(items)} items; narrow the filters."
         return ToolResult.success(data)
+
+    def compact(self, result: ToolResult, args: ListMenuArgs) -> str:
+        if not result.ok:
+            return super().compact(result, args)
+        dishes = []
+        for item in result.data["items"]:
+            flags = [t.removeprefix("contains-") for t in item["tags"] if t.startswith("contains-")]
+            if not item["available"]:
+                flags.append("unavailable")
+            suffix = f" ({', '.join(flags)})" if flags else ""
+            dishes.append(f"{item['id']} {item['name']} {item['price']:g}{suffix}")
+        return f"{len(dishes)} dishes: " + "; ".join(dishes) if dishes else "no dishes matched"

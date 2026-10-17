@@ -3,6 +3,7 @@
 Mirrors the real API's behaviour recorded in docs/backend-contract.md (status codes and
 messages), seeded from tests/fixtures. Records every request."""
 
+import copy
 import json
 import re
 from collections.abc import Callable
@@ -56,7 +57,7 @@ class FakeBackend:
 
     def __init__(self) -> None:
         self.requests: list[httpx.Request] = []
-        self.customers: list[dict[str, Any]] = [dict(c) for c in CUSTOMERS]
+        self.customers: list[dict[str, Any]] = copy.deepcopy(CUSTOMERS)
         self.reservations: dict[int, dict[str, Any]] = {}
         self.orders: dict[int, dict[str, Any]] = {}
         # Test hook: (method, path regex) -> response, consulted before the normal routes.
@@ -89,6 +90,18 @@ class FakeBackend:
 
         if path == "/menu":
             return _menu(q)
+        if m := re.fullmatch(r"/menu/(\d+)", path):
+            item = next((i for i in MENU if i["id"] == int(m[1])), None)
+            return httpx.Response(200, json=item) if item else _detail(404, "Menu item not found")
+        if m := re.fullmatch(r"/customers/(\d+)", path):
+            c = next((c for c in self.customers if c["id"] == int(m[1])), None)
+            return httpx.Response(200, json=c) if c else _detail(404, "Customer not found")
+        if m := re.fullmatch(r"/customers/(\d+)/preferences", path) and method == "PATCH":
+            c = next((c for c in self.customers if c["id"] == int(path.split("/")[2])), None)
+            if c is None:
+                return _detail(404, "Customer not found")
+            c["preferences"] = {**c["preferences"], **body["preferences"]}  # shallow, like the API
+            return httpx.Response(200, json=c)
         if path == "/customers/lookup":
             return self._lookup(q)
         if path == "/customers" and method == "POST":
