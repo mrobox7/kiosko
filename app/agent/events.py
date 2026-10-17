@@ -12,6 +12,14 @@ class TurnStarted:
 
 
 @dataclass(frozen=True)
+class GuardDecided:
+    """The input guard's verdict on the customer message."""
+
+    action: str
+    reason: str
+
+
+@dataclass(frozen=True)
 class LLMCalled:
     input_tokens: int
     output_tokens: int
@@ -36,9 +44,10 @@ class ToolReturned:
 @dataclass(frozen=True)
 class TurnEnded:
     stop_reason: str
+    detail: str = ""
 
 
-TraceEvent = TurnStarted | LLMCalled | ToolRequested | ToolReturned | TurnEnded
+TraceEvent = TurnStarted | GuardDecided | LLMCalled | ToolRequested | ToolReturned | TurnEnded
 Listener = Callable[[TraceEvent], None]
 
 

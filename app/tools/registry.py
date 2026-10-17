@@ -18,12 +18,33 @@ from app.domain.results import (
     INTERNAL_ERROR,
     INVALID_ARGUMENTS,
     MALFORMED_ARGUMENTS_JSON,
+    NOT_PERMITTED,
     UNKNOWN_TOOL,
     ToolResult,
 )
-from app.tools.base import Tool, ToolContext
+from app.tools.base import NotPermitted, Tool, ToolContext
 
 logger = logging.getLogger(__name__)
+
+
+def _compact_schema(schema: Any, *, top: bool = True) -> Any:
+    """Drop what pydantic adds that the model does not need: `title` keywords and the
+    class docstring on the top-level schema (the tool description already says it)."""
+    if isinstance(schema, list):
+        return [_compact_schema(item, top=False) for item in schema]
+    if not isinstance(schema, dict):
+        return schema
+    out: dict[str, Any] = {}
+    for key, value in schema.items():
+        if key == "title" and isinstance(value, str):
+            continue
+        if key == "description" and top:
+            continue
+        if key in ("properties", "$defs"):  # keys here are names, not keywords
+            out[key] = {k: _compact_schema(v, top=False) for k, v in value.items()}
+        else:
+            out[key] = _compact_schema(value, top=False)
+    return out
 
 
 class ToolRegistry:
@@ -46,7 +67,7 @@ class ToolRegistry:
             ToolSpec(
                 name=t.name,
                 description=t.description,
-                parameters=t.args_model.model_json_schema(),
+                parameters=_compact_schema(t.args_model.model_json_schema()),
             )
             for t in sorted(self._tools.values(), key=lambda t: t.name)
         ]
@@ -81,6 +102,12 @@ class ToolRegistry:
             )
         try:
             return tool.run(ctx, args)
+        except NotPermitted:
+            return ToolResult.failure(
+                NOT_PERMITTED,
+                "That reservation or order is not on this customer's account.",
+                "Do not retry with other ids. Offer to list the customer's own bookings.",
+            )
         except BackendUnavailable as exc:
             return ToolResult.failure(
                 BACKEND_UNAVAILABLE,

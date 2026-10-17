@@ -1,3 +1,4 @@
+import json
 from typing import Any
 
 from pydantic import BaseModel
@@ -6,7 +7,7 @@ from app.backend.errors import BackendRuleViolation, BackendUnavailable
 from app.domain.results import ToolResult
 from app.tools.base import Tool, ToolContext
 from app.tools.registry import ToolRegistry
-from tests.support.fake_backend import FakeBackend
+from tests.support.builders import make_ctx
 
 
 class Args(BaseModel):
@@ -26,8 +27,7 @@ class Boom(Tool[Args]):
 def setup(kind: Exception | None = None) -> tuple[ToolRegistry, ToolContext]:
     tool = Boom()
     tool.kind = kind
-    fake = FakeBackend()
-    return ToolRegistry([tool]), ToolContext(backend=fake.client)
+    return ToolRegistry([tool]), make_ctx()
 
 
 def code(result: ToolResult) -> str | None:
@@ -73,7 +73,7 @@ def test_unexpected_exception_becomes_internal_error() -> None:
 
 def test_list_menu_filters_and_trims() -> None:
     reg = ToolRegistry.discover()
-    ctx = ToolContext(backend=FakeBackend().client)
+    ctx = make_ctx()
     r = reg.dispatch(
         "list_menu", {"category": "starter", "tags_any": ["vegetarian"], "max_price": 400}, ctx
     )
@@ -85,11 +85,40 @@ def test_list_menu_filters_and_trims() -> None:
 
 def test_list_menu_rejects_unknown_tag() -> None:
     reg = ToolRegistry.discover()
-    ctx = ToolContext(backend=FakeBackend().client)
+    ctx = make_ctx()
     assert code(reg.dispatch("list_menu", {"exclude_tags": ["gluten"]}, ctx)) == "invalid_arguments"
 
 
 def test_list_menu_rejects_wrong_category_case() -> None:
     reg = ToolRegistry.discover()
-    ctx = ToolContext(backend=FakeBackend().client)
+    ctx = make_ctx()
     assert code(reg.dispatch("list_menu", {"category": "Starters"}, ctx)) == "invalid_arguments"
+
+
+def test_specs_drop_pydantic_noise_but_keep_meaning() -> None:
+    specs = {s.name: s.parameters for s in ToolRegistry.discover().specs()}
+    assert all('"title"' not in json.dumps(p) for p in specs.values())
+    assert all("Arguments of" not in json.dumps(p) for p in specs.values())
+    menu = specs["list_menu"]
+    assert menu["properties"]["max_price"]["description"] == "Maximum price per item"
+    assert menu["properties"]["category"]["anyOf"][0]["enum"] == ["starter", "main", "dessert"]
+    order = specs["add_order_items"]
+    assert order["required"] == ["reservation_id", "items"]
+    assert order["$defs"]["OrderItem"]["required"] == ["menu_item_id"]
+    assert order["properties"]["items"]["maxItems"] == 10
+
+
+def test_a_property_named_title_survives() -> None:
+    class Args(BaseModel):
+        title: str
+
+    class Titled(Tool[Args]):
+        name = "titled"
+        description = "t"
+        args_model = Args
+
+        def run(self, ctx: ToolContext, args: Args) -> ToolResult:
+            return ToolResult.success(None)
+
+    schema = ToolRegistry([Titled()]).specs()[0].parameters
+    assert "title" in schema["properties"] and schema["required"] == ["title"]

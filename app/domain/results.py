@@ -2,9 +2,10 @@
 
 from typing import Any, Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.domain.messages import Message
+from app.domain.state import LedgerEntry
 
 # Error codes a tool result can carry (PLAN.md section 8, dispatcher contract).
 MALFORMED_ARGUMENTS_JSON = "malformed_arguments_json"
@@ -13,6 +14,7 @@ INVALID_ARGUMENTS = "invalid_arguments"
 BACKEND_REJECTED = "backend_rejected"
 BACKEND_UNAVAILABLE = "backend_unavailable"
 INTERNAL_ERROR = "internal_error"
+NOT_PERMITTED = "not_permitted"
 TOOL_CALL_BUDGET = "tool_call_budget"
 
 
@@ -30,6 +32,7 @@ class ToolResult(BaseModel):
     ok: bool
     data: Any = None
     error: ToolError | None = None
+    writes: list[LedgerEntry] = Field(default_factory=list)  # never shown to the model
 
     @classmethod
     def success(cls, data: Any) -> ToolResult:
@@ -51,3 +54,4 @@ class LoopResult(BaseModel):
     text: str
     new_messages: list[Message]
     stop_reason: StopReason
+    writes: list[LedgerEntry] = Field(default_factory=list)

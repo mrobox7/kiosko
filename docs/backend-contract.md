@@ -28,4 +28,3 @@ Full schema: `backend-openapi.json`. Base URL `http://localhost:8000`. Datetimes
 - Missing resource: 404 with `{"detail": "..."}` (e.g. `Menu item not found`, `Customer not found`).
 - Validation: 422 (FastAPI shape).
 - Observed quirks: unknown `exclude_tags` values are ignored (no error); `/availability` does not reject out-of-hours slots (the 12:00-22:30 rule must be enforced on create).
-- TODO (stage 2, step 2.1): record status codes for slot taken, cancel within 2h, unavailable item, order after slot.

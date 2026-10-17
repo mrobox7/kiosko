@@ -3,11 +3,10 @@ from app.agent.loop import AgentLoop
 from app.domain.messages import Message, ToolCall
 from app.llm.base import LLMError, LLMResponse
 from app.llm.fake import FakeLLM
-from app.tools.base import ToolContext
 from app.tools.registry import ToolRegistry
-from tests.support.fake_backend import FakeBackend
+from tests.support.builders import make_ctx
 
-CTX = ToolContext(backend=FakeBackend().client)
+CTX = make_ctx()
 HISTORY = [Message(role="user", text="vegetarian starters?")]
 
 
@@ -88,3 +87,12 @@ def test_listener_failure_is_swallowed() -> None:
 
     loop, _ = make([LLMResponse(text="ok")])
     assert loop.run("s", HISTORY, CTX, bad).stop_reason == "answered"
+
+
+def test_llm_error_cause_is_in_the_trace() -> None:
+    loop, _ = make([LLMError("Error code: 429 - rate limit reached", retryable=True)])
+    events = []
+    loop.run("s", HISTORY, CTX, events.append)
+    ended = [e for e in events if isinstance(e, TurnEnded)][0]
+    assert ended.stop_reason == "llm_error"
+    assert "429" in ended.detail and "retryable=True" in ended.detail

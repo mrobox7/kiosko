@@ -1,20 +1,56 @@
-"""Wires the real dependencies into a Session."""
+"""Wires the real dependencies. The only place that reads the wall clock."""
+
+from dataclasses import dataclass
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import httpx
 from openai import OpenAI
 
 from app.agent.loop import AgentLoop
 from app.backend.client import BackendClient
+from app.backend.models import Customer
 from app.config import settings
+from app.domain.state import Clock
+from app.guards.rules import RulesGuard
 from app.llm.openai_compat import OpenAICompatLLM
+from app.session.identification import identify
 from app.session.session import Session
 from app.tools.base import ToolContext
 from app.tools.registry import ToolRegistry
 
 
-def build_session() -> Session:
-    """Create a Session from the environment settings."""
+@dataclass(frozen=True)
+class Runtime:
+    """Process-wide dependencies shared by every session."""
+
+    backend: BackendClient
+    loop: AgentLoop
+    clock: Clock
+
+    def start_session(self, customer: Customer) -> Session:
+        """A fresh chat for an identified customer."""
+        return Session(
+            customer=customer,
+            loop=self.loop,
+            ctx=ToolContext(backend=self.backend, customer_id=customer.id, clock=self.clock),
+            guard=RulesGuard(
+                max_chars=settings.max_message_chars,
+                turns_per_min=settings.rate_limit_turns_per_min,
+                token_budget=settings.session_token_budget,
+            ),
+            clock=self.clock,
+        )
+
+    def login(self, *, name: str = "", phone: str = "", email: str = "") -> Session:
+        """Identify the customer (look up or create) and start their chat."""
+        return self.start_session(identify(self.backend, name=name, phone=phone, email=email))
+
+
+def build_runtime() -> Runtime:
+    """Create the shared dependencies from the environment settings."""
     settings.require_llm()
+    tz = ZoneInfo(settings.restaurant_timezone)
     backend = BackendClient(
         httpx.Client(base_url=settings.backend_url, timeout=settings.backend_timeout_s)
     )
@@ -35,4 +71,4 @@ def build_session() -> Session:
         max_tool_calls=settings.max_tool_calls_per_turn,
         tool_result_max_chars=settings.tool_result_max_chars,
     )
-    return Session(loop, ToolContext(backend=backend))
+    return Runtime(backend=backend, loop=loop, clock=lambda: datetime.now(tz))

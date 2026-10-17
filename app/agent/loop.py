@@ -1,5 +1,6 @@
 """The agent loop: call the model, run its tools, repeat until it answers in text."""
 
+import logging
 import time
 from collections.abc import Sequence
 
@@ -14,10 +15,12 @@ from app.agent.events import (
 )
 from app.domain.messages import Message, ToolCall, ToolOutcome
 from app.domain.results import TOOL_CALL_BUDGET, LoopResult, StopReason, ToolResult
+from app.domain.state import LedgerEntry
 from app.llm.base import LLMClient, LLMError
 from app.tools.base import ToolContext
 from app.tools.registry import ToolRegistry
 
+logger = logging.getLogger(__name__)
 _CUT_NOTE = "...[result cut off]"
 
 
@@ -53,20 +56,22 @@ class AgentLoop:
         """Run until the model answers in text or a cap is hit."""
         messages = list(history)
         new: list[Message] = []
+        writes: list[LedgerEntry] = []
         tool_calls_used = 0
         specs = self._registry.specs()
         emit(listener, TurnStarted(messages=len(messages)))
 
-        def finish(text: str, reason: StopReason) -> LoopResult:
-            emit(listener, TurnEnded(stop_reason=reason))
-            return LoopResult(text=text, new_messages=new, stop_reason=reason)
+        def finish(text: str, reason: StopReason, detail: str = "") -> LoopResult:
+            emit(listener, TurnEnded(stop_reason=reason, detail=detail))
+            return LoopResult(text=text, new_messages=new, stop_reason=reason, writes=writes)
 
         for _ in range(self._max_iterations):
             started = time.perf_counter()
             try:
                 response = self._llm.complete(system, messages, specs)
-            except LLMError:
-                return finish("", "llm_error")
+            except LLMError as exc:
+                logger.warning("LLM call failed (retryable=%s): %s", exc.retryable, exc)
+                return finish("", "llm_error", detail=f"retryable={exc.retryable}: {exc}")
             usage = response.usage
             emit(
                 listener,
@@ -91,11 +96,10 @@ class AgentLoop:
             outcomes: list[ToolOutcome] = []
             for call in response.tool_calls:
                 tool_calls_used += 1
-                outcomes.append(
-                    self._run_call(
-                        call, ctx, listener, over_budget=tool_calls_used > self._max_tool_calls
-                    )
-                )
+                over_budget = tool_calls_used > self._max_tool_calls
+                outcome, result = self._run_call(call, ctx, listener, over_budget=over_budget)
+                outcomes.append(outcome)
+                writes.extend(result.writes)
             results = Message(role="user", tool_outcomes=outcomes)
             messages.append(results)
             new.append(results)
@@ -103,7 +107,7 @@ class AgentLoop:
 
     def _run_call(
         self, call: ToolCall, ctx: ToolContext, listener: Listener | None, *, over_budget: bool
-    ) -> ToolOutcome:
+    ) -> tuple[ToolOutcome, ToolResult]:
         """Exactly one outcome per call, always."""
         emit(listener, ToolRequested(name=call.name, arguments=call.arguments))
         started = time.perf_counter()
@@ -113,7 +117,7 @@ class AgentLoop:
             )
         else:
             result = self._registry.dispatch(call.name, call.arguments, ctx, call.parse_error)
-        content = result.model_dump_json(exclude_none=True)
+        content = result.model_dump_json(exclude_none=True, exclude={"writes"})
         if len(content) > self._max_chars:
             content = content[: self._max_chars] + _CUT_NOTE
         emit(
@@ -122,4 +126,4 @@ class AgentLoop:
                 name=call.name, ok=result.ok, summary=content[:160], latency_ms=_ms(started)
             ),
         )
-        return ToolOutcome(call_id=call.id, content=content, is_error=not result.ok)
+        return ToolOutcome(call_id=call.id, content=content, is_error=not result.ok), result

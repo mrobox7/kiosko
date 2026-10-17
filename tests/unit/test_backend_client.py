@@ -69,3 +69,31 @@ def test_read_timeout_maybe_processed() -> None:
     with pytest.raises(BackendUnavailable) as info:
         client_for(slow).get_menu()
     assert info.value.may_have_been_processed
+
+
+def test_new_calls_hit_the_right_endpoints_and_parse() -> None:
+    from datetime import datetime
+
+    fake = FakeBackend()
+    slot = datetime(2030, 6, 10, 19, 30)
+    assert fake.client.get_availability(slot, 4, "outdoor").available_tables
+    r = fake.client.create_reservation(1, 7, slot, 4)
+    assert fake.client.get_reservation(r.id).slot_datetime == slot
+    order = fake.client.add_order(r.id, 1, 2)
+    assert fake.client.list_reservation_orders(r.id) == [order]
+    assert fake.client.list_customer_orders(1) == [order]
+    assert fake.client.delete_order(order.id) is None
+    assert fake.client.list_customer_reservations(1, "confirmed")[0].id == r.id
+    assert fake.client.cancel_reservation(r.id).status == "cancelled"
+    sent = [(q.method, q.url.path) for q in fake.requests]
+    assert ("POST", "/reservations") in sent and ("DELETE", "/orders/1") in sent
+
+
+def test_conflict_on_double_booking() -> None:
+    from datetime import datetime
+
+    fake = FakeBackend()
+    slot = datetime(2030, 6, 10, 19, 30)
+    fake.client.create_reservation(1, 7, slot, 4)
+    with pytest.raises(BackendConflict, match="already booked"):
+        fake.client.create_reservation(2, 7, slot, 4)
