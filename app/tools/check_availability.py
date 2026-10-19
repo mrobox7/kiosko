@@ -20,8 +20,8 @@ class CheckAvailability(Tool[CheckAvailabilityArgs]):
 
     name = "check_availability"
     description = (
-        "Use before booking to find free tables for a date, time and party size. "
-        "Table ids from this tool are required to create a reservation."
+        "Use when the customer asks what is free at a date, time and party size. "
+        "Not needed before booking: create_reservation picks the table."
     )
     args_model = CheckAvailabilityArgs
 

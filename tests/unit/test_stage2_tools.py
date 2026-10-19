@@ -1,5 +1,9 @@
+from datetime import datetime
+
 import pytest
 
+from app.backend.errors import BackendConflict
+from app.backend.models import Reservation
 from app.domain.results import ToolResult
 from app.tools.registry import ToolRegistry
 from tests.support.builders import make_ctx
@@ -49,18 +53,55 @@ def test_slot_with_utc_offset_is_rejected() -> None:
 
 def test_create_reservation_binds_customer_and_writes_ledger() -> None:
     b = FakeBackend()
-    r = run("create_reservation", {"table_id": 7, "slot_datetime": SLOT, "party_size": 4}, b)
+    r = run(
+        "create_reservation", {"slot_datetime": SLOT, "party_size": 4, "location": "outdoor"}, b
+    )
     assert r.ok and b.reservations[1]["customer_id"] == 1
     assert r.writes[0].action == "created" and r.writes[0].state.table_id == 7  # type: ignore[union-attr]
 
 
-def test_create_reservation_over_capacity_passes_backend_text() -> None:
-    r = run(
-        "create_reservation", {"table_id": 1, "slot_datetime": SLOT, "party_size": 4}, FakeBackend()
-    )
-    assert (
-        code(r) == "backend_rejected" and r.error.message == "Party of 4 exceeds table capacity 2"
-    )  # type: ignore[union-attr]
+def book(backend: FakeBackend, **args: object) -> ToolResult:
+    return run("create_reservation", {"slot_datetime": SLOT, **args}, backend)
+
+
+def test_create_reservation_picks_the_smallest_table_that_fits() -> None:
+    r = book(FakeBackend(), party_size=3)  # tables 3/4 (indoor, 4 seats) are the smallest fit
+    assert r.ok and r.data["table_id"] == 3
+    assert book(FakeBackend(), party_size=3, location="outdoor").data["table_id"] == 7
+
+
+def test_create_reservation_reports_the_seating_it_booked() -> None:
+    assert book(FakeBackend(), party_size=2, location="indoor").data["location"] == "indoor"
+
+
+def test_create_reservation_takes_the_next_table_when_one_is_taken_meanwhile() -> None:
+    b = FakeBackend()
+    real = b.client.create_reservation
+    calls: list[int] = []
+
+    def racing(customer_id: int, table_id: int, slot: datetime, party: int) -> Reservation:
+        calls.append(table_id)
+        if len(calls) == 1:
+            raise BackendConflict("Table taken")
+        return real(customer_id, table_id, slot, party)
+
+    b.client.create_reservation = racing  # type: ignore[method-assign]
+    r = book(b, party_size=4, location="outdoor")
+    assert r.ok and calls == [7, 8] and r.data["table_id"] == 8
+
+
+def test_requested_seating_full_books_nothing_and_names_what_is_free() -> None:
+    b = FakeBackend()
+    b.add_reservation(2, 7, SLOT, 4)
+    b.add_reservation(2, 8, SLOT, 4)
+    r = book(b, party_size=4, location="outdoor")
+    assert code(r) == "backend_rejected" and "Free: indoor" in r.error.message  # type: ignore[union-attr]
+    assert r.writes == [] and len(b.reservations) == 2
+
+
+def test_nothing_free_at_all_books_nothing() -> None:
+    r = book(FakeBackend(), party_size=9)
+    assert code(r) == "backend_rejected" and "No table for 9" in r.error.message  # type: ignore[union-attr]
     assert r.writes == []
 
 

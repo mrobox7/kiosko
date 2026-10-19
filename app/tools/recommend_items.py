@@ -20,7 +20,8 @@ class RecommendItems(Tool[RecommendItemsArgs]):
     name = "recommend_items"
     description = (
         "Use when the customer asks for suggestions or what to order. Returns up to 3 available "
-        "dishes that fit their saved diet and allergies, ones they ordered before first."
+        "dishes that fit their saved diet and allergies, ones they ordered before first. Offer "
+        "only these dishes and say why each fits."
     )
     args_model = RecommendItemsArgs
 

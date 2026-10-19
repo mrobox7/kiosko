@@ -340,6 +340,7 @@ dependencies = [
     { name = "openai" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
+    { name = "sarvamai" },
     { name = "streamlit" },
 ]
 
@@ -359,6 +360,7 @@ requires-dist = [
     { name = "openai", specifier = ">=1.51" },
     { name = "pydantic", specifier = ">=2.9" },
     { name = "pydantic-settings", specifier = ">=2.5" },
+    { name = "sarvamai", specifier = ">=0.1.37" },
     { name = "streamlit", specifier = ">=1.41" },
 ]
 
@@ -1590,6 +1592,22 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/0a/e8/1e186578076aff7a80735f625005fde678412ab609cd323ed182eb7d6b87/ruff-0.17.1-py3-none-win32.whl", hash = "sha256:1de0030a8aa78c65c5fecb84b2e5c390ac684c0452875a02afc7c083d49a496a", size = 9895093, upload-time = "2026-10-15T15:23:10.582Z" },
     { url = "https://files.pythonhosted.org/packages/6a/2e/da3d9589bae8e8b58f3a48bd5bc0b980232fb14a83bf02c3be7660f87c1b/ruff-0.17.1-py3-none-win_amd64.whl", hash = "sha256:5df76f16580fab58d0f6c98a3ac254a4abceb7b2489b8b678335869cff77b3d7", size = 10097955, upload-time = "2026-10-15T15:23:13.309Z" },
     { url = "https://files.pythonhosted.org/packages/df/c9/0f2a4dea06a5e12c1191ee3d96b1e1233797d0d5e18f97a2b909a95a9836/ruff-0.17.1-py3-none-win_arm64.whl", hash = "sha256:42400b9a6ff8515ff27796f07f92e0195be011c86e81e381606f58ea5502fef4", size = 9853542, upload-time = "2026-10-15T15:23:16.05Z" },
+]
+
+[[package]]
+name = "sarvamai"
+version = "0.1.37"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+    { name = "pydantic-core" },
+    { name = "typing-extensions" },
+    { name = "websockets" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/25/95/15484df5b0ffbb4a9ff1433ad1074686451e13147d4eaf489a7c3fb5dbef/sarvamai-0.1.37.tar.gz", hash = "sha256:fc5550422c4fe6f6ef4b7ca568a7efb357c7603c528b83402163575c187f9864", size = 244750, upload-time = "2026-10-12T11:45:45.428Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/84/2b/97cd87f72d2b94bd1cf1df9ffb05b54607a5a27b8ef9b17ccec6412dd77e/sarvamai-0.1.37-py3-none-any.whl", hash = "sha256:c578946d0575c976a57be87474877ba5fdd9a37cba7d0fe3eca87be1c577afab", size = 504685, upload-time = "2026-10-12T11:45:43.651Z" },
 ]
 
 [[package]]

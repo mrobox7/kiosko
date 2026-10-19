@@ -93,3 +93,98 @@ def test_non_retryable_fails_immediately() -> None:
     with pytest.raises(LLMError) as info:
         c.complete("s", [], [])
     assert not info.value.retryable and len(sdk.kwargs) == 1
+
+
+def chunk(content=None, calls=(), finish=None, usage=None):
+    """One streamed piece. `calls` are (index, id, name, arguments) fragments."""
+    pieces = [
+        NS(index=i, id=cid, function=NS(name=name, arguments=args)) for i, cid, name, args in calls
+    ]
+    delta = NS(content=content, tool_calls=pieces or None)
+    return NS(choices=[NS(delta=delta, finish_reason=finish)], usage=usage)
+
+
+def usage_only(prompt=10, completion=5, cached=3):
+    usage = NS(
+        prompt_tokens=prompt,
+        completion_tokens=completion,
+        prompt_tokens_details=NS(cached_tokens=cached),
+    )
+    return NS(choices=[], usage=usage)
+
+
+def stream(c):
+    pieces = []
+    r = c.complete_stream("sys", [Message(role="user", text="yo")], [SPEC], pieces.append)
+    return r, pieces
+
+
+def test_stream_passes_text_on_as_it_arrives_and_returns_the_whole_reply() -> None:
+    c, sdk = llm([iter([chunk("Hello "), chunk("there."), chunk(finish="stop"), usage_only()])])
+    r, pieces = stream(c)
+    assert pieces == ["Hello ", "there."] and r.text == "Hello there."
+    assert r.usage.input_tokens == 10 and r.usage.cached_tokens == 3 and not r.truncated
+    assert sdk.kwargs[0]["stream"] is True
+    assert sdk.kwargs[0]["stream_options"] == {"include_usage": True}
+
+
+def test_stream_assembles_tool_calls_from_fragments() -> None:
+    c, _ = llm(
+        [
+            iter(
+                [
+                    chunk(calls=[(0, "c1", "t", '{"a": ')]),
+                    chunk(calls=[(0, None, None, "1}")]),
+                    chunk(calls=[(1, "c2", "u", "")]),
+                    chunk(finish="tool_calls"),
+                ]
+            )
+        ]
+    )
+    r, pieces = stream(c)
+    assert pieces == [] and r.text is None
+    assert [(t.id, t.name, t.arguments) for t in r.tool_calls] == [
+        ("c1", "t", {"a": 1}),
+        ("c2", "u", {}),
+    ]
+
+
+def test_stream_keeps_bad_tool_arguments_as_a_parse_error() -> None:
+    c, _ = llm([iter([chunk(calls=[(0, "c1", "t", "{oops")]), chunk(finish="tool_calls")])])
+    r, _ = stream(c)
+    assert r.tool_calls[0].parse_error is not None
+
+
+def test_stream_text_before_a_tool_call_is_kept_with_it() -> None:
+    c, _ = llm(
+        [iter([chunk("One moment. "), chunk(calls=[(0, "c1", "t", "{}")]), chunk(finish="stop")])]
+    )
+    r, pieces = stream(c)
+    assert pieces == ["One moment. "] and r.text == "One moment. " and r.tool_calls[0].name == "t"
+
+
+def test_stream_truncated_flag() -> None:
+    c, _ = llm([iter([chunk("cut", finish="length")])])
+    r, _ = stream(c)
+    assert r.truncated and r.usage.input_tokens == 0
+
+
+def test_stream_retries_opening_the_stream_then_succeeds() -> None:
+    sleeps: list[float] = []
+    c, sdk = llm(
+        [openai.APIConnectionError(request=REQ), iter([chunk("ok"), chunk(finish="stop")])], sleeps
+    )
+    r, pieces = stream(c)
+    assert r.text == "ok" and pieces == ["ok"] and len(sdk.kwargs) == 2 and sleeps == [0.5]
+
+
+def test_stream_failure_after_text_is_raised_not_retried() -> None:
+    def broken():
+        yield chunk("Hel")
+        raise openai.APIConnectionError(request=REQ)
+
+    c, sdk = llm([broken()])
+    pieces: list[str] = []
+    with pytest.raises(LLMError) as info:
+        c.complete_stream("sys", [Message(role="user", text="yo")], [], pieces.append)
+    assert pieces == ["Hel"] and info.value.retryable is False and len(sdk.kwargs) == 1

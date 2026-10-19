@@ -24,10 +24,11 @@ class ToolOutcome(BaseModel):
 
 
 class Message(BaseModel):
-    """One conversation turn. Assistant turns carry tool_calls; the user-side turn
-    that follows carries the matching tool_outcomes."""
+    """One conversation message. `system` is the per-turn context the Session puts in front of
+    the customer's message; it is never stored in history. Assistant turns carry tool_calls; the
+    user-side turn that follows carries the matching tool_outcomes."""
 
-    role: Literal["user", "assistant"]
+    role: Literal["system", "user", "assistant"]
     text: str | None = None
     tool_calls: list[ToolCall] = Field(default_factory=list)
     tool_outcomes: list[ToolOutcome] = Field(default_factory=list)

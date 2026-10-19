@@ -1,9 +1,12 @@
 """Menu demo and the stage 2 conversation flows, through Session, loop, tools and fake backend."""
 
 from app.agent.events import ToolRequested
+from app.backend.errors import BackendUnavailable
+from app.backend.models import Reservation
 from app.domain.messages import ToolCall
 from app.llm.base import LLMError, LLMResponse
-from tests.support.builders import make_session
+from tests.support.builders import context_of, make_session
+from tests.support.fake_backend import FakeBackend
 
 SLOT = "2030-06-10T19:30:00"
 
@@ -29,7 +32,7 @@ def test_booking_then_order_in_a_later_turn_uses_working_state() -> None:
     session, llm, backend = make_session(
         [
             call("check_availability", slot_datetime=SLOT, party_size=4, location="outdoor"),
-            call("create_reservation", table_id=7, slot_datetime=SLOT, party_size=4),
+            call("create_reservation", slot_datetime=SLOT, party_size=4, location="outdoor"),
             LLMResponse(text="Booked table 7. Anything to order?"),
             call("add_order_items", reservation_id=1, items=[{"menu_item_id": 1, "quantity": 2}]),
             LLMResponse(text="Added two Paneer Tikka."),
@@ -39,25 +42,26 @@ def test_booking_then_order_in_a_later_turn_uses_working_state() -> None:
     session.send("Book outdoor for 4 on 10 June at 19:30")
     assert session.state.reservation_id == 1 and session.state.table_id == 7
     session.send("Add two paneer tikka to that")
-    # The 2nd turn's system prompt carries the active reservation; history carried over.
-    assert "Active reservation: #1" in llm.calls[3].system
+    # The 2nd turn's context block carries the active reservation; history carried over.
+    assert "Active reservation: #1" in context_of(llm.calls[3])
     assert len(llm.calls[3].messages) > 3
     assert [e.action for e in session.ledger] == ["created", "added"]
     assert backend.orders[1]["reservation_id"] == 1
 
 
-def test_backend_rejection_reaches_the_model_verbatim() -> None:
+def test_full_seating_reaches_the_model_and_nothing_is_booked() -> None:
     session, llm, backend = make_session(
         [
-            call("create_reservation", table_id=7, slot_datetime=SLOT, party_size=4),
-            LLMResponse(text="That table is taken."),
+            call("create_reservation", slot_datetime=SLOT, party_size=4, location="outdoor"),
+            LLMResponse(text="Outdoor is full. Indoor?"),
         ],
         customer_id=1,
     )
     backend.add_reservation(2, 7, SLOT, 4)
-    session.send("book table 7")
+    backend.add_reservation(2, 8, SLOT, 4)
+    session.send("book outdoor for 4")
     content = llm.calls[1].messages[-1].tool_outcomes[0].content
-    assert "Table 7 is already booked at this slot" in content
+    assert "No outdoor table for 4 is free" in content and "Free: indoor" in content
     assert session.ledger == [] and session.state.reservation_id is None
 
 
@@ -76,7 +80,7 @@ def test_cannot_act_on_another_customers_reservation() -> None:
 def test_cancel_clears_working_state() -> None:
     session, _, _ = make_session(
         [
-            call("create_reservation", table_id=7, slot_datetime=SLOT, party_size=4),
+            call("create_reservation", slot_datetime=SLOT, party_size=4, location="outdoor"),
             LLMResponse(text="Booked."),
             call("cancel_reservation", reservation_id=1),
             LLMResponse(text="Cancelled."),
@@ -91,7 +95,7 @@ def test_cancel_clears_working_state() -> None:
 def test_failed_turn_is_discarded_but_writes_are_reported() -> None:
     session, _, _ = make_session(
         [
-            call("create_reservation", table_id=7, slot_datetime=SLOT, party_size=4),
+            call("create_reservation", slot_datetime=SLOT, party_size=4, location="outdoor"),
             LLMError("down"),
         ]
     )
@@ -100,3 +104,37 @@ def test_failed_turn_is_discarded_but_writes_are_reported() -> None:
     assert "Changes already made: Reservation #1" in reply.text
     assert session.history == []  # turn dropped, no unpaired tool call
     assert session.state.reservation_id == 1  # but the booking still resolves next turn
+
+
+def test_upcoming_bookings_follow_creates_and_cancels() -> None:
+    session, llm, _ = make_session(
+        [
+            LLMResponse(text="Hello."),
+            call("create_reservation", slot_datetime=SLOT, party_size=4, location="outdoor"),
+            LLMResponse(text="Booked."),
+            LLMResponse(text="Anything else?"),
+            call("cancel_reservation", reservation_id=1),
+            LLMResponse(text="Cancelled."),
+            LLMResponse(text="Anything else?"),
+        ],
+        customer_id=1,
+    )
+    session.send("hello")
+    assert "Upcoming bookings: none" in context_of(llm.calls[-1])
+    session.send("book outdoor for 4")
+    session.send("thanks")
+    assert "Upcoming bookings:\n- #1 " in context_of(llm.calls[-1])
+    session.send("cancel it")
+    session.send("thanks")
+    assert "Upcoming bookings: none" in context_of(llm.calls[-1])
+
+
+def test_unreachable_backend_leaves_the_bookings_line_out() -> None:
+    backend = FakeBackend()
+
+    def down(*_: object) -> list[Reservation]:
+        raise BackendUnavailable("down")
+
+    backend.client.list_customer_reservations = down  # type: ignore[method-assign]
+    session, _, _ = make_session([], backend=backend)
+    assert session.upcoming is None

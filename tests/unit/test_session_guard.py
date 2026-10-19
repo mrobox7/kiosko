@@ -1,6 +1,8 @@
 from app.llm.base import LLMResponse, Usage
 from app.llm.fake import FakeLLM
-from tests.support.builders import make_session
+from app.session.prompts import STABLE_PROMPT
+from tests.support.builders import chat_texts, make_session
+from tests.support.fake_backend import FakeBackend
 
 
 def test_guard_refuses_without_calling_the_llm() -> None:
@@ -30,5 +32,17 @@ def test_history_is_append_only_across_turns() -> None:
     session.send("two")
     assert isinstance(llm, FakeLLM)
     first, second = llm.calls[0].messages, llm.calls[1].messages
-    assert second[: len(first)] == first
-    assert llm.calls[0].system.split("\n\n")[0] == llm.calls[1].system.split("\n\n")[0]
+    assert chat_texts(second)[: len(chat_texts(first))] == chat_texts(first)
+    assert llm.calls[0].system == llm.calls[1].system == STABLE_PROMPT
+
+
+def test_session_starts_with_the_customers_upcoming_confirmed_bookings() -> None:
+    backend = FakeBackend()
+    backend.add_reservation(1, 7, "2030-06-10T19:30:00", 4)
+    backend.add_reservation(1, 6, "2030-06-02T13:00:00", 2)
+    backend.add_reservation(1, 6, "2030-05-01T13:00:00", 2)  # already past
+    backend.add_reservation(2, 1, "2030-06-03T13:00:00", 2)  # someone else's
+    backend.add_reservation(1, 6, "2030-06-04T13:00:00", 2)
+    backend.reservations[5]["status"] = "cancelled"
+    session, _, _ = make_session([], backend=backend)
+    assert [r.id for r in session.upcoming or []] == [2, 1]  # soonest first

@@ -2,7 +2,7 @@
 
 import logging
 import time
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 
 from app.agent.events import (
     Listener,
@@ -26,6 +26,16 @@ _CUT_NOTE = "...[result cut off]"
 
 def _ms(start: float) -> int:
     return int((time.perf_counter() - start) * 1000)
+
+
+def _safe(on_text: Callable[[str], None]) -> Callable[[str], None]:
+    def deliver(piece: str) -> None:
+        try:
+            on_text(piece)
+        except Exception:  # boundary: a speech or display failure must not undo the turn
+            logger.exception("on_text callback failed")
+
+    return deliver
 
 
 class AgentLoop:
@@ -52,8 +62,10 @@ class AgentLoop:
         history: Sequence[Message],
         ctx: ToolContext,
         listener: Listener | None = None,
+        on_text: Callable[[str], None] | None = None,
     ) -> LoopResult:
-        """Run until the model answers in text or a cap is hit."""
+        """Run until the model answers in text or a cap is hit. With `on_text`, reply text is
+        passed on as the model writes it. A failing `on_text` never breaks the turn."""
         messages = list(history)
         new: list[Message] = []
         writes: list[LedgerEntry] = []
@@ -71,7 +83,10 @@ class AgentLoop:
         for _ in range(self._max_iterations):
             started = time.perf_counter()
             try:
-                response = self._llm.complete(system, messages, specs)
+                if on_text is None:
+                    response = self._llm.complete(system, messages, specs)
+                else:
+                    response = self._llm.complete_stream(system, messages, specs, _safe(on_text))
             except LLMError as exc:
                 logger.warning("LLM call failed (retryable=%s): %s", exc.retryable, exc)
                 return finish("", "llm_error", detail=f"retryable={exc.retryable}: {exc}")

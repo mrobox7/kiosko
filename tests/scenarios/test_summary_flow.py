@@ -2,8 +2,9 @@
 
 from app.domain.messages import ToolCall
 from app.llm.base import LLMResponse
-from app.session.prompts import STABLE_PROMPT
-from tests.support.builders import make_session
+from app.session.context_builder import HEADING
+from app.session.prompts import STABLE_PROMPT, VOICE_PROMPT, system_prompt
+from tests.support.builders import chat_texts, context_of, make_session
 
 SLOT = "2030-06-10T19:30:00"
 
@@ -16,10 +17,6 @@ def say(text: str) -> LLMResponse:
     return LLMResponse(text=text)
 
 
-def changing_part(system: str) -> str:
-    return system.removeprefix(STABLE_PROMPT)
-
-
 def user_texts(messages: list) -> list[str]:  # type: ignore[type-arg]
     return [m.text for m in messages if m.role == "user" and m.text]
 
@@ -27,11 +24,11 @@ def user_texts(messages: list) -> list[str]:  # type: ignore[type-arg]
 def test_first_turns_have_no_summary_block() -> None:
     session, llm, _ = make_session([call("list_menu", "m"), say("Menu."), say("Sure.")])
     session.send("show the menu")
-    assert "Earlier turns" not in changing_part(llm.calls[0].system)
+    assert "Earlier turns" not in context_of(llm.calls[0])
     session.send("thanks")
     second = llm.calls[-1]
-    assert "Earlier turns" not in changing_part(
-        second.system
+    assert "Earlier turns" not in context_of(
+        second
     )  # only the latest turn exists, and it is verbatim
     assert user_texts(second.messages) == ["show the menu", "thanks"]
 
@@ -53,7 +50,7 @@ def test_older_turns_become_summary_lines_and_latest_stays_verbatim() -> None:
         assert session.send(text).stop_reason == "answered"
 
     last = llm.calls[-1]
-    tail = changing_part(last.system)
+    tail = context_of(last)
     assert user_texts(last.messages) == ["t3", "t4", "t5"]  # chat-only t3 and latest t4, verbatim
     assert 'T2 asked: "t2 tables" | check_availability -> free 2030-06-10 19:30: table' in tail
     assert "T3 asked" not in tail  # chat-only turns are not summarised
@@ -84,7 +81,7 @@ def test_failed_turn_reports_what_was_already_changed() -> None:
     items = [{"menu_item_id": 1, "quantity": 1}]
     session, _, _ = make_session(
         [
-            call("create_reservation", "c", table_id=7, slot_datetime=SLOT, party_size=2),
+            call("create_reservation", "c", slot_datetime=SLOT, party_size=2, location="outdoor"),
             say("Booked."),
             call("add_order_items", "a", reservation_id=1, items=items),
             LLMError("down"),
@@ -109,7 +106,7 @@ def test_chat_only_turns_stay_verbatim_so_an_answer_keeps_its_question() -> None
         session.send(text)
 
     last = llm.calls[-1]
-    assert [(m.role, m.text) for m in last.messages] == [
+    assert chat_texts(last.messages) == [
         ("user", "i want to order"),
         ("assistant", "When would you like to dine?"),
         ("user", "today 7pm"),
@@ -118,7 +115,7 @@ def test_chat_only_turns_stay_verbatim_so_an_answer_keeps_its_question() -> None
         ("assistant", "Indoors or outdoors?"),
         ("user", "outdoors"),
     ]
-    assert "Earlier turns" not in changing_part(last.system)
+    assert "Earlier turns" not in context_of(last)
 
 
 def test_chat_only_turns_older_than_the_window_are_dropped() -> None:
@@ -126,3 +123,40 @@ def test_chat_only_turns_older_than_the_window_are_dropped() -> None:
     for text in ("t1", "t2", "t3", "t4"):
         session.send(text)
     assert user_texts(llm.calls[-1].messages) == ["t2", "t3", "t4"]
+
+
+def test_spoken_turns_get_the_voice_rules_in_the_fixed_system_message() -> None:
+    session, llm, _ = make_session([say("Sure."), say("Okay.")])
+    session.send("book a table", spoken=True)
+    session.send("thanks")
+    assert llm.calls[0].system == system_prompt(True) and VOICE_PROMPT in llm.calls[0].system
+    assert llm.calls[1].system == STABLE_PROMPT
+    assert all(VOICE_PROMPT not in context_of(c) for c in llm.calls)  # never in the context
+
+
+def test_system_message_is_the_same_fixed_text_on_every_call() -> None:
+    session, llm, _ = make_session([call("list_menu", "m"), say("Menu."), say("Sure.")])
+    session.send("show the menu")
+    session.send("thanks")
+    assert len(llm.calls) == 3
+    assert {c.system for c in llm.calls} == {STABLE_PROMPT}
+    for fact in ("Priya", "2030", "Current date and time:", "Customer:", "Active reservation:"):
+        assert fact not in STABLE_PROMPT
+
+
+def test_context_is_its_own_message_before_the_bare_customer_text() -> None:
+    session, llm, _ = make_session([say("Hi.")])
+    session.send("hello there")
+    roles = [(m.role, m.text) for m in llm.calls[0].messages]
+    assert [r for r, _ in roles] == ["system", "user"]
+    assert roles[0][1] and roles[0][1].startswith(f"{HEADING}:") and "Priya" in roles[0][1]
+    assert roles[1] == ("user", "hello there")  # nothing added to the customer's words
+    assert [m.role for m in session.history] == ["user", "assistant"]  # context is not kept
+
+
+def test_send_streams_the_reply_text_and_history_is_the_same_as_without_streaming() -> None:
+    session, _, _ = make_session([say("Hello Priya.")])
+    pieces: list[str] = []
+    reply = session.send("hi", on_text=pieces.append)
+    assert "".join(pieces) == "Hello Priya." == reply.text
+    assert chat_texts(session.history) == [("user", "hi"), ("assistant", "Hello Priya.")]

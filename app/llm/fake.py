@@ -1,6 +1,7 @@
 """Scripted LLM double for offline tests."""
 
-from collections.abc import Sequence
+import re
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 
 from app.domain.messages import Message, ToolSpec
@@ -34,3 +35,16 @@ class FakeLLM:
         if isinstance(step, Exception):
             raise step
         return step
+
+    def complete_stream(
+        self,
+        system: str,
+        messages: Sequence[Message],
+        tools: Sequence[ToolSpec],
+        on_text: Callable[[str], None],
+    ) -> LLMResponse:
+        """Like `complete`, handing the reply text to `on_text` one word at a time."""
+        response = self.complete(system, messages, tools)
+        for word in re.findall(r"\S+\s*", response.text or ""):
+            on_text(word)
+        return response

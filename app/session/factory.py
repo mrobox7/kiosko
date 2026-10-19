@@ -6,6 +6,7 @@ from zoneinfo import ZoneInfo
 
 import httpx
 from openai import OpenAI
+from sarvamai import AsyncSarvamAI
 
 from app.agent.loop import AgentLoop
 from app.backend.client import BackendClient
@@ -17,6 +18,9 @@ from app.llm.openai_compat import OpenAICompatLLM
 from app.memory.service import MemoryService
 from app.session.identification import identify
 from app.session.session import Session
+from app.speech.base import SpeechToText, StreamingTextToSpeech, TextToSpeech
+from app.speech.sarvam import SarvamSpeechToText, SarvamTextToSpeech, sarvam_http
+from app.speech.sarvam_stream import SarvamStreamingTextToSpeech
 from app.tools.base import ToolContext
 from app.tools.registry import ToolRegistry
 
@@ -28,6 +32,9 @@ class Runtime:
     backend: BackendClient
     loop: AgentLoop
     clock: Clock
+    stt: SpeechToText | None = None  # None when no Sarvam key is set: the UI hides the mic
+    tts: TextToSpeech | None = None
+    tts_stream: StreamingTextToSpeech | None = None  # speaks sentences as they are written
 
     def start_session(self, customer: Customer) -> Session:
         """A fresh chat for an identified customer."""
@@ -74,4 +81,30 @@ def build_runtime() -> Runtime:
         max_tool_calls=settings.max_tool_calls_per_turn,
         tool_result_max_chars=settings.tool_result_max_chars,
     )
-    return Runtime(backend=backend, loop=loop, clock=lambda: datetime.now(tz))
+    stt: SarvamSpeechToText | None = None
+    tts: SarvamTextToSpeech | None = None
+    tts_stream: SarvamStreamingTextToSpeech | None = None
+    if key := settings.sarvam_api_key.get_secret_value():
+        speech_http = sarvam_http(settings.sarvam_base_url, key, settings.sarvam_timeout_s)
+        stt = SarvamSpeechToText(speech_http, model=settings.sarvam_stt_model)
+        tts = SarvamTextToSpeech(
+            speech_http,
+            model=settings.sarvam_tts_model,
+            speaker=settings.sarvam_tts_speaker,
+            pace=settings.sarvam_tts_pace,
+            temperature=settings.sarvam_tts_temperature,
+        )
+        tts_stream = SarvamStreamingTextToSpeech(
+            AsyncSarvamAI(api_subscription_key=key),
+            model=settings.sarvam_tts_model,
+            speaker=settings.sarvam_tts_speaker,
+            pace=settings.sarvam_tts_pace,
+        )
+    return Runtime(
+        backend=backend,
+        loop=loop,
+        clock=lambda: datetime.now(tz),
+        stt=stt,
+        tts=tts,
+        tts_stream=tts_stream,
+    )

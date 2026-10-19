@@ -1,6 +1,6 @@
 """The LLM contract: response types, client protocol, error."""
 
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from typing import Protocol
 
 from pydantic import BaseModel
@@ -42,4 +42,16 @@ class LLMClient(Protocol):
         self, system: str, messages: Sequence[Message], tools: Sequence[ToolSpec]
     ) -> LLMResponse:
         """Send the window to the model and return its reply."""
+        ...
+
+    def complete_stream(
+        self,
+        system: str,
+        messages: Sequence[Message],
+        tools: Sequence[ToolSpec],
+        on_text: Callable[[str], None],
+    ) -> LLMResponse:
+        """Like `complete`, but calls `on_text` with each piece of reply text as it arrives.
+        The return value is the same complete reply. Text already passed to `on_text` cannot be
+        taken back, so an error after the first piece is raised, not retried."""
         ...

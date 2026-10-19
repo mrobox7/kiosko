@@ -6,9 +6,10 @@ from zoneinfo import ZoneInfo
 
 from app.agent.loop import AgentLoop
 from app.backend.models import Customer
+from app.domain.messages import Message
 from app.guards.rules import RulesGuard
 from app.llm.base import LLMResponse
-from app.llm.fake import FakeLLM
+from app.llm.fake import FakeLLM, LLMCall
 from app.memory.service import MemoryService
 from app.session.session import Session
 from app.tools.base import ToolContext
@@ -61,3 +62,13 @@ def make_session(
         summary_turns=guard.get("summary_turns", 3),
     )
     return session, llm, backend
+
+
+def context_of(call: LLMCall) -> str:
+    """The context message the model was given right before the customer's message."""
+    return next(m.text for m in reversed(call.messages) if m.role == "system" and m.text)
+
+
+def chat_texts(messages: Sequence[Message]) -> list[tuple[str, str]]:
+    """(role, text) of the chat itself, without the per-turn context messages."""
+    return [(m.role, m.text or "") for m in messages if m.role != "system"]

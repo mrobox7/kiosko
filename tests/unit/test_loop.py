@@ -4,7 +4,7 @@ from app.domain.messages import Message, ToolCall
 from app.llm.base import LLMError, LLMResponse
 from app.llm.fake import FakeLLM
 from app.tools.registry import ToolRegistry
-from tests.support.builders import make_ctx
+from tests.support.builders import make_ctx, make_loop
 
 CTX = make_ctx()
 HISTORY = [Message(role="user", text="vegetarian starters?")]
@@ -96,3 +96,34 @@ def test_llm_error_cause_is_in_the_trace() -> None:
     ended = [e for e in events if isinstance(e, TurnEnded)][0]
     assert ended.stop_reason == "llm_error"
     assert "429" in ended.detail and "retryable=True" in ended.detail
+
+
+def test_on_text_receives_the_reply_as_it_is_written() -> None:
+    llm = FakeLLM([LLMResponse(text="Here you go.")])
+    pieces: list[str] = []
+    result = make_loop(llm).run("sys", HISTORY, CTX, on_text=pieces.append)
+    assert pieces == ["Here ", "you ", "go."] and result.text == "Here you go."
+
+
+def test_without_on_text_the_plain_call_is_used() -> None:
+    llm = FakeLLM([LLMResponse(text="Hi.")])
+    llm.complete_stream = None  # type: ignore[method-assign,assignment]
+    assert make_loop(llm).run("sys", HISTORY, CTX).text == "Hi."
+
+
+def test_only_the_final_answer_is_streamed_on_a_tool_turn() -> None:
+    steps = [
+        LLMResponse(tool_calls=[ToolCall(id="c1", name="list_menu", arguments={})]),
+        LLMResponse(text="Three starters."),
+    ]
+    pieces: list[str] = []
+    make_loop(FakeLLM(steps)).run("sys", HISTORY, CTX, on_text=pieces.append)
+    assert "".join(pieces) == "Three starters."
+
+
+def test_a_failing_on_text_does_not_break_the_turn() -> None:
+    def boom(_: str) -> None:
+        raise RuntimeError("speaker unplugged")
+
+    result = make_loop(FakeLLM([LLMResponse(text="Fine.")])).run("sys", HISTORY, CTX, on_text=boom)
+    assert result.stop_reason == "answered" and result.text == "Fine."

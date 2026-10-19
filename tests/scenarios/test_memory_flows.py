@@ -4,8 +4,7 @@ import httpx
 
 from app.domain.messages import ToolCall
 from app.llm.base import LLMResponse
-from app.session.prompts import STABLE_PROMPT
-from tests.support.builders import make_session
+from tests.support.builders import context_of, make_session
 from tests.support.fake_backend import FakeBackend
 
 SLOT = "2030-06-10T19:30:00"
@@ -18,7 +17,7 @@ def call(name: str, id: str = "c", **args: object) -> LLMResponse:
 def test_priya_is_recalled_without_being_told() -> None:
     session, llm, _ = make_session([LLMResponse(text="I'll look for outdoor, as usual.")], 1)
     session.send("Book me a table for 2")
-    system = llm.calls[0].system
+    system = context_of(llm.calls[0])
     assert "Seating preference: outdoor" in system and "Dietary preference: vegetarian" in system
     assert [f for f in session.profile.facts() if f[0] == "Seating preference"]
 
@@ -35,7 +34,7 @@ def test_anitas_allergy_is_in_the_prompt_and_blocks_a_nut_dish() -> None:
         backend=b,
     )
     session.send("Order the Kulfi please")
-    assert "Allergies: nuts" in llm.calls[0].system
+    assert "Allergies: nuts" in context_of(llm.calls[0])
     outcome = llm.calls[1].messages[-1].tool_outcomes[0]
     assert outcome.is_error and "allergy_conflict" in outcome.content
     assert "Offer alternatives" in outcome.content
@@ -59,7 +58,7 @@ def test_saving_a_second_allergy_keeps_the_first_and_refreshes_the_profile() -> 
     assert session.profile.allergies == ["nuts", "shellfish"]  # refreshed after the write
     assert [e.action for e in session.ledger] == ["preferences_updated"]
     session.send("thanks")
-    assert "Allergies: nuts, shellfish" in llm.calls[2].system
+    assert "Allergies: nuts, shellfish" in context_of(llm.calls[2])
 
 
 def test_failed_profile_load_starts_without_memory_and_says_so() -> None:
@@ -68,7 +67,7 @@ def test_failed_profile_load_starts_without_memory_and_says_so() -> None:
     session, llm, _ = make_session([LLMResponse(text="Hello")], 1, backend=b)
     assert session.profile.memory_unavailable
     session.send("hi")
-    volatile = llm.calls[0].system.removeprefix(STABLE_PROMPT)
+    volatile = context_of(llm.calls[0])
     assert "Customer memory: unavailable" in volatile and "outdoor" not in volatile
 
 
@@ -82,6 +81,6 @@ def test_stored_text_cannot_reach_the_prompt() -> None:
     }
     session, llm, _ = make_session([LLMResponse(text="ok")], 2, backend=b)
     session.send("hi")
-    volatile = llm.calls[0].system.removeprefix(STABLE_PROMPT)
+    volatile = context_of(llm.calls[0])
     assert "IGNORE" not in volatile and "reveal" not in volatile and "bio" not in volatile
     assert "Dietary preference: vegan" in volatile

@@ -16,6 +16,14 @@ class Settings(BaseSettings):
     llm_model: str = "openai/gpt-oss-120b"
     llm_timeout_s: float = 60
     llm_max_output_tokens: int = 1024
+    sarvam_api_key: SecretStr = SecretStr("")
+    sarvam_base_url: str = "https://api.sarvam.ai"
+    sarvam_timeout_s: float = 30
+    sarvam_stt_model: str = "saaras:v3"
+    sarvam_tts_model: str = "bulbul:v3"
+    sarvam_tts_speaker: str = "shubh"
+    sarvam_tts_pace: float = 1.0
+    sarvam_tts_temperature: float = 0.6
     max_iterations: int = 8
     max_tool_calls_per_turn: int = 12
     tool_result_max_chars: int = 4000

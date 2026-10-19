@@ -19,7 +19,9 @@ def line(name: str, args: dict[str, Any], result: ToolResult) -> str:
 
 
 def book(b: FakeBackend) -> int:
-    booked = run("create_reservation", {"table_id": 7, "slot_datetime": SLOT, "party_size": 2}, b)
+    booked = run(
+        "create_reservation", {"slot_datetime": SLOT, "party_size": 2, "location": "outdoor"}, b
+    )
     return int(booked.data["id"])
 
 
@@ -57,7 +59,7 @@ def test_reservation_and_order_read_lines() -> None:
     b = FakeBackend()
     rid = book(b)
     mine = line("list_my_reservations", {}, run("list_my_reservations", {}, b))
-    assert f"#{rid} 2030-06-10 19:30 party 2 table 7 confirmed" in mine
+    assert f"#{rid} 2030-06-10 19:30 party 2 table 6 confirmed" in mine
 
     items = [{"menu_item_id": 1, "quantity": 2}]
     run("add_order_items", {"reservation_id": rid, "items": items}, b)
@@ -75,11 +77,11 @@ def test_reservation_and_order_read_lines() -> None:
 
 def test_create_cancel_and_preferences_lines() -> None:
     b = FakeBackend()
-    create = {"table_id": 7, "slot_datetime": SLOT, "party_size": 2}
+    create = {"slot_datetime": SLOT, "party_size": 2, "location": "outdoor"}
     booked = run("create_reservation", create, b)
     rid = booked.data["id"]
     assert line("create_reservation", create, booked) == (
-        f"Reservation #{rid} for 2 at 2030-06-10 19:30 (table 7)"
+        f"Reservation #{rid} for 2 at 2030-06-10 19:30 (table 6)"
     )
     cancel = {"reservation_id": rid}
     assert line("cancel_reservation", cancel, run("cancel_reservation", cancel, b)) == (
