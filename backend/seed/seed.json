@@ -1,0 +1,6613 @@
+{
+  "generated": "2026-10-20",
+  "money_unit": "rupees, before tax",
+  "outlets": [
+    {
+      "id": 1,
+      "name": "McDonald's Nemi Nagar",
+      "address": "Ground & first floor, plot no.A4 & A5 Nemi Nagar, Gandhi Path West, Vaishali Nagar Jaipur 302021",
+      "source_ref": "1162375"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "slug": "burgers",
+      "name": "Burgers",
+      "sort_order": 0
+    },
+    {
+      "id": 2,
+      "slug": "wraps",
+      "name": "Wraps",
+      "sort_order": 1
+    },
+    {
+      "id": 3,
+      "slug": "fries-sides",
+      "name": "Fries & Sides",
+      "sort_order": 2
+    },
+    {
+      "id": 4,
+      "slug": "meals",
+      "name": "Meals",
+      "sort_order": 3
+    },
+    {
+      "id": 5,
+      "slug": "mccaf",
+      "name": "McCafé",
+      "sort_order": 4
+    },
+    {
+      "id": 6,
+      "slug": "beverages",
+      "name": "Beverages",
+      "sort_order": 5
+    },
+    {
+      "id": 7,
+      "slug": "desserts",
+      "name": "Desserts",
+      "sort_order": 6
+    },
+    {
+      "id": 8,
+      "slug": "condiments",
+      "name": "Condiments",
+      "sort_order": 7
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "sku": "mcd-180910792",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McAloo Tikki Burger ®",
+      "description": "A tikki delight: Potato and peas patty topped with veg sauce, ketchup, tomatoes and onions with toasted buns.",
+      "veg": "veg",
+      "base_price": 60.0,
+      "image_key": "images/180910792.png",
+      "nutrition": {
+        "serving_size": "146gm",
+        "calories_kcal": 339.52
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [
+        "bestseller"
+      ],
+      "is_active": true,
+      "sort_order": 0,
+      "source_ref": "180910792"
+    },
+    {
+      "id": 2,
+      "sku": "mcd-180910790",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McVeggie®",
+      "description": "A patty made of potatoes, peas, carrots, beans, onions, red capsicum and a selection of Indian spices, topped with crispy lettuce, mayonnaise, packed into sesame toasted buns.",
+      "veg": "veg",
+      "base_price": 124.76,
+      "image_key": "images/180910790.png",
+      "nutrition": {
+        "serving_size": "168gm",
+        "calories_kcal": 402.05
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 1,
+      "source_ref": "180910790"
+    },
+    {
+      "id": 3,
+      "sku": "mcd-180910797",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McSpicy® Chicken",
+      "description": "Juicy Chicken meat coated in crispy batter with a kick of spice topped with a creamy sauce and crispy lettuce.",
+      "veg": "non_veg",
+      "base_price": 205.71,
+      "image_key": "images/180910797.png",
+      "nutrition": {
+        "serving_size": "186gm",
+        "calories_kcal": 451.92
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true,
+        "i egg products": true
+      },
+      "tags": [
+        "bestseller"
+      ],
+      "is_active": true,
+      "sort_order": 2,
+      "source_ref": "180910797"
+    },
+    {
+      "id": 4,
+      "sku": "mcd-180910798",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McChicken®",
+      "description": "Delightfully crispy chicken sandwich with a crispy chicken patty topped with mayonnaise and shredded iceberg lettuce served on a perfectly toasty bun.",
+      "veg": "non_veg",
+      "base_price": 155.24,
+      "image_key": "images/180910798.png",
+      "nutrition": {
+        "serving_size": "173gm",
+        "calories_kcal": 400.8
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true,
+        "i egg products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 3,
+      "source_ref": "180910798"
+    },
+    {
+      "id": 5,
+      "sku": "mcd-180910789",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McSpicy® Paneer",
+      "description": "Crispy and spicy paneer patty with creamy tandoori sauce and crispy lettuce topping.",
+      "veg": "veg",
+      "base_price": 200.95,
+      "image_key": "images/180910789.png",
+      "nutrition": {
+        "serving_size": "199gm",
+        "calories_kcal": 652.76
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabeans products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 4,
+      "source_ref": "180910789"
+    },
+    {
+      "id": 6,
+      "sku": "mcd-180910799",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Chicken McGrill®",
+      "description": "Grilled chicken patty served with freshly toasted bun, tomatoes, onions and cool mint sauce.",
+      "veg": "non_veg",
+      "base_price": 108.57,
+      "image_key": "images/180910799.png",
+      "nutrition": {
+        "serving_size": "142gm",
+        "calories_kcal": 274.17
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 5,
+      "source_ref": "180910799"
+    },
+    {
+      "id": 7,
+      "sku": "mcd-180910788",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Veg Maharaja Mac",
+      "description": "Big Mac sesame seeds bun, with rich and crusty cheesy corn patty, topped with chunky vegetable-cocktail sauce served with pungent jalapeño slices, red onion slices, tomato slices, Cheddar cheese slice and crisp iceberg lettuce.",
+      "veg": "veg",
+      "base_price": 246.67,
+      "image_key": "images/180910788.png",
+      "nutrition": {
+        "serving_size": "306gm",
+        "calories_kcal": 832.67
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 6,
+      "source_ref": "180910788"
+    },
+    {
+      "id": 8,
+      "sku": "mcd-180910795",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Chicken Maharaja Mac®",
+      "description": "Chunky juicy grilled chicken patty with fresh and premium ingredients such as jalapeño, onion, Cheddar cheese, tomatoes and crunchy lettuce, dressed with classic Habanero sauce..",
+      "veg": "non_veg",
+      "base_price": 259.05,
+      "image_key": "images/180910795.png",
+      "nutrition": {
+        "serving_size": "296gm",
+        "calories_kcal": 689.12
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 7,
+      "source_ref": "180910795"
+    },
+    {
+      "id": 9,
+      "sku": "mcd-180910796",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Filet O Fish®",
+      "description": "Made with Alaskan Pollock sourced from sustainable fisheries, topped with cheese slice and creamy tartar sauce, served on a soft, steamed bun.",
+      "veg": "non_veg",
+      "base_price": 200.95,
+      "image_key": "images/180910796.png",
+      "nutrition": {
+        "serving_size": "136gm",
+        "calories_kcal": 348.11
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true,
+        "i eggs products": true,
+        "i fish products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 8,
+      "source_ref": "180910796"
+    },
+    {
+      "id": 10,
+      "sku": "mcd-180910793",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Butter Paneer Burger",
+      "description": "Mildly spiced grilled paneer patty topped with makhani sauce and shredded onions placed between freshly toasted sesame seeded buns.",
+      "veg": "veg",
+      "base_price": 137.14,
+      "image_key": "images/180910793.png",
+      "nutrition": {
+        "serving_size": "142gm",
+        "calories_kcal": 382.26
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 9,
+      "source_ref": "180910793"
+    },
+    {
+      "id": 11,
+      "sku": "mcd-180910801",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McEgg®",
+      "description": "An Egg lover's delight! A unique combination of perfectly steamed egg, classic mayonnaise and chopped onions with a sprinkling of magic masala sandwiched in a toasted bun.",
+      "veg": "non_veg",
+      "base_price": 68.57,
+      "image_key": "images/180910801.png",
+      "nutrition": {
+        "serving_size": "115gm",
+        "calories_kcal": 265
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true,
+        "i eggs products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 10,
+      "source_ref": "180910801"
+    },
+    {
+      "id": 12,
+      "sku": "mcd-180910794",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Veg-Surprise Burger*",
+      "description": "A surprise that will leave you wide-eyed. A scrumptious potato patty topped with a delectable Italian herb sauce and shredded onions placed between perfectly toasted buns.",
+      "veg": "veg",
+      "base_price": 79.05,
+      "image_key": "images/180910794.png",
+      "nutrition": {
+        "serving_size": "132gm",
+        "calories_kcal": 313.44
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 11,
+      "source_ref": "180910794"
+    },
+    {
+      "id": 13,
+      "sku": "mcd-200565028",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Chicken Delite",
+      "description": "chicken patty served with freshly toasted bun, onions and Veg Mayo.",
+      "veg": "non_veg",
+      "base_price": 79.05,
+      "image_key": "images/200565028.png",
+      "nutrition": {
+        "serving_size": "115gm",
+        "calories_kcal": 322.9
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true,
+        "i fish products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 12,
+      "source_ref": "200565028"
+    },
+    {
+      "id": 14,
+      "sku": "mcd-180910874",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Chicken McNuggets® 20pc",
+      "description": "Bite-sized pieces of breaded boneless chicken, fried and served hot with smoke-flavoured Barbeque Sauce or Mustard Sauce.",
+      "veg": "non_veg",
+      "base_price": 413.33,
+      "image_key": "images/180910874.png",
+      "nutrition": {
+        "serving_size": "320gm",
+        "calories_kcal": 806.1
+      },
+      "allergens": {
+        "i gluten": true,
+        "i fish products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 13,
+      "source_ref": "180910874"
+    },
+    {
+      "id": 15,
+      "sku": "mcd-180910868",
+      "category_id": 3,
+      "kind": "item",
+      "name": "McFlavor Fries",
+      "description": "Hi, it’s McFlavor on this side! The all-time favourite fries with a generous dollop of McFlavor yet smoky chipotle sauce.",
+      "veg": "veg",
+      "base_price": 132.38,
+      "image_key": "images/180910868.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 289.91
+      },
+      "allergens": {
+        "i milk products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 14,
+      "source_ref": "180910868"
+    },
+    {
+      "id": 16,
+      "sku": "mcd-180910876",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Chicken McNuggets® 6pc",
+      "description": "Bite-sized pieces of breaded boneless chicken, fried and served hot with smoke-flavoured Barbeque Sauce or Mustard Sauce.",
+      "veg": "non_veg",
+      "base_price": 171.43,
+      "image_key": "images/180910876.png",
+      "nutrition": {
+        "serving_size": "96gm",
+        "calories_kcal": 254.52
+      },
+      "allergens": {
+        "i gluten": true,
+        "i fish products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 15,
+      "source_ref": "180910876"
+    },
+    {
+      "id": 17,
+      "sku": "mcd-180910871",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Fries",
+      "description": "World Famous Fries®. These epic, fan-favourite fries are crispy and golden on the outside and fluffy on the inside.",
+      "veg": "veg",
+      "base_price": 98.1,
+      "image_key": "images/180910871.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 224.59
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 16,
+      "source_ref": "180910871"
+    },
+    {
+      "id": 18,
+      "sku": "mcd-180910875",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Chicken McNuggets® 9pc",
+      "description": "Bite-sized pieces of breaded boneless chicken, fried and served hot with smoke-flavoured Barbeque Sauce or Mustard Sauce.",
+      "veg": "non_veg",
+      "base_price": 217.14,
+      "image_key": "images/180910875.png",
+      "nutrition": {
+        "serving_size": "144gm",
+        "calories_kcal": 381.77
+      },
+      "allergens": {
+        "i gluten": true,
+        "i fish products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 17,
+      "source_ref": "180910875"
+    },
+    {
+      "id": 19,
+      "sku": "mcd-180910869",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Medium-Fries",
+      "description": "World Famous Fries®. These epic, fan-favourite fries are crispy and golden on the outside and fluffy on the inside.",
+      "veg": "veg",
+      "base_price": 120.95,
+      "image_key": "images/180910869.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 317.92
+      },
+      "allergens": {},
+      "tags": [
+        "bestseller"
+      ],
+      "is_active": true,
+      "sort_order": 18,
+      "source_ref": "180910869"
+    },
+    {
+      "id": 20,
+      "sku": "mcd-200565030",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Jumbo Chicken Nuggets 4pc",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 159.05,
+      "image_key": "images/200565030.png",
+      "nutrition": {
+        "serving_size": "170gm",
+        "calories_kcal": 586.4
+      },
+      "allergens": {
+        "i gluten": true,
+        "i fish products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 19,
+      "source_ref": "200565030"
+    },
+    {
+      "id": 21,
+      "sku": "mcd-203460969",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Chicken McNuggets 4Pc",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 114.29,
+      "image_key": null,
+      "nutrition": {
+        "serving_size": "64gm",
+        "calories_kcal": 169.68
+      },
+      "allergens": {
+        "i gluten": true,
+        "i fish products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 20,
+      "source_ref": "203460969"
+    },
+    {
+      "id": 22,
+      "sku": "mcd-200565029",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Jumbo Chicken Nuggets 2pc",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 79.05,
+      "image_key": "images/200565029.png",
+      "nutrition": {
+        "serving_size": "85gm",
+        "calories_kcal": 293.2
+      },
+      "allergens": {
+        "i gluten": true,
+        "i fish products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 21,
+      "source_ref": "200565029"
+    },
+    {
+      "id": 23,
+      "sku": "mcd-180910736",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Chicken Puff",
+      "description": "Blend of assorted chicken, mozzarella cheese mixed with tomato sauce and exotic spices stuffed in rectangle shaped savoury dough.",
+      "veg": "non_veg",
+      "base_price": 68.57,
+      "image_key": "images/180910736.png",
+      "nutrition": {
+        "serving_size": "80gm",
+        "calories_kcal": 212.6
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 22,
+      "source_ref": "180910736"
+    },
+    {
+      "id": 24,
+      "sku": "mcd-180910873",
+      "category_id": 3,
+      "kind": "item",
+      "name": "Piri Piri Seasoning",
+      "description": "The perfect, taste bud tingling partner for our world-famous fries. Shake shake, and dive in!",
+      "veg": "veg",
+      "base_price": 24.76,
+      "image_key": "images/180910873.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 23,
+      "source_ref": "180910873"
+    },
+    {
+      "id": 25,
+      "sku": "mcd-180910720",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Vanilla Oreo Shake",
+      "description": "A refreshing sweet treat made from vanilla flavour and Oreo cookie pieces which are blended with ice. Now in a new, convenient and delivery friendly packaging.",
+      "veg": "veg",
+      "base_price": 213.33,
+      "image_key": "images/180910720.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 24,
+      "source_ref": "180910720"
+    },
+    {
+      "id": 26,
+      "sku": "mcd-180910718",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Strawberry Shake",
+      "description": "An all time favourite treat bringing together the perfect blend of creamy vanilla soft serve and strawberry flavor.Now in new, convenient and delivery friendly packaging.",
+      "veg": "veg",
+      "base_price": 200.95,
+      "image_key": "images/180910718.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 25,
+      "source_ref": "180910718"
+    },
+    {
+      "id": 27,
+      "sku": "mcd-197534667",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Strawberry Matcha",
+      "description": "Vibrant matcha layered with strawberry and creamy milk, crafted for a refreshing café-style experience.",
+      "veg": "veg",
+      "base_price": 205.71,
+      "image_key": "images/197534667.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 26,
+      "source_ref": "197534667"
+    },
+    {
+      "id": 28,
+      "sku": "mcd-180910719",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Chocolate Shake",
+      "description": "The classic sinful chocolate shake, a treat for anytime you need one. Now in a new, convenient and delivery friendly packaging",
+      "veg": "veg",
+      "base_price": 200.95,
+      "image_key": "images/180910719.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 27,
+      "source_ref": "180910719"
+    },
+    {
+      "id": 29,
+      "sku": "mcd-204413815",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Salted Caramel Latte",
+      "description": "Freshly brewed espresso, creamy milk and indulgent salted caramel, expertly crafted by our baristas for a smooth sweet-savoury finish.",
+      "veg": "veg",
+      "base_price": 194.29,
+      "image_key": "images/204413815.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 28,
+      "source_ref": "204413815"
+    },
+    {
+      "id": 30,
+      "sku": "mcd-180910735",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Garlic Marinara Toasty",
+      "description": "Garlic Sub Marinara Toasty",
+      "veg": "veg",
+      "base_price": 160.0,
+      "image_key": "images/180910735.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 29,
+      "source_ref": "180910735"
+    },
+    {
+      "id": 31,
+      "sku": "mcd-180910729",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Peach Iced Tea",
+      "description": "A perfect blend of aromatic teas, infused with peach flavour. Now in a new, convenient and delivery friendly packaging",
+      "veg": "veg",
+      "base_price": 194.29,
+      "image_key": "images/180910729.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 30,
+      "source_ref": "180910729"
+    },
+    {
+      "id": 32,
+      "sku": "mcd-180910727",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Mocha*",
+      "description": "A refreshing combination of chocolate, our signature McCafé coffee made with 100% Arabica beans and steamed milk, topped off with chocolate syrup.",
+      "veg": "veg",
+      "base_price": 194.29,
+      "image_key": "images/180910727.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 31,
+      "source_ref": "180910727"
+    },
+    {
+      "id": 33,
+      "sku": "mcd-180910730",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Velvety Chocolate Cup(HOT)",
+      "description": "A perfect silky treat made with sinful chocolate steamed with 100% real milk and topped with an even sweeter touch of more chocolate.",
+      "veg": "veg",
+      "base_price": 194.29,
+      "image_key": "images/180910730.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 32,
+      "source_ref": "180910730"
+    },
+    {
+      "id": 34,
+      "sku": "mcd-180910716",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Vietnamese Iced Coffee",
+      "description": "Freshly brewed espresso, blended with creamy sweetness and served chilled for a rich, smooth coffee experience.",
+      "veg": "veg",
+      "base_price": 147.62,
+      "image_key": "images/180910716.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 33,
+      "source_ref": "180910716"
+    },
+    {
+      "id": 35,
+      "sku": "mcd-201530216",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Iced Americano",
+      "description": null,
+      "veg": "veg",
+      "base_price": 160.0,
+      "image_key": "images/201530216.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 34,
+      "source_ref": "201530216"
+    },
+    {
+      "id": 36,
+      "sku": "mcd-180910726",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Latte",
+      "description": "Rich in flavour espresso balanced with steamed milk and a light layer of foam",
+      "veg": "veg",
+      "base_price": 160.0,
+      "image_key": "images/180910726.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 35,
+      "source_ref": "180910726"
+    },
+    {
+      "id": 37,
+      "sku": "mcd-201530217",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Iced Latte",
+      "description": "Freshly brewed espresso, chilled creamy milk and ice, expertly crafted by our baristas for a smooth and refreshing coffee experience.",
+      "veg": "veg",
+      "base_price": 147.62,
+      "image_key": "images/201530217.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 36,
+      "source_ref": "201530217"
+    },
+    {
+      "id": 38,
+      "sku": "mcd-180910732",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Macchiato Small",
+      "description": "Freshly steamed milk with vanilla-flavoured syrup is marked with espresso",
+      "veg": "veg",
+      "base_price": 147.62,
+      "image_key": "images/180910732.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 37,
+      "source_ref": "180910732"
+    },
+    {
+      "id": 39,
+      "sku": "mcd-180910728",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Americano",
+      "description": "Our Americano is bold and robust, made with our signature McCafé coffee combined with hot water. For coffee aficionados who prefer a bolder cup.",
+      "veg": "veg",
+      "base_price": 147.62,
+      "image_key": "images/180910728.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 38,
+      "source_ref": "180910728"
+    },
+    {
+      "id": 40,
+      "sku": "mcd-203675007",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Hot Chai Latte",
+      "description": "Comforting chai blended with creamy milk and warm aromatic spices for a soothing, indulgent cup.",
+      "veg": "veg",
+      "base_price": 137.14,
+      "image_key": "images/203675007.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 39,
+      "source_ref": "203675007"
+    },
+    {
+      "id": 41,
+      "sku": "mcd-203675006",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Chilled Chai Latte",
+      "description": "A refreshing twist on classic chai, combining aromatic spices with creamy milk, served chilled.",
+      "veg": "veg",
+      "base_price": 137.14,
+      "image_key": "images/203675006.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 40,
+      "source_ref": "203675006"
+    },
+    {
+      "id": 42,
+      "sku": "mcd-180910725",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Cappuccino*",
+      "description": "A refreshing shot of our signature McCafé coffee made with 100% arabica beans, topped with milk that is steamed to a thick, perfect foam.",
+      "veg": "veg",
+      "base_price": 137.14,
+      "image_key": "images/180910725.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 41,
+      "source_ref": "180910725"
+    },
+    {
+      "id": 43,
+      "sku": "mcd-180910717",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Watermelon Cooler",
+      "description": "A refreshing, watermelon flavored beverage that delivers a light and fruity burst of flavour.",
+      "veg": "veg",
+      "base_price": 124.76,
+      "image_key": "images/180910717.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 42,
+      "source_ref": "180910717"
+    },
+    {
+      "id": 44,
+      "sku": "mcd-199269175",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Passion Fruit Cooler",
+      "description": "A chilled, iced cooler with a vibrant tangy-sweet passion fruit flavour—offering a light and refreshing summer escape in every sip.",
+      "veg": "veg",
+      "base_price": 124.76,
+      "image_key": "images/199269175.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 43,
+      "source_ref": "199269175"
+    },
+    {
+      "id": 45,
+      "sku": "mcd-180910731",
+      "category_id": 5,
+      "kind": "item",
+      "name": "Espresso Small",
+      "description": "Concentrated black coffee shot.Our signature McCafé coffee made with 100% Arabica beans",
+      "veg": "veg",
+      "base_price": 101.9,
+      "image_key": "images/180910731.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 44,
+      "source_ref": "180910731"
+    },
+    {
+      "id": 46,
+      "sku": "mcd-180910689",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McCrispy® Chicken*",
+      "description": "Delightfully crispy chicken sandwich with a crispy chicken patty topped with mayonnaise and shredded iceberg lettuce served on a perfectly toasty bun.",
+      "veg": "non_veg",
+      "base_price": 240.0,
+      "image_key": "images/180910689.png",
+      "nutrition": {
+        "serving_size": "227gm",
+        "calories_kcal": 507.72
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 45,
+      "source_ref": "180910689"
+    },
+    {
+      "id": 47,
+      "sku": "mcd-201530210",
+      "category_id": 2,
+      "kind": "item",
+      "name": "Crispy Chicken Wrap",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 298.1,
+      "image_key": "images/201530210.png",
+      "nutrition": {
+        "serving_size": "300gm",
+        "calories_kcal": 691.9
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 46,
+      "source_ref": "201530210"
+    },
+    {
+      "id": 48,
+      "sku": "mcd-201530204",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McCrispy Chicken Deluxe Burger",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 285.71,
+      "image_key": "images/201530204.png",
+      "nutrition": {
+        "serving_size": "260gm",
+        "calories_kcal": 558.72
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 47,
+      "source_ref": "201530204"
+    },
+    {
+      "id": 49,
+      "sku": "mcd-201530207",
+      "category_id": 2,
+      "kind": "item",
+      "name": "Crispy Veggie Wrap",
+      "description": null,
+      "veg": "veg",
+      "base_price": 275.24,
+      "image_key": "images/201530207.png",
+      "nutrition": {
+        "serving_size": "290gm",
+        "calories_kcal": 651.8
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 48,
+      "source_ref": "201530207"
+    },
+    {
+      "id": 50,
+      "sku": "mcd-201530201",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Crispy Veggie Deluxe Burger",
+      "description": null,
+      "veg": "veg",
+      "base_price": 262.86,
+      "image_key": "images/201530201.png",
+      "nutrition": {
+        "serving_size": "250gm",
+        "calories_kcal": 533.33
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 49,
+      "source_ref": "201530201"
+    },
+    {
+      "id": 51,
+      "sku": "mcd-180910686",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Crispy Veggie Burger*",
+      "description": "A crunchy patty made from a blend of 7 exotic veggies, topped with crisp lettuce and a tangy cocktail sauce, all nestled in soft, glazed potato buns. A delightful mix of bold flavours and ultimate satisfaction in every bite.",
+      "veg": "veg",
+      "base_price": 217.14,
+      "image_key": "images/180910686.png",
+      "nutrition": {
+        "serving_size": "212gm",
+        "calories_kcal": 482.33
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 50,
+      "source_ref": "180910686"
+    },
+    {
+      "id": 52,
+      "sku": "mcd-180910891",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Cold Coffee",
+      "description": "A rich smooth creamy cold coffee made with coffee powder and milk.",
+      "veg": "veg",
+      "base_price": 124.76,
+      "image_key": "images/180910891.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 237.23
+      },
+      "allergens": {
+        "i milk products": true
+      },
+      "tags": [
+        "bestseller"
+      ],
+      "is_active": true,
+      "sort_order": 51,
+      "source_ref": "180910891"
+    },
+    {
+      "id": 53,
+      "sku": "mcd-180910897",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Coke",
+      "description": null,
+      "veg": "veg",
+      "base_price": 84.76,
+      "image_key": "images/180910897.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 109.56
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 52,
+      "source_ref": "180910897"
+    },
+    {
+      "id": 54,
+      "sku": "mcd-180910899",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Sprite",
+      "description": null,
+      "veg": "veg",
+      "base_price": 84.76,
+      "image_key": "images/180910899.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 119.52
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 53,
+      "source_ref": "180910899"
+    },
+    {
+      "id": 55,
+      "sku": "mcd-180910898",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Fanta",
+      "description": null,
+      "veg": "veg",
+      "base_price": 84.76,
+      "image_key": "images/180910898.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 129.48
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 54,
+      "source_ref": "180910898"
+    },
+    {
+      "id": 56,
+      "sku": "mcd-200397002",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Lychee Sprite",
+      "description": null,
+      "veg": "veg",
+      "base_price": 114.29,
+      "image_key": "images/200397002.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 215.12
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 55,
+      "source_ref": "200397002"
+    },
+    {
+      "id": 57,
+      "sku": "mcd-200397003",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Red Orange",
+      "description": null,
+      "veg": "veg",
+      "base_price": 114.29,
+      "image_key": "images/200397003.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 188.09
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 56,
+      "source_ref": "200397003"
+    },
+    {
+      "id": 58,
+      "sku": "mcd-198266534",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Mango Shake",
+      "description": null,
+      "veg": "veg",
+      "base_price": 114.29,
+      "image_key": null,
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 307.58
+      },
+      "allergens": {
+        "milk products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 57,
+      "source_ref": "198266534"
+    },
+    {
+      "id": 59,
+      "sku": "mcd-180910741",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Coke ® Zero",
+      "description": null,
+      "veg": "veg",
+      "base_price": 98.1,
+      "image_key": "images/180910741.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 58,
+      "source_ref": "180910741"
+    },
+    {
+      "id": 60,
+      "sku": "mcd-180910895",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Ice Tea",
+      "description": "A sweet tangy lime flavored tea.",
+      "veg": "veg",
+      "base_price": 98.1,
+      "image_key": "images/180910895.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": 79.68
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 59,
+      "source_ref": "180910895"
+    },
+    {
+      "id": 61,
+      "sku": "mcd-180910894",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Minute Maid Pulpy Orange",
+      "description": null,
+      "veg": "veg",
+      "base_price": 89.29,
+      "image_key": "images/180910894.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 60,
+      "source_ref": "180910894"
+    },
+    {
+      "id": 62,
+      "sku": "mcd-180910893",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Chocolate Milk shake",
+      "description": "Specially curated milk based beverage for indian kids with rich chocolate taste and no artificial colors, flavors & preservatives",
+      "veg": "veg",
+      "base_price": 75.24,
+      "image_key": "images/180910893.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 61,
+      "source_ref": "180910893"
+    },
+    {
+      "id": 63,
+      "sku": "mcd-180910906",
+      "category_id": 6,
+      "kind": "item",
+      "name": "Schweppes™ Bottled Water",
+      "description": null,
+      "veg": "veg",
+      "base_price": 66.67,
+      "image_key": "images/180910906.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 62,
+      "source_ref": "180910906"
+    },
+    {
+      "id": 64,
+      "sku": "mcd-180910807",
+      "category_id": 2,
+      "kind": "item",
+      "name": "Big Spicy Chicken Wrap",
+      "description": "Juicy chicken coated with hot and crispy batter, dressed with fresh salad of lettuce, onions, tomatoes and seasonings. Served with creamy sauce and supple cheese slices.",
+      "veg": "non_veg",
+      "base_price": 259.05,
+      "image_key": "images/180910807.png",
+      "nutrition": {
+        "serving_size": "257gm",
+        "calories_kcal": 567.19
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true,
+        "i egg products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 63,
+      "source_ref": "180910807"
+    },
+    {
+      "id": 65,
+      "sku": "mcd-180910803",
+      "category_id": 2,
+      "kind": "item",
+      "name": "Big Spicy Paneer Wrap",
+      "description": "Tender paneer patty with a fiery, crunchy batter coating, dressed with fresh veggies and seasonings, topped with creamy sauce and a dash of mustard and melted cheese.",
+      "veg": "veg",
+      "base_price": 246.67,
+      "image_key": "images/180910803.png",
+      "nutrition": {
+        "serving_size": "250gm",
+        "calories_kcal": 674.68
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [
+        "bestseller"
+      ],
+      "is_active": true,
+      "sort_order": 64,
+      "source_ref": "180910803"
+    },
+    {
+      "id": 69,
+      "sku": "mcd-180910806",
+      "category_id": 2,
+      "kind": "item",
+      "name": "Aloo Wrap",
+      "description": "Aloo Tikki patty topped with tandoori sauce, onions and lettuce wrapped in a tortilla.",
+      "veg": "veg",
+      "base_price": 92.38,
+      "image_key": "images/180910806.png",
+      "nutrition": {
+        "serving_size": "147gm",
+        "calories_kcal": 372.43
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 68,
+      "source_ref": "180910806"
+    },
+    {
+      "id": 70,
+      "sku": "mcd-180910810",
+      "category_id": 2,
+      "kind": "item",
+      "name": "Tandoori Chicken Wrap",
+      "description": "Grilled chicken patty topped with tandoori sauce, onions and lettuce wrapped in a tortilla.",
+      "veg": "non_veg",
+      "base_price": 115.24,
+      "image_key": "images/180910810.png",
+      "nutrition": {
+        "serving_size": "137gm",
+        "calories_kcal": 313.1
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i soyabean products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 69,
+      "source_ref": "180910810"
+    },
+    {
+      "id": 71,
+      "sku": "mcd-180910811",
+      "category_id": 2,
+      "kind": "item",
+      "name": "Egg Wrap",
+      "description": "Egg patty topped with tandoori sauce, onions and lettuce wrapped in a tortilla..",
+      "veg": "non_veg",
+      "base_price": 103.81,
+      "image_key": "images/180910811.png",
+      "nutrition": {
+        "serving_size": "132gm",
+        "calories_kcal": 295.78
+      },
+      "allergens": {
+        "i gluten": true,
+        "i milk products": true,
+        "i egg products": true
+      },
+      "tags": [],
+      "is_active": true,
+      "sort_order": 70,
+      "source_ref": "180910811"
+    },
+    {
+      "id": 72,
+      "sku": "mcd-211995742",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Small McSpicy Chicken Korean Burger",
+      "description": "Our McSpicy Chicken patty with a Korean twist, topped with Gochujang Butter Sauce, served as a complete meal.",
+      "veg": "non_veg",
+      "base_price": 320.95,
+      "image_key": "images/211995742.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 71,
+      "source_ref": "211995742"
+    },
+    {
+      "id": 73,
+      "sku": "mcd-211995743",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McSpicy Chicken Korean Burger",
+      "description": "Our McSpicy Chicken patty with a Korean twist, topped with our new Gochujang Butter Sauce.",
+      "veg": "non_veg",
+      "base_price": 240.0,
+      "image_key": "images/211995743.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 72,
+      "source_ref": "211995743"
+    },
+    {
+      "id": 74,
+      "sku": "mcd-211995739",
+      "category_id": 1,
+      "kind": "item",
+      "name": "McSpicy Paneer Korean Burger",
+      "description": "Our McSpicy Paneer patty with a Korean twist, topped with our new Gochujang Butter Sauce.",
+      "veg": "veg",
+      "base_price": 240.0,
+      "image_key": "images/211995739.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 73,
+      "source_ref": "211995739"
+    },
+    {
+      "id": 75,
+      "sku": "mcd-211995753",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Small Dbl Veg Surprise Korean Burger",
+      "description": "Two Veg Surprise patties with a Korean twist, topped with Gochujang Butter Sauce, served as a complete meal.",
+      "veg": "veg",
+      "base_price": 194.29,
+      "image_key": "images/211995753.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 74,
+      "source_ref": "211995753"
+    },
+    {
+      "id": 76,
+      "sku": "mcd-211995752",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Dbl Veg Surprise Korean Burger",
+      "description": "Two Veg Surprise patties with a Korean twist, topped with our new Gochujang Butter Sauce.",
+      "veg": "veg",
+      "base_price": 133.33,
+      "image_key": "images/211995752.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 75,
+      "source_ref": "211995752"
+    },
+    {
+      "id": 77,
+      "sku": "mcd-211995757",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Small Dbl Chicken Delite Korean Burger",
+      "description": "Two Chicken Delite patties with a Korean twist, topped with Gochujang Butter Sauce, served as a complete meal.",
+      "veg": "non_veg",
+      "base_price": 194.29,
+      "image_key": "images/211995757.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 76,
+      "source_ref": "211995757"
+    },
+    {
+      "id": 78,
+      "sku": "mcd-211995756",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Dbl Chicken Delite Korean Burger",
+      "description": "Two Chicken Delite patties with a Korean twist, topped with our new Gochujang Butter Sauce.",
+      "veg": "non_veg",
+      "base_price": 137.14,
+      "image_key": "images/211995756.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 77,
+      "source_ref": "211995756"
+    },
+    {
+      "id": 79,
+      "sku": "mcd-211995746",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Small Veg Surprise Korean Burger",
+      "description": "Our Veg Surprise patty with a Korean twist, topped with Gochujang Butter Sauce, served as a complete meal.",
+      "veg": "veg",
+      "base_price": 160.0,
+      "image_key": "images/211995746.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 78,
+      "source_ref": "211995746"
+    },
+    {
+      "id": 80,
+      "sku": "mcd-211995747",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Veg Surprise Korean Burger",
+      "description": "Our Veg Surprise patty with a Korean twist, topped with our new Gochujang Butter Sauce.",
+      "veg": "veg",
+      "base_price": 101.9,
+      "image_key": "images/211995747.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 79,
+      "source_ref": "211995747"
+    },
+    {
+      "id": 81,
+      "sku": "mcd-211995750",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Small Chicken Delite Korean Burger",
+      "description": "Our Chicken Delite patty with a Korean twist, topped with Gochujang Butter Sauce, served as a complete meal.",
+      "veg": "non_veg",
+      "base_price": 160.0,
+      "image_key": "images/211995750.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 80,
+      "source_ref": "211995750"
+    },
+    {
+      "id": 82,
+      "sku": "mcd-211995751",
+      "category_id": 1,
+      "kind": "item",
+      "name": "Chicken Delite Korean Burger",
+      "description": "Our Chicken Delite patty with a Korean twist, topped with our new Gochujang Butter Sauce.",
+      "veg": "non_veg",
+      "base_price": 101.9,
+      "image_key": "images/211995751.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 81,
+      "source_ref": "211995751"
+    },
+    {
+      "id": 83,
+      "sku": "mcd-180910853",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Spicy Paneer/Spicy Chicken Wrap(Any 2)+1 Med. Fries+2 Puff",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 633.33,
+      "image_key": "images/180910853.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 82,
+      "source_ref": "180910853"
+    },
+    {
+      "id": 84,
+      "sku": "mcd-180910854",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "MaharajMac Veg/MaharajMac Chicken(Any Two)+1 Medium Fries+2",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 624.76,
+      "image_key": "images/180910854.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 83,
+      "source_ref": "180910854"
+    },
+    {
+      "id": 85,
+      "sku": "mcd-180910855",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Spicy Paneer/Spicy Chicken Burger(Any 2)+1 Med Fries+2 Puff",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 546.67,
+      "image_key": "images/180910855.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 84,
+      "source_ref": "180910855"
+    },
+    {
+      "id": 86,
+      "sku": "mcd-180910856",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McVeggie/McChicken(Any Two)+1 Medium Fries+2 McPuff",
+      "description": null,
+      "veg": "non_veg",
+      "base_price": 418.1,
+      "image_key": "images/180910856.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 85,
+      "source_ref": "180910856"
+    },
+    {
+      "id": 87,
+      "sku": "mcd-180910883",
+      "category_id": 7,
+      "kind": "item",
+      "name": "McFlurry Oreo",
+      "description": null,
+      "veg": "veg",
+      "base_price": 94.29,
+      "image_key": "images/180910883.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 86,
+      "source_ref": "180910883"
+    },
+    {
+      "id": 88,
+      "sku": "mcd-180910884",
+      "category_id": 7,
+      "kind": "item",
+      "name": "McFlurry Choc crunch",
+      "description": null,
+      "veg": "veg",
+      "base_price": 94.29,
+      "image_key": "images/180910884.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 87,
+      "source_ref": "180910884"
+    },
+    {
+      "id": 89,
+      "sku": "mcd-180910878",
+      "category_id": 7,
+      "kind": "item",
+      "name": "Chocolate Brownie Sundae",
+      "description": null,
+      "veg": "veg",
+      "base_price": 124.76,
+      "image_key": "images/180910878.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 88,
+      "source_ref": "180910878"
+    },
+    {
+      "id": 90,
+      "sku": "mcd-180910881",
+      "category_id": 7,
+      "kind": "item",
+      "name": "StrawberrySundae",
+      "description": null,
+      "veg": "veg",
+      "base_price": 91.43,
+      "image_key": "images/180910881.jpg",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 89,
+      "source_ref": "180910881"
+    },
+    {
+      "id": 91,
+      "sku": "mcd-203460970",
+      "category_id": 7,
+      "kind": "item",
+      "name": "Small Coconut Caramel McFlurry",
+      "description": null,
+      "veg": "veg",
+      "base_price": 101.9,
+      "image_key": null,
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 90,
+      "source_ref": "203460970"
+    },
+    {
+      "id": 92,
+      "sku": "mcd-180910882",
+      "category_id": 7,
+      "kind": "item",
+      "name": "Chocolate Sundae",
+      "description": null,
+      "veg": "veg",
+      "base_price": 91.43,
+      "image_key": "images/180910882.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [
+        "bestseller"
+      ],
+      "is_active": true,
+      "sort_order": 91,
+      "source_ref": "180910882"
+    },
+    {
+      "id": 93,
+      "sku": "mcd-207157253",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McSpicy Chicken Meal*",
+      "description": "Juicy Chicken meat coated in crispy batter with a kick of spice topped with a creamy sauce and crispy lettuce with your favourite McCafe Drinks & Small French Fries",
+      "veg": "non_veg",
+      "base_price": 348.57,
+      "image_key": "images/207157253.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 92,
+      "source_ref": "207157253"
+    },
+    {
+      "id": 94,
+      "sku": "mcd-207157248",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McSpicy Paneer Value Meal*",
+      "description": "Crispy and spicy paneer patty with creamy tandoori sauce and crispy lettuce topping with your favourite McCafe Drinks & Small French Fries",
+      "veg": "veg",
+      "base_price": 338.1,
+      "image_key": "images/207157248.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 93,
+      "source_ref": "207157248"
+    },
+    {
+      "id": 95,
+      "sku": "mcd-207157254",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McChicken Value Meal*",
+      "description": "Delightfully crispy chicken sandwich with a crispy chicken patty topped with mayonnaise and shredded iceberg lettuce served on a perfectly toasty bun with your favourite McCafe Drinks & Small French Fries",
+      "veg": "non_veg",
+      "base_price": 280.0,
+      "image_key": "images/207157254.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 94,
+      "source_ref": "207157254"
+    },
+    {
+      "id": 96,
+      "sku": "mcd-207157249",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McVeggie Value Meal*",
+      "description": "A patty made of potatoes, peas, carrots, beans, onions, red capsicum and a selection of Indian spices, topped with crispy lettuce, mayonnaise, packed into sesame toasted buns with your favourite McCafe Drinks & Small French Fries",
+      "veg": "veg",
+      "base_price": 257.14,
+      "image_key": "images/207157249.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 95,
+      "source_ref": "207157249"
+    },
+    {
+      "id": 97,
+      "sku": "mcd-207157251",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McAloo Value Meal*",
+      "description": "A tikki delight Potato and peas patty topped with veg sauce, ketchup, tomatoes and onions with toasted buns with your favourite McCafe Drinks & Small French Fries",
+      "veg": "veg",
+      "base_price": 177.14,
+      "image_key": "images/207157251.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 96,
+      "source_ref": "207157251"
+    },
+    {
+      "id": 98,
+      "sku": "mcd-207157250",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Veg Surprise Value Meal*",
+      "description": "A surprise that will leave you wide-eyed. A scrumptious potato patty topped with a delectable Italian herb sauce and shredded onions placed between perfectly toasted buns with your favourite McCafe Drinks & Small French Fries",
+      "veg": "veg",
+      "base_price": 200.0,
+      "image_key": "images/207157250.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 97,
+      "source_ref": "207157250"
+    },
+    {
+      "id": 99,
+      "sku": "mcd-207157255",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Chicken Delite Value Meal *",
+      "description": "chicken patty served with freshly toasted bun, onions and Veg Mayo with your favourite McCafe Drinks & Small French Fries",
+      "veg": "non_veg",
+      "base_price": 200.0,
+      "image_key": "images/207157255.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 98,
+      "source_ref": "207157255"
+    },
+    {
+      "id": 100,
+      "sku": "mcd-180910785",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "HappyMeal-McVeggie *",
+      "description": "Combo of your Favorite Burger with choice of Beverage and Surprise Toy!",
+      "veg": "veg",
+      "base_price": 228.57,
+      "image_key": "images/180910785.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 99,
+      "source_ref": "180910785"
+    },
+    {
+      "id": 101,
+      "sku": "mcd-180910784",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Happy Meal-Chicken McGrill*",
+      "description": "Combo of your Favorite Burger with choice of Beveraget and Surprise Toy!",
+      "veg": "non_veg",
+      "base_price": 223.81,
+      "image_key": "images/180910784.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 100,
+      "source_ref": "180910784"
+    },
+    {
+      "id": 102,
+      "sku": "mcd-180910787",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "HappyMeal Chicken McNuggets Meal*",
+      "description": "Combo of your Favorite Burger with choice of Beverage and Surprise Toy!",
+      "veg": "non_veg",
+      "base_price": 228.57,
+      "image_key": "images/180910787.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 101,
+      "source_ref": "180910787"
+    },
+    {
+      "id": 103,
+      "sku": "mcd-180910783",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Happy Meal McAloo Tikki Burger*",
+      "description": "Combo of your Favorite Burger with choice of Beverage and Surprise Toy!",
+      "veg": "veg",
+      "base_price": 180.95,
+      "image_key": "images/180910783.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 102,
+      "source_ref": "180910783"
+    },
+    {
+      "id": 104,
+      "sku": "mcd-207481122",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Chicken McNuggets 2PC Meal",
+      "description": "Bite-sized pieces of breaded boneless chicken, fried and served hot with smoke-flavoured Barbeque Sauce or Mustard Sauce with your favourite McCafe Drinks",
+      "veg": "non_veg",
+      "base_price": 319.05,
+      "image_key": "images/207481122.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 103,
+      "source_ref": "207481122"
+    },
+    {
+      "id": 105,
+      "sku": "mcd-207481121",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McChicken 2PC Meal",
+      "description": "Delightfully crispy chicken sandwich with a crispy chicken patty topped with mayonnaise and shredded iceberg lettuce served on a perfectly toasty bun with your favourite McCafe Drinks",
+      "veg": "non_veg",
+      "base_price": 302.86,
+      "image_key": "images/207481121.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 104,
+      "source_ref": "207481121"
+    },
+    {
+      "id": 106,
+      "sku": "mcd-207481119",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Large Fries 2pc Meal",
+      "description": "World Famous Fries®. These epic, fan-favourite fries are crispy and golden on the outside and fluffy on the inside with your favourite McCafe Drinks",
+      "veg": "veg",
+      "base_price": 284.76,
+      "image_key": "images/207481119.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 105,
+      "source_ref": "207481119"
+    },
+    {
+      "id": 107,
+      "sku": "mcd-207481120",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "McVeggie 2PC Meal",
+      "description": "A patty made of potatoes, peas, carrots, beans, onions, red capsicum and a selection of Indian spices, topped with crispy lettuce, mayonnaise, packed into sesame toasted buns with your favourite McCafe Drinks",
+      "veg": "veg",
+      "base_price": 273.33,
+      "image_key": "images/207481120.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 106,
+      "source_ref": "207481120"
+    },
+    {
+      "id": 108,
+      "sku": "mcd-207481118",
+      "category_id": 4,
+      "kind": "combo",
+      "name": "Pizza McPuff 2PC Meal",
+      "description": "Blend of assorted vegetables [carrot, beans, capsicum, onion and green peas], mozzarella cheese mixed with tomato sauce and exotic spices stuffed in rectangle shaped savoury dough with your favourite McCafe Drinks",
+      "veg": "veg",
+      "base_price": 200.0,
+      "image_key": "images/207481118.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 107,
+      "source_ref": "207481118"
+    },
+    {
+      "id": 109,
+      "sku": "mcd-180910910",
+      "category_id": 8,
+      "kind": "item",
+      "name": "Ketchup",
+      "description": null,
+      "veg": "veg",
+      "base_price": 0.9,
+      "image_key": "images/180910910.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 108,
+      "source_ref": "180910910"
+    },
+    {
+      "id": 110,
+      "sku": "mcd-180910909",
+      "category_id": 8,
+      "kind": "item",
+      "name": "Chilli Sauce",
+      "description": null,
+      "veg": "veg",
+      "base_price": 1.79,
+      "image_key": "images/180910909.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 109,
+      "source_ref": "180910909"
+    },
+    {
+      "id": 111,
+      "sku": "mcd-180910911",
+      "category_id": 8,
+      "kind": "item",
+      "name": "Smoky Chipotle Sauce",
+      "description": "Smoky Chipotle Sauce",
+      "veg": "veg",
+      "base_price": 28.57,
+      "image_key": null,
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 110,
+      "source_ref": "180910911"
+    },
+    {
+      "id": 112,
+      "sku": "mcd-180910907",
+      "category_id": 8,
+      "kind": "item",
+      "name": "Barbeque Dip",
+      "description": null,
+      "veg": "veg",
+      "base_price": 21.9,
+      "image_key": "images/180910907.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 111,
+      "source_ref": "180910907"
+    },
+    {
+      "id": 113,
+      "sku": "mcd-180910908",
+      "category_id": 8,
+      "kind": "item",
+      "name": "Mustard Dip",
+      "description": null,
+      "veg": "veg",
+      "base_price": 21.9,
+      "image_key": "images/180910908.png",
+      "nutrition": {
+        "serving_size": null,
+        "calories_kcal": null
+      },
+      "allergens": {},
+      "tags": [],
+      "is_active": true,
+      "sort_order": 112,
+      "source_ref": "180910908"
+    }
+  ],
+  "option_groups": [
+    {
+      "id": 1,
+      "name": "Sauce",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 2,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 3,
+      "name": "Cheese",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 4,
+      "name": "Bun upgrade",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 5,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 6,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 7,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 8,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 9,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 10,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 3
+    },
+    {
+      "id": 11,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 12,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 13,
+      "name": "Dip",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 14,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 2
+    },
+    {
+      "id": 15,
+      "name": "Size",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 16,
+      "name": "Size",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 17,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 2
+    },
+    {
+      "id": 18,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 1
+    },
+    {
+      "id": 19,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 20,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 3
+    },
+    {
+      "id": 21,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 3
+    },
+    {
+      "id": 22,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 3
+    },
+    {
+      "id": 23,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 3
+    },
+    {
+      "id": 24,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 25,
+      "name": "Bun upgrade",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 26,
+      "name": "Size",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 27,
+      "name": "Meal side (Medium)",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 29,
+      "name": "Cheese",
+      "min_select": 0,
+      "max_select": 1
+    },
+    {
+      "id": 30,
+      "name": "Meal side (Small)",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 31,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 32,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 33,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 34,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 35,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 36,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 37,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 38,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 39,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 40,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 41,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 4
+    },
+    {
+      "id": 42,
+      "name": "Wrap choice",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 43,
+      "name": "Drink add-on",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 44,
+      "name": "Burger choice",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 45,
+      "name": "Burger choice",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 46,
+      "name": "Burger choice",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 47,
+      "name": "Size",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 48,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 1
+    },
+    {
+      "id": 49,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 1
+    },
+    {
+      "id": 50,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 1
+    },
+    {
+      "id": 51,
+      "name": "Extras",
+      "min_select": 0,
+      "max_select": 1
+    },
+    {
+      "id": 52,
+      "name": "McCafé drink",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 53,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 54,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 55,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 56,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 57,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 58,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 59,
+      "name": "Happy Meal drink",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 60,
+      "name": "Fries add-on",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 61,
+      "name": "Card choice",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 62,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 63,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 64,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 65,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 66,
+      "name": "Extra patty",
+      "min_select": 0,
+      "max_select": 5
+    },
+    {
+      "id": 67,
+      "name": "Meal drink (Medium)",
+      "min_select": 1,
+      "max_select": 1
+    },
+    {
+      "id": 68,
+      "name": "Meal drink (Large)",
+      "min_select": 1,
+      "max_select": 1
+    }
+  ],
+  "options": [
+    {
+      "id": 1,
+      "group_id": 1,
+      "name": "Complimentary Ketchup",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 2,
+      "group_id": 1,
+      "name": "No Ketchup",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 3,
+      "group_id": 2,
+      "name": "McAloo Tikki Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 4,
+      "group_id": 3,
+      "name": "Cheese",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 5,
+      "group_id": 3,
+      "name": "Double Cheese",
+      "price_delta": 58.1,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 6,
+      "group_id": 4,
+      "name": "Protein Bun",
+      "price_delta": 32.38,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 7,
+      "group_id": 4,
+      "name": "Multi Millet Bun",
+      "price_delta": 17.14,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 8,
+      "group_id": 5,
+      "name": "McVeggie Patty",
+      "price_delta": 59.05,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 9,
+      "group_id": 6,
+      "name": "McSpicy Chicken Patty",
+      "price_delta": 142.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 10,
+      "group_id": 7,
+      "name": "McChicken Patty",
+      "price_delta": 86.67,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 11,
+      "group_id": 8,
+      "name": "McSpicy Paneer Patty",
+      "price_delta": 128.57,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 12,
+      "group_id": 9,
+      "name": "Chicken McGrill Patty",
+      "price_delta": 65.71,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 13,
+      "group_id": 10,
+      "name": "Filet O Fish Patty",
+      "price_delta": 137.14,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 14,
+      "group_id": 11,
+      "name": "Butter Paneer Patty",
+      "price_delta": 86.67,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 15,
+      "group_id": 12,
+      "name": "Veg Surprise Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 16,
+      "group_id": 13,
+      "name": "Barbeque Dip",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 17,
+      "group_id": 13,
+      "name": "Mustard Dip",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 18,
+      "group_id": 14,
+      "name": "Smoky Chipotle Sauce",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 19,
+      "group_id": 14,
+      "name": "Piri Piri Seasoning",
+      "price_delta": 24.76,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 20,
+      "group_id": 15,
+      "name": "Regular",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 21,
+      "group_id": 15,
+      "name": "Medium",
+      "price_delta": 22.86,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 22,
+      "group_id": 16,
+      "name": "Small",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 23,
+      "group_id": 16,
+      "name": "Medium",
+      "price_delta": 22.85,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 24,
+      "group_id": 16,
+      "name": "Large",
+      "price_delta": 39.04,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 25,
+      "group_id": 17,
+      "name": "Reusable Bottle",
+      "price_delta": 10.48,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 26,
+      "group_id": 17,
+      "name": "Whipped Cream",
+      "price_delta": 27.62,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 27,
+      "group_id": 18,
+      "name": "Reusable Bottle",
+      "price_delta": 10.48,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 28,
+      "group_id": 19,
+      "name": "Reusable Bottle",
+      "price_delta": 10.48,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 29,
+      "group_id": 19,
+      "name": "Espresso Shot",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 30,
+      "group_id": 19,
+      "name": "No Whip",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 31,
+      "group_id": 19,
+      "name": "Whipped Cream",
+      "price_delta": 27.62,
+      "is_default": false,
+      "sort_order": 3,
+      "linked_product_id": null
+    },
+    {
+      "id": 32,
+      "group_id": 20,
+      "name": "Espresso Shot",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 33,
+      "group_id": 20,
+      "name": "Extra Milk",
+      "price_delta": 27.62,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 34,
+      "group_id": 20,
+      "name": "Whipped Cream",
+      "price_delta": 27.62,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 35,
+      "group_id": 21,
+      "name": "McCrispy Chicken* Patty",
+      "price_delta": 136.19,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 36,
+      "group_id": 22,
+      "name": "McCrispy Chicken* Patty",
+      "price_delta": 136.19,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 37,
+      "group_id": 23,
+      "name": "Crispy Veggie Patty*",
+      "price_delta": 136.19,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 38,
+      "group_id": 24,
+      "name": "Crispy Veggie Patty*",
+      "price_delta": 136.19,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 39,
+      "group_id": 25,
+      "name": "Protein Bun",
+      "price_delta": 32.38,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 40,
+      "group_id": 26,
+      "name": "Small",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 41,
+      "group_id": 26,
+      "name": "Medium",
+      "price_delta": 13.34,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 42,
+      "group_id": 26,
+      "name": "Large",
+      "price_delta": 19.05,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 43,
+      "group_id": 27,
+      "name": "Medium Fries",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 44,
+      "group_id": 27,
+      "name": "McFlavor Fries (Med.)",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 45,
+      "group_id": 27,
+      "name": "Medium Piri Piri Fries*",
+      "price_delta": 24.76,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 46,
+      "group_id": 27,
+      "name": "Honey Chilli Fries (Med.)",
+      "price_delta": 22.86,
+      "is_default": false,
+      "sort_order": 3,
+      "linked_product_id": null
+    },
+    {
+      "id": 49,
+      "group_id": 29,
+      "name": "Cheese",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 50,
+      "group_id": 30,
+      "name": "Small-Fries",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 51,
+      "group_id": 30,
+      "name": "McFlavor- Fries (Reg.)",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 52,
+      "group_id": 30,
+      "name": "Honey Chilli Fries (Reg.)",
+      "price_delta": 16.19,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 53,
+      "group_id": 31,
+      "name": "McSpicy Chicken Patty",
+      "price_delta": 142.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 54,
+      "group_id": 32,
+      "name": "McSpicy Chicken Patty",
+      "price_delta": 142.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 55,
+      "group_id": 33,
+      "name": "McSpicy Paneer Patty",
+      "price_delta": 128.57,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 56,
+      "group_id": 34,
+      "name": "Veg Surprise Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 57,
+      "group_id": 35,
+      "name": "Veg Surprise Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 58,
+      "group_id": 36,
+      "name": "Chicken Delite Patty",
+      "price_delta": 35.24,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 59,
+      "group_id": 37,
+      "name": "Chicken Delite Patty",
+      "price_delta": 35.24,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 60,
+      "group_id": 38,
+      "name": "Veg Surprise Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 61,
+      "group_id": 39,
+      "name": "Veg Surprise Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 62,
+      "group_id": 40,
+      "name": "Chicken Delite Patty",
+      "price_delta": 35.24,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 63,
+      "group_id": 41,
+      "name": "Chicken Delite Patty",
+      "price_delta": 35.24,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 64,
+      "group_id": 42,
+      "name": "Big Spicy Chicken Wrap",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": 64
+    },
+    {
+      "id": 65,
+      "group_id": 42,
+      "name": "Big Spicy Paneer Wrap",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": 65
+    },
+    {
+      "id": 66,
+      "group_id": 43,
+      "name": "NO ADDON",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 67,
+      "group_id": 43,
+      "name": "Small Coke ® X 2 Qty",
+      "price_delta": 169.52,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 68,
+      "group_id": 43,
+      "name": "Small Fanta X 2 Qty",
+      "price_delta": 169.52,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 69,
+      "group_id": 43,
+      "name": "Small Sprite X 2 Qty",
+      "price_delta": 169.52,
+      "is_default": false,
+      "sort_order": 3,
+      "linked_product_id": null
+    },
+    {
+      "id": 70,
+      "group_id": 44,
+      "name": "Veg Maharaja Mac",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": 7
+    },
+    {
+      "id": 71,
+      "group_id": 44,
+      "name": "Chicken Maharaja Mac®",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": 8
+    },
+    {
+      "id": 72,
+      "group_id": 45,
+      "name": "McSpicy® Chicken",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": 3
+    },
+    {
+      "id": 73,
+      "group_id": 45,
+      "name": "McSpicy® Paneer",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": 5
+    },
+    {
+      "id": 74,
+      "group_id": 46,
+      "name": "McVeggie Burger®",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": 2
+    },
+    {
+      "id": 75,
+      "group_id": 46,
+      "name": "McChicken®",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": 4
+    },
+    {
+      "id": 76,
+      "group_id": 47,
+      "name": "Small",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 77,
+      "group_id": 47,
+      "name": "Regular",
+      "price_delta": 42.85,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 78,
+      "group_id": 48,
+      "name": "Oreo ExtraShot*",
+      "price_delta": 22.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 79,
+      "group_id": 49,
+      "name": "Crunch ExtraShot*",
+      "price_delta": 22.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 80,
+      "group_id": 50,
+      "name": "Chocolate Topping*",
+      "price_delta": 22.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 81,
+      "group_id": 51,
+      "name": "Strawberry Topping*",
+      "price_delta": 22.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 82,
+      "group_id": 52,
+      "name": "Vietnamese Iced Coffee",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 83,
+      "group_id": 52,
+      "name": "Strawberry Matcha",
+      "price_delta": 58.1,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 84,
+      "group_id": 52,
+      "name": "Salted Caramel Latte",
+      "price_delta": 46.67,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 85,
+      "group_id": 52,
+      "name": "Iced Latte",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 3,
+      "linked_product_id": null
+    },
+    {
+      "id": 86,
+      "group_id": 52,
+      "name": "Passion Fruit Cooler",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 4,
+      "linked_product_id": null
+    },
+    {
+      "id": 87,
+      "group_id": 53,
+      "name": "McSpicy Chicken Patty",
+      "price_delta": 142.86,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 88,
+      "group_id": 54,
+      "name": "McSpicy Paneer Patty",
+      "price_delta": 128.57,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 89,
+      "group_id": 55,
+      "name": "McChicken Patty",
+      "price_delta": 86.67,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 90,
+      "group_id": 56,
+      "name": "McVeggie Patty",
+      "price_delta": 59.05,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 91,
+      "group_id": 57,
+      "name": "McAloo Tikki Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 92,
+      "group_id": 58,
+      "name": "Veg Surprise Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 93,
+      "group_id": 59,
+      "name": "Chocolate Milk shake",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 94,
+      "group_id": 59,
+      "name": "Small Coke®",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 95,
+      "group_id": 59,
+      "name": "Small Fanta",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 96,
+      "group_id": 59,
+      "name": "Small Sprite",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 3,
+      "linked_product_id": null
+    },
+    {
+      "id": 97,
+      "group_id": 59,
+      "name": "Cold Coffee",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 4,
+      "linked_product_id": null
+    },
+    {
+      "id": 98,
+      "group_id": 59,
+      "name": "Ice Tea",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 5,
+      "linked_product_id": null
+    },
+    {
+      "id": 99,
+      "group_id": 59,
+      "name": "Minute Maid Pulpy Orange",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 6,
+      "linked_product_id": null
+    },
+    {
+      "id": 100,
+      "group_id": 59,
+      "name": "Schweppes™ Bottled Water",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 7,
+      "linked_product_id": null
+    },
+    {
+      "id": 101,
+      "group_id": 59,
+      "name": "Coke® Zero Can",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 8,
+      "linked_product_id": null
+    },
+    {
+      "id": 102,
+      "group_id": 59,
+      "name": "Fresh Brew Coffee W Milk",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 9,
+      "linked_product_id": null
+    },
+    {
+      "id": 103,
+      "group_id": 59,
+      "name": "Black Coffee",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 10,
+      "linked_product_id": null
+    },
+    {
+      "id": 104,
+      "group_id": 60,
+      "name": "No ADD ON",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 105,
+      "group_id": 60,
+      "name": "Small Fries Addon",
+      "price_delta": 44.76,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 106,
+      "group_id": 61,
+      "name": "HM Book",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 107,
+      "group_id": 61,
+      "name": "HM Funny Pairs",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 108,
+      "group_id": 61,
+      "name": "HM Funny Domino",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 109,
+      "group_id": 62,
+      "name": "McVeggie Patty",
+      "price_delta": 59.05,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 110,
+      "group_id": 63,
+      "name": "Chicken McGrill Patty",
+      "price_delta": 65.71,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 111,
+      "group_id": 64,
+      "name": "McAloo Tikki Patty",
+      "price_delta": 31.43,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 112,
+      "group_id": 65,
+      "name": "McChicken Patty",
+      "price_delta": 86.67,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 113,
+      "group_id": 66,
+      "name": "McVeggie Patty",
+      "price_delta": 59.05,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 114,
+      "group_id": 67,
+      "name": "Salted Caramel Latte*",
+      "price_delta": 79.05,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 115,
+      "group_id": 67,
+      "name": "Hot Chai Latte*",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 116,
+      "group_id": 67,
+      "name": "Chilled Chai Latte*",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 117,
+      "group_id": 67,
+      "name": "Vietnamese Iced Coffee",
+      "price_delta": 21.9,
+      "is_default": false,
+      "sort_order": 3,
+      "linked_product_id": null
+    },
+    {
+      "id": 118,
+      "group_id": 67,
+      "name": "Passion Fruit-Cooler",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 4,
+      "linked_product_id": null
+    },
+    {
+      "id": 119,
+      "group_id": 67,
+      "name": "Watermelon Cooler",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 5,
+      "linked_product_id": null
+    },
+    {
+      "id": 120,
+      "group_id": 67,
+      "name": "Peach Iced Tea",
+      "price_delta": 17.14,
+      "is_default": false,
+      "sort_order": 6,
+      "linked_product_id": null
+    },
+    {
+      "id": 121,
+      "group_id": 67,
+      "name": "Iced Latte",
+      "price_delta": 49.52,
+      "is_default": false,
+      "sort_order": 7,
+      "linked_product_id": null
+    },
+    {
+      "id": 122,
+      "group_id": 67,
+      "name": "Chocolate Shake*",
+      "price_delta": 52.38,
+      "is_default": false,
+      "sort_order": 8,
+      "linked_product_id": null
+    },
+    {
+      "id": 123,
+      "group_id": 67,
+      "name": "Strawberry Shake",
+      "price_delta": 52.38,
+      "is_default": false,
+      "sort_order": 9,
+      "linked_product_id": null
+    },
+    {
+      "id": 124,
+      "group_id": 67,
+      "name": "Vanilla Oreo-Shake",
+      "price_delta": 45.71,
+      "is_default": false,
+      "sort_order": 10,
+      "linked_product_id": null
+    },
+    {
+      "id": 125,
+      "group_id": 67,
+      "name": "Iced Americano",
+      "price_delta": 61.9,
+      "is_default": false,
+      "sort_order": 11,
+      "linked_product_id": null
+    },
+    {
+      "id": 126,
+      "group_id": 67,
+      "name": "Red-Orange",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 12,
+      "linked_product_id": null
+    },
+    {
+      "id": 127,
+      "group_id": 67,
+      "name": "Mango Shake*",
+      "price_delta": 33.33,
+      "is_default": false,
+      "sort_order": 13,
+      "linked_product_id": null
+    },
+    {
+      "id": 128,
+      "group_id": 67,
+      "name": "Cappuccino",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 14,
+      "linked_product_id": null
+    },
+    {
+      "id": 129,
+      "group_id": 67,
+      "name": "Latte*",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 15,
+      "linked_product_id": null
+    },
+    {
+      "id": 130,
+      "group_id": 67,
+      "name": "Mocha",
+      "price_delta": 75.24,
+      "is_default": false,
+      "sort_order": 16,
+      "linked_product_id": null
+    },
+    {
+      "id": 131,
+      "group_id": 67,
+      "name": "Americano*",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 17,
+      "linked_product_id": null
+    },
+    {
+      "id": 132,
+      "group_id": 67,
+      "name": "Ice Tea",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 18,
+      "linked_product_id": null
+    },
+    {
+      "id": 133,
+      "group_id": 67,
+      "name": "Minute Maid Pulpy Orange",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 19,
+      "linked_product_id": null
+    },
+    {
+      "id": 134,
+      "group_id": 67,
+      "name": "Cold Coffee",
+      "price_delta": 26.67,
+      "is_default": false,
+      "sort_order": 20,
+      "linked_product_id": null
+    },
+    {
+      "id": 135,
+      "group_id": 67,
+      "name": "Coke ® Zero",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 21,
+      "linked_product_id": null
+    },
+    {
+      "id": 136,
+      "group_id": 67,
+      "name": "Medium Coke",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 22,
+      "linked_product_id": null
+    },
+    {
+      "id": 137,
+      "group_id": 67,
+      "name": "Medium Fanta",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 23,
+      "linked_product_id": null
+    },
+    {
+      "id": 138,
+      "group_id": 67,
+      "name": "Medium Sprite",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 24,
+      "linked_product_id": null
+    },
+    {
+      "id": 139,
+      "group_id": 67,
+      "name": "Schweppes™ Bottled Water",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 25,
+      "linked_product_id": null
+    },
+    {
+      "id": 140,
+      "group_id": 67,
+      "name": "Chocolate Milk shake",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 26,
+      "linked_product_id": null
+    },
+    {
+      "id": 141,
+      "group_id": 67,
+      "name": "Cold Coffee Frappe*",
+      "price_delta": 52.38,
+      "is_default": false,
+      "sort_order": 27,
+      "linked_product_id": null
+    },
+    {
+      "id": 142,
+      "group_id": 67,
+      "name": "Caramel Frappe",
+      "price_delta": 75.24,
+      "is_default": false,
+      "sort_order": 28,
+      "linked_product_id": null
+    },
+    {
+      "id": 143,
+      "group_id": 67,
+      "name": "Lychee-Sprite",
+      "price_delta": 28.57,
+      "is_default": false,
+      "sort_order": 29,
+      "linked_product_id": null
+    },
+    {
+      "id": 144,
+      "group_id": 67,
+      "name": "Velvety Chocolate Cup(HOT)",
+      "price_delta": 96.19,
+      "is_default": false,
+      "sort_order": 30,
+      "linked_product_id": null
+    },
+    {
+      "id": 145,
+      "group_id": 67,
+      "name": "Black Coffee",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 31,
+      "linked_product_id": null
+    },
+    {
+      "id": 146,
+      "group_id": 67,
+      "name": "Mango Thick Shake",
+      "price_delta": 52.38,
+      "is_default": false,
+      "sort_order": 32,
+      "linked_product_id": null
+    },
+    {
+      "id": 147,
+      "group_id": 67,
+      "name": "Coke® Zero Can",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 33,
+      "linked_product_id": null
+    },
+    {
+      "id": 148,
+      "group_id": 68,
+      "name": "Salted Caramel-Latte",
+      "price_delta": 67.62,
+      "is_default": false,
+      "sort_order": 0,
+      "linked_product_id": null
+    },
+    {
+      "id": 149,
+      "group_id": 68,
+      "name": "Hot Chai-Latte",
+      "price_delta": 35.24,
+      "is_default": false,
+      "sort_order": 1,
+      "linked_product_id": null
+    },
+    {
+      "id": 150,
+      "group_id": 68,
+      "name": "Chilled Chai-Latte",
+      "price_delta": 35.24,
+      "is_default": false,
+      "sort_order": 2,
+      "linked_product_id": null
+    },
+    {
+      "id": 151,
+      "group_id": 68,
+      "name": "Passion Fruit Cooler*",
+      "price_delta": 40.0,
+      "is_default": false,
+      "sort_order": 3,
+      "linked_product_id": null
+    },
+    {
+      "id": 152,
+      "group_id": 68,
+      "name": "Vietnamese Iced Coffee",
+      "price_delta": 20.0,
+      "is_default": false,
+      "sort_order": 4,
+      "linked_product_id": null
+    },
+    {
+      "id": 153,
+      "group_id": 68,
+      "name": "Watermelon Cooler",
+      "price_delta": 15.24,
+      "is_default": false,
+      "sort_order": 5,
+      "linked_product_id": null
+    },
+    {
+      "id": 154,
+      "group_id": 68,
+      "name": "Peach Iced Tea",
+      "price_delta": 15.24,
+      "is_default": false,
+      "sort_order": 6,
+      "linked_product_id": null
+    },
+    {
+      "id": 155,
+      "group_id": 68,
+      "name": "Iced Latte",
+      "price_delta": 43.81,
+      "is_default": false,
+      "sort_order": 7,
+      "linked_product_id": null
+    },
+    {
+      "id": 156,
+      "group_id": 68,
+      "name": "Chocolate-Shake",
+      "price_delta": 50.48,
+      "is_default": false,
+      "sort_order": 8,
+      "linked_product_id": null
+    },
+    {
+      "id": 157,
+      "group_id": 68,
+      "name": "Strawberry Shake",
+      "price_delta": 50.48,
+      "is_default": false,
+      "sort_order": 9,
+      "linked_product_id": null
+    },
+    {
+      "id": 158,
+      "group_id": 68,
+      "name": "Vanilla Oreo-Shake",
+      "price_delta": 50.48,
+      "is_default": false,
+      "sort_order": 10,
+      "linked_product_id": null
+    },
+    {
+      "id": 159,
+      "group_id": 68,
+      "name": "Iced Americano",
+      "price_delta": 56.19,
+      "is_default": false,
+      "sort_order": 11,
+      "linked_product_id": null
+    },
+    {
+      "id": 160,
+      "group_id": 68,
+      "name": "Mango-Shake*",
+      "price_delta": 33.33,
+      "is_default": false,
+      "sort_order": 12,
+      "linked_product_id": null
+    },
+    {
+      "id": 161,
+      "group_id": 68,
+      "name": "Cappuccino",
+      "price_delta": 34.29,
+      "is_default": false,
+      "sort_order": 13,
+      "linked_product_id": null
+    },
+    {
+      "id": 162,
+      "group_id": 68,
+      "name": "Latte*",
+      "price_delta": 34.29,
+      "is_default": false,
+      "sort_order": 14,
+      "linked_product_id": null
+    },
+    {
+      "id": 163,
+      "group_id": 68,
+      "name": "Mocha",
+      "price_delta": 69.52,
+      "is_default": false,
+      "sort_order": 15,
+      "linked_product_id": null
+    },
+    {
+      "id": 164,
+      "group_id": 68,
+      "name": "Americano*",
+      "price_delta": 34.29,
+      "is_default": false,
+      "sort_order": 16,
+      "linked_product_id": null
+    },
+    {
+      "id": 165,
+      "group_id": 68,
+      "name": "Large Coke ®",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 17,
+      "linked_product_id": null
+    },
+    {
+      "id": 166,
+      "group_id": 68,
+      "name": "Large Fanta",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 18,
+      "linked_product_id": null
+    },
+    {
+      "id": 167,
+      "group_id": 68,
+      "name": "Large Sprite",
+      "price_delta": 0.0,
+      "is_default": false,
+      "sort_order": 19,
+      "linked_product_id": null
+    },
+    {
+      "id": 168,
+      "group_id": 68,
+      "name": "Cold CoffeeFrappe",
+      "price_delta": 50.48,
+      "is_default": false,
+      "sort_order": 20,
+      "linked_product_id": null
+    },
+    {
+      "id": 169,
+      "group_id": 68,
+      "name": "Caramel Frappe",
+      "price_delta": 73.33,
+      "is_default": false,
+      "sort_order": 21,
+      "linked_product_id": null
+    },
+    {
+      "id": 170,
+      "group_id": 68,
+      "name": "Velvety Chocolate Cup(HOT)",
+      "price_delta": 90.48,
+      "is_default": false,
+      "sort_order": 22,
+      "linked_product_id": null
+    },
+    {
+      "id": 171,
+      "group_id": 68,
+      "name": "Mango Thick Shake",
+      "price_delta": 97.14,
+      "is_default": false,
+      "sort_order": 23,
+      "linked_product_id": null
+    }
+  ],
+  "product_option_groups": [
+    {
+      "product_id": 1,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 1,
+      "group_id": 2,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 1,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 1,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 2,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 2,
+      "group_id": 5,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 2,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 2,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 3,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 3,
+      "group_id": 6,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 3,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 3,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 4,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 4,
+      "group_id": 7,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 4,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 4,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 5,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 5,
+      "group_id": 8,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 5,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 5,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 6,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 6,
+      "group_id": 9,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 6,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 6,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 7,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 7,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 8,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 8,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 9,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 9,
+      "group_id": 10,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 1
+    },
+    {
+      "product_id": 9,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 2
+    },
+    {
+      "product_id": 10,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 10,
+      "group_id": 11,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 10,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 10,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 11,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 11,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 11,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 12,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 12,
+      "group_id": 12,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 1
+    },
+    {
+      "product_id": 12,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 12,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 13,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 14,
+      "group_id": 13,
+      "min_select": 3,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 14,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 15,
+      "group_id": 15,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 16,
+      "group_id": 13,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 16,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 17,
+      "group_id": 16,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 17,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 17,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 2
+    },
+    {
+      "product_id": 18,
+      "group_id": 13,
+      "min_select": 2,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 18,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 19,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 19,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 21,
+      "group_id": 13,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 21,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 25,
+      "group_id": 17,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 26,
+      "group_id": 17,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 27,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 28,
+      "group_id": 17,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 29,
+      "group_id": 19,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 0
+    },
+    {
+      "product_id": 31,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 32,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 33,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 34,
+      "group_id": 19,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 0
+    },
+    {
+      "product_id": 35,
+      "group_id": 19,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 0
+    },
+    {
+      "product_id": 36,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 37,
+      "group_id": 19,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 0
+    },
+    {
+      "product_id": 38,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 39,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 40,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 41,
+      "group_id": 19,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 0
+    },
+    {
+      "product_id": 42,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 43,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 44,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 45,
+      "group_id": 20,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 0
+    },
+    {
+      "product_id": 46,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 46,
+      "group_id": 21,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 1
+    },
+    {
+      "product_id": 46,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 2
+    },
+    {
+      "product_id": 47,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 47,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 48,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 48,
+      "group_id": 22,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 1
+    },
+    {
+      "product_id": 48,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 2
+    },
+    {
+      "product_id": 49,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 49,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 50,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 50,
+      "group_id": 23,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 1
+    },
+    {
+      "product_id": 50,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 3,
+      "sort_order": 2
+    },
+    {
+      "product_id": 51,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 51,
+      "group_id": 24,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 51,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 51,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 52,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 53,
+      "group_id": 26,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 53,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 54,
+      "group_id": 26,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 54,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 55,
+      "group_id": 26,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 55,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 56,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 57,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 58,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 59,
+      "group_id": 18,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 64,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 64,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 65,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 65,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 1
+    },
+    {
+      "product_id": 69,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 69,
+      "group_id": 29,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 70,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 70,
+      "group_id": 29,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 71,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 71,
+      "group_id": 29,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 72,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 72,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 72,
+      "group_id": 31,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 72,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 72,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 4
+    },
+    {
+      "product_id": 73,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 73,
+      "group_id": 32,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 73,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 73,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 74,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 74,
+      "group_id": 33,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 74,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 74,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 75,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 75,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 75,
+      "group_id": 34,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 75,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 75,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 4
+    },
+    {
+      "product_id": 76,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 76,
+      "group_id": 35,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 76,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 76,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 77,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 77,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 77,
+      "group_id": 36,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 77,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 77,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 4
+    },
+    {
+      "product_id": 78,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 78,
+      "group_id": 37,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 78,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 78,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 79,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 79,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 79,
+      "group_id": 38,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 79,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 79,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 4
+    },
+    {
+      "product_id": 80,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 80,
+      "group_id": 39,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 80,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 80,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 81,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 81,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 81,
+      "group_id": 40,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 81,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 81,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 4
+    },
+    {
+      "product_id": 82,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 82,
+      "group_id": 41,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 1
+    },
+    {
+      "product_id": 82,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 2
+    },
+    {
+      "product_id": 82,
+      "group_id": 25,
+      "min_select": null,
+      "max_select": 4,
+      "sort_order": 3
+    },
+    {
+      "product_id": 83,
+      "group_id": 42,
+      "min_select": 2,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 83,
+      "group_id": 43,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 83,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 83,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 3
+    },
+    {
+      "product_id": 84,
+      "group_id": 44,
+      "min_select": 2,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 84,
+      "group_id": 43,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 84,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 84,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 3
+    },
+    {
+      "product_id": 85,
+      "group_id": 45,
+      "min_select": 2,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 85,
+      "group_id": 43,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 85,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 85,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 3
+    },
+    {
+      "product_id": 86,
+      "group_id": 46,
+      "min_select": 2,
+      "max_select": 2,
+      "sort_order": 0
+    },
+    {
+      "product_id": 86,
+      "group_id": 43,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 86,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 86,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 3
+    },
+    {
+      "product_id": 87,
+      "group_id": 47,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 87,
+      "group_id": 48,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 88,
+      "group_id": 47,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 88,
+      "group_id": 49,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 1
+    },
+    {
+      "product_id": 89,
+      "group_id": 50,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 90,
+      "group_id": 51,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 92,
+      "group_id": 50,
+      "min_select": null,
+      "max_select": 1,
+      "sort_order": 0
+    },
+    {
+      "product_id": 93,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 93,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 93,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 93,
+      "group_id": 53,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 93,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 93,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 94,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 94,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 94,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 94,
+      "group_id": 54,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 94,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 94,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 95,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 95,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 95,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 95,
+      "group_id": 55,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 95,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 95,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 96,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 96,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 96,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 96,
+      "group_id": 56,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 96,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 96,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 97,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 97,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 97,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 97,
+      "group_id": 57,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 97,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 97,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 98,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 98,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 98,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 98,
+      "group_id": 58,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 98,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 98,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 99,
+      "group_id": 30,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 99,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 99,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 100,
+      "group_id": 59,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 100,
+      "group_id": 60,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 100,
+      "group_id": 61,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 100,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 3
+    },
+    {
+      "product_id": 100,
+      "group_id": 62,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 100,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 100,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 6
+    },
+    {
+      "product_id": 101,
+      "group_id": 59,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 101,
+      "group_id": 60,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 101,
+      "group_id": 61,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 101,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 3
+    },
+    {
+      "product_id": 101,
+      "group_id": 63,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 101,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 101,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 6
+    },
+    {
+      "product_id": 102,
+      "group_id": 13,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 102,
+      "group_id": 59,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 102,
+      "group_id": 60,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 102,
+      "group_id": 61,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 3
+    },
+    {
+      "product_id": 102,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 4
+    },
+    {
+      "product_id": 102,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 5
+    },
+    {
+      "product_id": 103,
+      "group_id": 59,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 103,
+      "group_id": 60,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 103,
+      "group_id": 61,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 2
+    },
+    {
+      "product_id": 103,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 3
+    },
+    {
+      "product_id": 103,
+      "group_id": 64,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 103,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 5
+    },
+    {
+      "product_id": 103,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 6
+    },
+    {
+      "product_id": 104,
+      "group_id": 13,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 104,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 104,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 2
+    },
+    {
+      "product_id": 105,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 105,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 105,
+      "group_id": 65,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 105,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 105,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 106,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 106,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 106,
+      "group_id": 14,
+      "min_select": null,
+      "max_select": 2,
+      "sort_order": 2
+    },
+    {
+      "product_id": 107,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    },
+    {
+      "product_id": 107,
+      "group_id": 1,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 1
+    },
+    {
+      "product_id": 107,
+      "group_id": 66,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 2
+    },
+    {
+      "product_id": 107,
+      "group_id": 3,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 3
+    },
+    {
+      "product_id": 107,
+      "group_id": 4,
+      "min_select": null,
+      "max_select": 5,
+      "sort_order": 4
+    },
+    {
+      "product_id": 108,
+      "group_id": 52,
+      "min_select": null,
+      "max_select": null,
+      "sort_order": 0
+    }
+  ],
+  "meal_offers": [
+    {
+      "product_id": 8,
+      "size": "Medium",
+      "price_delta": 133.33,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910753"
+    },
+    {
+      "product_id": 48,
+      "size": "Medium",
+      "price_delta": 133.34,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "201530206"
+    },
+    {
+      "product_id": 5,
+      "size": "Medium",
+      "price_delta": 146.67,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910745"
+    },
+    {
+      "product_id": 2,
+      "size": "Medium",
+      "price_delta": 138.1,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910746"
+    },
+    {
+      "product_id": 3,
+      "size": "Medium",
+      "price_delta": 144.77,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910755"
+    },
+    {
+      "product_id": 46,
+      "size": "Medium",
+      "price_delta": 133.33,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910690"
+    },
+    {
+      "product_id": 47,
+      "size": "Medium",
+      "price_delta": 132.38,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "201530212"
+    },
+    {
+      "product_id": 18,
+      "size": "Medium",
+      "price_delta": 140.96,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910754"
+    },
+    {
+      "product_id": 51,
+      "size": "Medium",
+      "price_delta": 133.34,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910687"
+    },
+    {
+      "product_id": 7,
+      "size": "Medium",
+      "price_delta": 133.33,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910743"
+    },
+    {
+      "product_id": 49,
+      "size": "Medium",
+      "price_delta": 131.43,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "201530209"
+    },
+    {
+      "product_id": 64,
+      "size": "Medium",
+      "price_delta": 138.09,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910752"
+    },
+    {
+      "product_id": 65,
+      "size": "Medium",
+      "price_delta": 130.47,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910744"
+    },
+    {
+      "product_id": 9,
+      "size": "Medium",
+      "price_delta": 122.86,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910756"
+    },
+    {
+      "product_id": 1,
+      "size": "Medium",
+      "price_delta": 148.57,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910751"
+    },
+    {
+      "product_id": 50,
+      "size": "Medium",
+      "price_delta": 133.33,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "201530203"
+    },
+    {
+      "product_id": 4,
+      "size": "Medium",
+      "price_delta": 130.47,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910758"
+    },
+    {
+      "product_id": 16,
+      "size": "Medium",
+      "price_delta": 145.71,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910757"
+    },
+    {
+      "product_id": 6,
+      "size": "Medium",
+      "price_delta": 144.76,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910759"
+    },
+    {
+      "product_id": 11,
+      "size": "Medium",
+      "price_delta": 132.38,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910760"
+    },
+    {
+      "product_id": 10,
+      "size": "Medium",
+      "price_delta": 136.19,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910747"
+    },
+    {
+      "product_id": 12,
+      "size": "Medium",
+      "price_delta": 140.0,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910748"
+    },
+    {
+      "product_id": 23,
+      "size": "Medium",
+      "price_delta": 140.0,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "180910737"
+    },
+    {
+      "product_id": 13,
+      "size": "Medium",
+      "price_delta": 140.0,
+      "side_group_id": 27,
+      "drink_group_id": 67,
+      "source_ref": "200565026"
+    },
+    {
+      "product_id": 47,
+      "size": "Large",
+      "price_delta": 160.95,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "201530211"
+    },
+    {
+      "product_id": 8,
+      "size": "Large",
+      "price_delta": 160.0,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910771"
+    },
+    {
+      "product_id": 3,
+      "size": "Large",
+      "price_delta": 170.48,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910774"
+    },
+    {
+      "product_id": 5,
+      "size": "Large",
+      "price_delta": 173.34,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910763"
+    },
+    {
+      "product_id": 46,
+      "size": "Large",
+      "price_delta": 160.95,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910691"
+    },
+    {
+      "product_id": 48,
+      "size": "Large",
+      "price_delta": 160.96,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "201530205"
+    },
+    {
+      "product_id": 49,
+      "size": "Large",
+      "price_delta": 160.95,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "201530208"
+    },
+    {
+      "product_id": 64,
+      "size": "Large",
+      "price_delta": 163.81,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910770"
+    },
+    {
+      "product_id": 18,
+      "size": "Large",
+      "price_delta": 166.67,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910772"
+    },
+    {
+      "product_id": 7,
+      "size": "Large",
+      "price_delta": 159.04,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910761"
+    },
+    {
+      "product_id": 50,
+      "size": "Large",
+      "price_delta": 160.95,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "201530202"
+    },
+    {
+      "product_id": 9,
+      "size": "Large",
+      "price_delta": 150.48,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910775"
+    },
+    {
+      "product_id": 65,
+      "size": "Large",
+      "price_delta": 157.14,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910762"
+    },
+    {
+      "product_id": 4,
+      "size": "Large",
+      "price_delta": 157.14,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910777"
+    },
+    {
+      "product_id": 2,
+      "size": "Large",
+      "price_delta": 165.72,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910764"
+    },
+    {
+      "product_id": 16,
+      "size": "Large",
+      "price_delta": 172.38,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910776"
+    },
+    {
+      "product_id": 51,
+      "size": "Large",
+      "price_delta": 160.96,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910688"
+    },
+    {
+      "product_id": 6,
+      "size": "Large",
+      "price_delta": 170.48,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910778"
+    },
+    {
+      "product_id": 1,
+      "size": "Large",
+      "price_delta": 176.19,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910768"
+    },
+    {
+      "product_id": 11,
+      "size": "Large",
+      "price_delta": 159.05,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910779"
+    },
+    {
+      "product_id": 10,
+      "size": "Large",
+      "price_delta": 155.24,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910766"
+    },
+    {
+      "product_id": 23,
+      "size": "Large",
+      "price_delta": 167.62,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910738"
+    },
+    {
+      "product_id": 12,
+      "size": "Large",
+      "price_delta": 168.57,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "180910765"
+    },
+    {
+      "product_id": 13,
+      "size": "Large",
+      "price_delta": 168.57,
+      "side_group_id": null,
+      "drink_group_id": 68,
+      "source_ref": "200565027"
+    }
+  ]
+}
