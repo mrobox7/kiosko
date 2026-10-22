@@ -21,6 +21,7 @@ class ToolOutcome(BaseModel):
     content: str
     is_error: bool = False
     compact: str = ""  # one-line form for the turn summary; never sent to the model
+    in_order: bool = False  # the order in the context shows what this call did; left out of it
 
 
 class Message(BaseModel):

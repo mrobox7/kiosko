@@ -25,13 +25,13 @@ def test_the_reply_is_spoken_sentence_by_sentence_and_timed() -> None:
 
 def test_on_a_tool_turn_only_the_final_answer_is_spoken() -> None:
     steps = [
-        LLMResponse(tool_calls=[ToolCall(id="c", name="list_my_reservations", arguments={})]),
-        LLMResponse(text="You have no bookings."),
+        LLMResponse(tool_calls=[ToolCall(id="c", name="get_menu", arguments={})]),
+        LLMResponse(text="We have burgers and desserts."),
     ]
     session, _, _ = make_session(steps)
     speaker = FakeStreamingTextToSpeech()
-    run(speak_turn(session, "my bookings?", speaker))
-    assert speaker.spoken == ["You have no bookings."]
+    run(speak_turn(session, "what do you have?", speaker))
+    assert speaker.spoken == ["We have burgers and desserts."]
 
 
 def test_a_speech_failure_keeps_the_reply_and_the_turn() -> None:

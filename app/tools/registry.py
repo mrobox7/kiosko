@@ -18,16 +18,20 @@ from app.domain.results import (
     INTERNAL_ERROR,
     INVALID_ARGUMENTS,
     MALFORMED_ARGUMENTS_JSON,
-    NOT_PERMITTED,
     UNKNOWN_TOOL,
     ToolResult,
 )
-from app.tools.base import NotPermitted, Tool, ToolContext
+from app.tools.base import Tool, ToolContext
+from app.tools.cart import refusal_for
 
 logger = logging.getLogger(__name__)
 
 
 _NULL = {"type": "null"}
+
+# Bounds the model does not need to see: the tool's own validation still enforces them and
+# answers with a clear error. `maximum` stays, because it is a real limit ("at most 20").
+_UNSHOWN_BOUNDS = frozenset({"maxLength", "minLength", "minimum", "exclusiveMinimum"})
 
 
 def _without_null_option(schema: dict[str, Any]) -> dict[str, Any]:
@@ -44,8 +48,8 @@ def _without_null_option(schema: dict[str, Any]) -> dict[str, Any]:
 
 def _compact_schema(schema: Any, *, top: bool = True) -> Any:
     """Drop what pydantic adds that the model does not need: `title` keywords, the class
-    docstring on the top-level schema (the tool description already says it), `default: null`
-    and the null option of optional fields."""
+    docstring on the top-level schema (the tool description already says it), `default: null`,
+    the null option of optional fields and the lower and length bounds."""
     if isinstance(schema, list):
         return [_compact_schema(item, top=False) for item in schema]
     if not isinstance(schema, dict):
@@ -57,6 +61,8 @@ def _compact_schema(schema: Any, *, top: bool = True) -> Any:
         if key == "description" and top:
             continue
         if key == "default" and value is None:
+            continue
+        if key in _UNSHOWN_BOUNDS:
             continue
         if key in ("properties", "$defs"):  # keys here are names, not keywords
             out[key] = {k: _compact_schema(v, top=False) for k, v in value.items()}
@@ -102,6 +108,11 @@ class ToolRegistry:
             logger.exception("Tool %s failed to compact its result", name)
         return f"error: {result.error.code}" if result.error else ("ok" if result.ok else "error")
 
+    def shown_in_order(self, name: str) -> bool:
+        """True for a tool whose success the order in the context already shows."""
+        tool = self._tools.get(name)
+        return tool is not None and tool.shown_in_order
+
     def dispatch(
         self,
         name: str,
@@ -132,12 +143,6 @@ class ToolRegistry:
             )
         try:
             return tool.run(ctx, args)
-        except NotPermitted:
-            return ToolResult.failure(
-                NOT_PERMITTED,
-                "That reservation or order is not on this customer's account.",
-                "Do not retry with other ids. Offer to list the customer's own bookings.",
-            )
         except BackendUnavailable as exc:
             return ToolResult.failure(
                 BACKEND_UNAVAILABLE,
@@ -145,7 +150,7 @@ class ToolRegistry:
                 "Tell the customer the system is unavailable; do not retry in a loop.",
             )
         except BackendError as exc:
-            return ToolResult.failure(BACKEND_REJECTED, exc.message)
+            return refusal_for(ctx, exc) or ToolResult.failure(BACKEND_REJECTED, exc.message)
         except Exception:  # boundary: tools must never raise into the loop
             logger.exception("Tool %s crashed", name)
             return ToolResult.failure(

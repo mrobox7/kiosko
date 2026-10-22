@@ -1,13 +1,15 @@
+import json
+
 from app.agent.events import ToolRequested, ToolReturned, TurnEnded
 from app.agent.loop import AgentLoop
 from app.domain.messages import Message, ToolCall
 from app.llm.base import LLMError, LLMResponse
 from app.llm.fake import FakeLLM
 from app.tools.registry import ToolRegistry
-from tests.support.builders import make_ctx, make_loop
+from tests.support.builders import make_ctx, make_loop, make_order_tools
 
 CTX = make_ctx()
-HISTORY = [Message(role="user", text="vegetarian starters?")]
+HISTORY = [Message(role="user", text="veg burgers?")]
 
 
 def make(steps, **kw):
@@ -22,7 +24,7 @@ def make(steps, **kw):
     return loop, llm
 
 
-def call(id="c1", name="list_menu", **args):
+def call(id="c1", name="get_menu", **args):
     return LLMResponse(tool_calls=[ToolCall(id=id, name=name, arguments=args)])
 
 
@@ -34,13 +36,13 @@ def test_text_only() -> None:
 
 
 def test_tool_call_then_text_pairs_outcomes_and_traces() -> None:
-    loop, llm = make([call(tags_any=["vegetarian"]), LLMResponse(text="Here you go")])
+    loop, llm = make([call(category="burgers"), LLMResponse(text="Here you go")])
     events = []
     r = loop.run("sys", HISTORY, CTX, events.append)
     assert r.stop_reason == "answered"
     outcomes = r.new_messages[1].tool_outcomes
     assert [o.call_id for o in outcomes] == ["c1"] and not outcomes[0].is_error
-    assert "Paneer Tikka" in outcomes[0].content
+    assert "McAloo Tikki" in outcomes[0].content
     # second model call saw the tool outcome
     assert llm.calls[1].messages[-1].tool_outcomes[0].call_id == "c1"
     kinds = [type(e) for e in events]
@@ -54,7 +56,7 @@ def test_iteration_cap() -> None:
 
 
 def test_tool_call_budget_still_pairs_every_call() -> None:
-    many = LLMResponse(tool_calls=[ToolCall(id=f"c{i}", name="list_menu") for i in range(3)])
+    many = LLMResponse(tool_calls=[ToolCall(id=f"c{i}", name="get_menu") for i in range(3)])
     loop, _ = make([many, LLMResponse(text="done")], max_tool_calls=1)
     r = loop.run("sys", HISTORY, CTX)
     outcomes = r.new_messages[1].tool_outcomes
@@ -75,10 +77,29 @@ def test_llm_error_and_truncation() -> None:
     assert loop.run("s", HISTORY, CTX).stop_reason == "truncated"
 
 
-def test_large_result_is_capped() -> None:
+def test_a_reply_too_long_to_show_becomes_an_error_not_broken_json() -> None:
     loop, _ = make([call(), LLMResponse(text="ok")], max_chars=100)
     r = loop.run("s", HISTORY, CTX)
-    assert r.new_messages[1].tool_outcomes[0].content.endswith("[result cut off]")
+    outcome = r.new_messages[1].tool_outcomes[0]
+    assert outcome.is_error and "result_too_long" in outcome.content
+    assert "[result cut off]" not in outcome.content and len(outcome.content) < 300
+    json.loads(outcome.content)  # whole, valid JSON
+
+
+def test_a_write_whose_reply_is_too_long_still_says_it_happened() -> None:
+    ctx, _, tools = make_order_tools()
+    loop = AgentLoop(
+        FakeLLM([call(name="add_to_order", dish_id=4), LLMResponse(text="ok")]),
+        tools,
+        max_iterations=4,
+        max_tool_calls=4,
+        tool_result_max_chars=30,
+    )
+    r = loop.run("s", HISTORY, ctx)
+    outcome = r.new_messages[1].tool_outcomes[0]
+    assert "The change was made" in outcome.content and "get_order" in outcome.content
+    assert "McAloo Tikki" in outcome.compact  # the failed-turn report still names the change
+    assert r.changes == [outcome.compact]
 
 
 def test_listener_failure_is_swallowed() -> None:
@@ -113,7 +134,7 @@ def test_without_on_text_the_plain_call_is_used() -> None:
 
 def test_only_the_final_answer_is_streamed_on_a_tool_turn() -> None:
     steps = [
-        LLMResponse(tool_calls=[ToolCall(id="c1", name="list_menu", arguments={})]),
+        LLMResponse(tool_calls=[ToolCall(id="c1", name="get_menu", arguments={})]),
         LLMResponse(text="Three starters."),
     ]
     pieces: list[str] = []

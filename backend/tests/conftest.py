@@ -9,13 +9,14 @@ from sqlalchemy import Engine, create_engine, text
 from sqlalchemy.engine import make_url
 from sqlalchemy.orm import Session
 
-from app import models  # noqa: F401  (registers the tables)
-from app.database import Base, get_db
+from app.database import Base, create_tables, get_db
 from app.main import app
 from app.seed import load_seed, read_seed
 
 TEST_URL = make_url(
-    os.environ.get("TEST_DATABASE_URL", "postgresql+psycopg://menu:menu@localhost:5434/menu_test")
+    os.environ.get(
+        "TEST_DATABASE_URL", "postgresql+psycopg://menu:menu@localhost:5434/restaurant_test"
+    )
 )
 assert TEST_URL.database and TEST_URL.database.endswith("_test"), "tests need a *_test database"
 
@@ -32,7 +33,7 @@ def engine() -> Iterator[Engine]:
     admin.dispose()
     eng = create_engine(TEST_URL)
     Base.metadata.drop_all(eng)  # always start from a clean test database
-    Base.metadata.create_all(eng)
+    create_tables(eng)
     yield eng
     eng.dispose()
 

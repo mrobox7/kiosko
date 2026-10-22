@@ -1,8 +1,7 @@
 """The only code that talks HTTP to the restaurant backend."""
 
 import json
-from datetime import datetime
-from typing import Any
+from typing import Any, NamedTuple
 
 import httpx
 
@@ -14,26 +13,43 @@ from app.backend.errors import (
     BackendUnavailable,
 )
 from app.backend.models import (
-    Availability,
     Customer,
-    MenuFilters,
-    MenuItem,
-    Order,
-    Reservation,
+    DriveThruOrder,
+    Favourite,
+    MenuCatalog,
+    Outlet,
 )
 
 
-def _error_message(response: httpx.Response) -> str:
-    """The backend's `detail` text, or the raw body when it has no usable detail."""
+class _Refusal(NamedTuple):
+    """An error response, read: the text for the model and what the server said in full."""
+
+    message: str
+    code: str | None
+    missing: list[dict[str, Any]]
+    problems: list[dict[str, Any]]
+
+
+def _refusal(response: httpx.Response) -> _Refusal:
+    """The server's error as `{"detail": {"code", "message", ...}}`. The text is the message, and
+    for a cart the messages of what is missing or wrong, without the ids and indexes. Anything
+    else (a plain string, FastAPI's own field errors, no JSON) is passed on as it came."""
     try:
         detail = response.json().get("detail")
     except ValueError, AttributeError:
         detail = None
+    if isinstance(detail, dict) and isinstance(detail.get("message"), str):
+        missing, problems = detail.get("missing") or [], detail.get("problems") or []
+        issues = [i["message"] for i in [*missing, *problems] if i.get("message")]
+        text = detail["message"] + (": " + "; ".join(issues) if issues else "")
+        return _Refusal(text, detail.get("code"), missing, problems)
     if isinstance(detail, str):
-        return detail
-    if detail is not None:
-        return json.dumps(detail, separators=(",", ":"))
-    return response.text or f"HTTP {response.status_code}"
+        text = detail
+    elif detail is not None:
+        text = json.dumps(detail, separators=(",", ":"))
+    else:
+        text = response.text or f"HTTP {response.status_code}"
+    return _Refusal(text, None, [], [])
 
 
 class BackendClient:
@@ -61,98 +77,25 @@ class BackendClient:
 
         status = response.status_code
         if status >= 500:
-            raise BackendUnavailable(_error_message(response), status, may_have_been_processed=True)
+            raise BackendUnavailable(
+                _refusal(response).message, status, may_have_been_processed=True
+            )
         if status >= 400:
-            message = _error_message(response)
-            if status == 404:
-                raise BackendNotFound(message, status)
-            if status == 409:
-                raise BackendConflict(message, status)
-            raise BackendRuleViolation(message, status)
+            r = _refusal(response)
+            error = (
+                BackendNotFound
+                if status == 404
+                else BackendConflict
+                if status == 409
+                else BackendRuleViolation
+            )
+            raise error(r.message, status, code=r.code, missing=r.missing, problems=r.problems)
         if status == 204 or not response.content:
             return None
         try:
             return response.json()
         except ValueError as exc:
             raise BackendError("Backend returned invalid JSON", status) from exc
-
-    def get_menu(self, filters: MenuFilters | None = None) -> list[MenuItem]:
-        """GET /menu."""
-        f = filters or MenuFilters()
-        params = f.model_dump(exclude_none=True)
-        params = {k: v for k, v in params.items() if v != []}
-        items = self._request("GET", "/menu", params=params)
-        return [MenuItem.model_validate(item) for item in items]
-
-    def get_availability(
-        self, slot: datetime, party_size: int, location: str | None = None
-    ) -> Availability:
-        """GET /availability."""
-        params: dict[str, Any] = {"slot_datetime": slot.isoformat(), "party_size": party_size}
-        if location:
-            params["location"] = location
-        return Availability.model_validate(self._request("GET", "/availability", params=params))
-
-    def lookup_customer(self, *, phone: str | None = None, email: str | None = None) -> Customer:
-        """GET /customers/lookup. Raises BackendNotFound when nobody matches."""
-        params = {k: v for k, v in {"phone": phone, "email": email}.items() if v}
-        return Customer.model_validate(self._request("GET", "/customers/lookup", params=params))
-
-    def create_customer(
-        self, name: str, phone: str | None = None, email: str | None = None
-    ) -> Customer:
-        """POST /customers."""
-        body = {"name": name, "phone": phone, "email": email}
-        return Customer.model_validate(self._request("POST", "/customers", body=body))
-
-    def create_reservation(
-        self, customer_id: int, table_id: int, slot: datetime, party_size: int
-    ) -> Reservation:
-        """POST /reservations."""
-        body = {
-            "customer_id": customer_id,
-            "table_id": table_id,
-            "slot_datetime": slot.isoformat(),
-            "party_size": party_size,
-        }
-        return Reservation.model_validate(self._request("POST", "/reservations", body=body))
-
-    def get_reservation(self, reservation_id: int) -> Reservation:
-        """GET /reservations/{id}."""
-        return Reservation.model_validate(self._request("GET", f"/reservations/{reservation_id}"))
-
-    def list_customer_reservations(
-        self, customer_id: int, status: str | None = None
-    ) -> list[Reservation]:
-        """GET /customers/{id}/reservations."""
-        params = {"status": status} if status else None
-        data = self._request("GET", f"/customers/{customer_id}/reservations", params=params)
-        return [Reservation.model_validate(r) for r in data]
-
-    def cancel_reservation(self, reservation_id: int) -> Reservation:
-        """DELETE /reservations/{id}."""
-        data = self._request("DELETE", f"/reservations/{reservation_id}")
-        return Reservation.model_validate(data)
-
-    def add_order(self, reservation_id: int, menu_item_id: int, quantity: int) -> Order:
-        """POST /reservations/{id}/orders."""
-        body = {"menu_item_id": menu_item_id, "quantity": quantity}
-        data = self._request("POST", f"/reservations/{reservation_id}/orders", body=body)
-        return Order.model_validate(data)
-
-    def list_reservation_orders(self, reservation_id: int) -> list[Order]:
-        """GET /reservations/{id}/orders."""
-        data = self._request("GET", f"/reservations/{reservation_id}/orders")
-        return [Order.model_validate(o) for o in data]
-
-    def list_customer_orders(self, customer_id: int) -> list[Order]:
-        """GET /customers/{id}/orders."""
-        data = self._request("GET", f"/customers/{customer_id}/orders")
-        return [Order.model_validate(o) for o in data]
-
-    def delete_order(self, order_id: int) -> None:
-        """DELETE /orders/{id}."""
-        self._request("DELETE", f"/orders/{order_id}")
 
     def get_customer(self, customer_id: int) -> Customer:
         """GET /customers/{id}."""
@@ -165,6 +108,68 @@ class BackendClient:
         data = self._request("PATCH", f"/customers/{customer_id}/preferences", body=body)
         return Customer.model_validate(data)
 
-    def get_menu_item(self, item_id: int) -> MenuItem:
-        """GET /menu/{id}."""
-        return MenuItem.model_validate(self._request("GET", f"/menu/{item_id}"))
+    def create_order(self, outlet_code: str, customer_id: int | None = None) -> DriveThruOrder:
+        """POST /orders: start an empty draft order, for a customer if one is known."""
+        body: dict[str, Any] = {"outlet": outlet_code}
+        if customer_id is not None:
+            body["customer_id"] = customer_id
+        return DriveThruOrder.model_validate(self._request("POST", "/orders", body=body))
+
+    def get_order(self, order_id: int) -> DriveThruOrder:
+        """GET /orders/{id}: the order as it stands, whatever its status."""
+        return DriveThruOrder.model_validate(self._request("GET", f"/orders/{order_id}"))
+
+    def cancel_order(self, order_id: int) -> DriveThruOrder:
+        """DELETE /orders/{id}: abandon a draft. Safe to repeat; a placed order is a conflict."""
+        return DriveThruOrder.model_validate(self._request("DELETE", f"/orders/{order_id}"))
+
+    def set_line_quantity(self, order_id: int, line_id: int, quantity: int) -> DriveThruOrder:
+        """PATCH /orders/{id}/lines/{line_id}: change how many; the line keeps its id."""
+        body = {"quantity": quantity}
+        path = f"/orders/{order_id}/lines/{line_id}"
+        return DriveThruOrder.model_validate(self._request("PATCH", path, body=body))
+
+    def attach_customer(self, order_id: int, customer_id: int) -> DriveThruOrder:
+        """PUT /orders/{id}/customer: put a draft on a customer identified after it began."""
+        body = {"customer_id": customer_id}
+        path = f"/orders/{order_id}/customer"
+        return DriveThruOrder.model_validate(self._request("PUT", path, body=body))
+
+    def find_or_add_customer(self, phone: str) -> Customer:
+        """POST /customers: the customer with this mobile number, added if new. Only the number
+        is needed; the server accepts the usual ways of writing it."""
+        return Customer.model_validate(self._request("POST", "/customers", body={"phone": phone}))
+
+    def get_favourites(self, customer_id: int, limit: int = 5) -> list[Favourite]:
+        """GET /customers/{id}/favourites: what they order most, still on the menu."""
+        data = self._request("GET", f"/customers/{customer_id}/favourites", params={"limit": limit})
+        return [Favourite.model_validate(f) for f in data]
+
+    def add_order_line(self, order_id: int, line: dict[str, Any]) -> DriveThruOrder:
+        """POST /orders/{id}/lines. A 422 carries `missing` and `problems` in its message."""
+        data = self._request("POST", f"/orders/{order_id}/lines", body=line)
+        return DriveThruOrder.model_validate(data)
+
+    def remove_order_line(self, order_id: int, line_id: int) -> DriveThruOrder:
+        """DELETE /orders/{id}/lines/{line_id}."""
+        data = self._request("DELETE", f"/orders/{order_id}/lines/{line_id}")
+        return DriveThruOrder.model_validate(data)
+
+    def confirm_order(self, order_id: int) -> DriveThruOrder:
+        """POST /orders/{id}/confirm: freeze the draft and give it its number."""
+        return DriveThruOrder.model_validate(self._request("POST", f"/orders/{order_id}/confirm"))
+
+    def get_outlet(self, outlet_code: str) -> Outlet:
+        """GET /outlets/{code}: the outlet's name and address."""
+        return Outlet.model_validate(self._request("GET", f"/outlets/{outlet_code}"))
+
+    def get_catalog_version(self, outlet_code: str) -> str:
+        """GET /catalog/version: changes whenever the outlet's menu does."""
+        data = self._request("GET", "/catalog/version", params={"outlet": outlet_code})
+        return str(data["version"])
+
+    def get_catalog(self, outlet_code: str) -> MenuCatalog:
+        """GET /catalog: what this outlet is selling now, every dish with its questions, meals,
+        nutrition and allergens, and the menu's version."""
+        data = self._request("GET", "/catalog", params={"outlet": outlet_code})
+        return MenuCatalog.model_validate(data)

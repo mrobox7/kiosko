@@ -1,31 +1,63 @@
-"""Builders for contexts, loops and sessions wired to fakes."""
+"""Builders for contexts, loops and sessions wired to the fake ordering server."""
 
 from collections.abc import Sequence
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+import httpx
+
 from app.agent.loop import AgentLoop
-from app.backend.models import Customer
+from app.backend.client import BackendClient
+from app.backend.models import Outlet
 from app.domain.messages import Message
 from app.guards.rules import RulesGuard
 from app.llm.base import LLMResponse
 from app.llm.fake import FakeLLM, LLMCall
-from app.memory.service import MemoryService
+from app.menu.menu import Menu
+from app.session.factory import Runtime
 from app.session.session import Session
 from app.tools.base import ToolContext
 from app.tools.registry import ToolRegistry
-from tests.support.fake_backend import CUSTOMERS, FakeBackend
+from tests.support.fake_order_server import FakeOrderServer
 
 NOW = datetime(2030, 6, 1, 12, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+OUTLET = "JPR-013-7429"
+OUTLET_INFO = Outlet(
+    code=OUTLET, name="McDonald's Nemi Nagar", address="Gandhi Path West, Vaishali Nagar, Jaipur"
+)
 
 
 def clock() -> datetime:
     return NOW
 
 
-def make_ctx(backend: FakeBackend | None = None, customer_id: int | None = None) -> ToolContext:
-    return ToolContext(
-        backend=(backend or FakeBackend()).client, customer_id=customer_id, clock=clock
+def make_ctx(server: FakeOrderServer | None = None) -> ToolContext:
+    """A tool context on the fake server, with the menu already loaded, so the requests a test
+    records are the tools' own."""
+    server = server or FakeOrderServer()
+    http = httpx.Client(base_url="http://shop", transport=httpx.MockTransport(server.handle))
+    backend = BackendClient(http)
+    menu = Menu(backend, OUTLET)
+    menu.refresh()
+    server.requests.clear()
+    return ToolContext(backend=backend, clock=clock, outlet_code=OUTLET, menu=menu)
+
+
+def make_order_tools() -> tuple[ToolContext, FakeOrderServer, ToolRegistry]:
+    server = FakeOrderServer()
+    return make_ctx(server), server, ToolRegistry.discover()
+
+
+def make_runtime(llm: FakeLLM, server: FakeOrderServer | None = None, **speech: object) -> Runtime:
+    """What the API runs on: the fake model, the fake ordering server and its menu."""
+    ctx = make_ctx(server or FakeOrderServer())
+    return Runtime(
+        backend=ctx.backend,
+        loop=make_loop(llm),
+        clock=clock,
+        menu=ctx.menu,
+        outlet=OUTLET_INFO,
+        **speech,  # type: ignore[arg-type]
     )
 
 
@@ -41,27 +73,23 @@ def make_loop(llm: FakeLLM, **kw: int) -> AgentLoop:
 
 def make_session(
     steps: Sequence[LLMResponse | Exception],
-    customer_id: int = 1,
-    backend: FakeBackend | None = None,
+    server: FakeOrderServer | None = None,
     **guard: int,
-) -> tuple[Session, FakeLLM, FakeBackend]:
-    backend = backend or FakeBackend()
+) -> tuple[Session, FakeLLM, FakeOrderServer]:
+    server = server or FakeOrderServer()
     llm = FakeLLM(steps)
-    customer = Customer.model_validate(next(c for c in CUSTOMERS if c["id"] == customer_id))
     session = Session(
-        customer=customer,
         loop=make_loop(llm),
-        ctx=make_ctx(backend, customer_id),
+        ctx=make_ctx(server),
         guard=RulesGuard(
             max_chars=guard.get("max_chars", 1000),
             turns_per_min=guard.get("turns_per_min", 10),
             token_budget=guard.get("token_budget", 200_000),
         ),
         clock=clock,
-        memory=MemoryService(backend.client),
         summary_turns=guard.get("summary_turns", 3),
     )
-    return session, llm, backend
+    return session, llm, server
 
 
 def context_of(call: LLMCall) -> str:

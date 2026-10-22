@@ -37,10 +37,14 @@ function vadAssets(): Plugin {
   }
 }
 
-// The dev server forwards /api to the Python API, so the browser sees one origin.
+// The dev server forwards /api to the Python API and /images to the ordering server that holds
+// the dish pictures, so the browser sees one origin.
 export default defineConfig({
   plugins: [react(), tailwindcss(), vadAssets()],
   server: {
-    proxy: { '/api': { target: process.env.API_URL ?? 'http://localhost:8001', ws: true } },
+    proxy: {
+      '/api': { target: process.env.API_URL ?? 'http://localhost:8001', ws: true },
+      '/images': { target: process.env.BACKEND_URL ?? 'http://localhost:8010' },
+    },
   },
 })

@@ -1,4 +1,4 @@
-.PHONY: install run api web check lint types test fmt
+.PHONY: install api web check lint types test fmt request
 .DEFAULT_GOAL := help
 
 help:  ## Show targets
@@ -6,9 +6,6 @@ help:  ## Show targets
 
 install:  ## Install dependencies
 	uv sync
-
-run:  ## Start the Streamlit chat UI
-	uv run streamlit run app/ui/streamlit_app.py
 
 api:  ## Start the HTTP API on :8001
 	uv run uvicorn app.api.main:app --port 8001
@@ -29,3 +26,6 @@ types:  ## Mypy
 
 test:  ## Pytest (offline)
 	uv run pytest -q
+
+request:  ## Print a scripted order's model requests with token counts: make request CATALOG=catalog.json
+	uv run --with tiktoken python -m tests.show_request $(CATALOG)

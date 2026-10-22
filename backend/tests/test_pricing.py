@@ -5,8 +5,9 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app import models
-from app.pricing import gst
+from app.menu.models import Product, UnavailableProduct
+from app.orders.pricing import gst
+from tests.helpers import OUTLET
 
 Json = dict[str, Any]
 
@@ -32,8 +33,8 @@ def meal_option(source: Json, size: str, part: str, index: int = 0) -> Json:
     return chosen
 
 
-def price(client: TestClient, *lines: Json, outlet_id: int = 1) -> Json:
-    response = client.post("/orders/price", json={"outlet_id": outlet_id, "lines": list(lines)})
+def price(client: TestClient, *lines: Json, outlet: str = OUTLET) -> Json:
+    response = client.post("/orders/price", json={"outlet": outlet, "lines": list(lines)})
     assert response.status_code == 200, response.text
     body: Json = response.json()
     return body
@@ -108,11 +109,39 @@ def test_gst_rounds_half_up_to_the_paisa() -> None:
 def test_a_required_question_left_open_is_reported_as_missing(
     client: TestClient, mcspicy: Json
 ) -> None:
-    cart = price(client, {"product_id": mcspicy["id"]})
+    # A medium meal asks for a side and a drink, and neither has a default.
+    cart = price(client, {"product_id": mcspicy["id"], "meal_size": "Medium"})
     assert cart["ready"] is False and cart["problems"] == []
-    [issue] = cart["missing"]
-    assert issue["code"] == "required" and "Sauce" in issue["message"] and issue["line"] == 0
-    assert cart["lines"][0]["unit_price"] == 205.71  # still priced with what it has
+    assert [m["code"] for m in cart["missing"]] == ["required", "required"]
+    assert "Meal side" in cart["missing"][0]["message"] and cart["missing"][0]["line"] == 0
+    assert cart["lines"][0]["meal_price"] > 0  # still priced with what it has
+
+
+def test_an_unanswered_sauce_takes_its_default_ketchup(client: TestClient, mcspicy: Json) -> None:
+    cart = price(client, {"product_id": mcspicy["id"]})
+    assert cart["ready"] is True and cart["missing"] == [] and cart["problems"] == []
+    [chosen] = cart["lines"][0]["options"]
+    assert chosen["name"] == "Complimentary Ketchup" and chosen["group"] == "Sauce"
+    assert cart["lines"][0]["unit_price"] == 205.71  # ketchup is free
+
+
+def test_an_answer_given_replaces_the_default(client: TestClient, mcspicy: Json) -> None:
+    no_ketchup = pick(option(mcspicy, "Sauce", "No Ketchup"))
+    cart = price(client, {"product_id": mcspicy["id"], "options": [no_ketchup]})
+    assert cart["ready"] is True
+    assert [o["name"] for o in cart["lines"][0]["options"]] == ["No Ketchup"]
+
+
+def test_a_default_that_is_not_on_sale_is_not_used(client: TestClient, mcspicy: Json) -> None:
+    ketchup = option(mcspicy, "Sauce", "Complimentary Ketchup")
+    base = f"/outlets/{OUTLET}/unavailable/options/{ketchup}"
+    try:
+        assert client.put(base).status_code == 204
+        cart = price(client, {"product_id": mcspicy["id"]})
+    finally:
+        assert client.delete(base).status_code == 204  # the test database is shared
+    assert cart["ready"] is False
+    assert cart["missing"][0]["code"] == "required" and "Sauce" in cart["missing"][0]["message"]
 
 
 def test_more_picks_than_allowed_is_a_problem(client: TestClient, mcspicy: Json) -> None:
@@ -222,7 +251,7 @@ def test_unknown_and_hidden_products_are_not_priced(client: TestClient, db: Sess
     assert cart["ready"] is False and cart["lines"] == []
     assert [p["code"] for p in cart["problems"]] == ["not_on_menu"]
     assert (cart["subtotal"], cart["gst"], cart["total"]) == (0, 0, 0)
-    product = db.get(models.Product, 1)
+    product = db.get(Product, 1)
     assert product is not None
     product.is_active = False
     db.commit()
@@ -242,20 +271,13 @@ def test_a_good_line_is_priced_next_to_a_bad_one(client: TestClient, mcspicy: Js
     assert cart["problems"][0]["line"] == 0 and cart["subtotal"] == 205.71
 
 
-def test_outlet_unavailable_and_price_override(
-    client: TestClient, db: Session, mcspicy: Json
-) -> None:
+def test_outlet_unavailable(client: TestClient, db: Session, mcspicy: Json) -> None:
     ketchup = pick(option(mcspicy, "Sauce", "Complimentary Ketchup"))
     line = {"product_id": mcspicy["id"], "options": [ketchup]}
-    row = models.OutletProduct(
-        outlet_id=1, product_id=mcspicy["id"], available=True, price_override=Decimal("199.00")
-    )
+    row = UnavailableProduct(outlet_id=1, product_id=mcspicy["id"])
     db.add(row)
     db.commit()
     try:
-        assert price(client, line)["lines"][0]["unit_price"] == 199.0
-        row.available = False
-        db.commit()
         cart = price(client, line)
         assert cart["lines"] == [] and cart["problems"][0]["code"] == "unavailable"
     finally:
@@ -266,17 +288,20 @@ def test_outlet_unavailable_and_price_override(
 
 def test_bad_requests_are_rejected(client: TestClient, mcspicy: Json) -> None:
     line = {"product_id": mcspicy["id"]}
-    assert client.post("/orders/price", json={"outlet_id": 999, "lines": [line]}).status_code == 404
-    assert client.post("/orders/price", json={"outlet_id": 1, "lines": []}).status_code == 422
+    assert (
+        client.post("/orders/price", json={"outlet": "no-such-outlet", "lines": [line]}).status_code
+        == 404
+    )
+    assert client.post("/orders/price", json={"outlet": OUTLET, "lines": []}).status_code == 422
     assert (
         client.post(
-            "/orders/price", json={"outlet_id": 1, "lines": [{**line, "quantity": 0}]}
+            "/orders/price", json={"outlet": OUTLET, "lines": [{**line, "quantity": 0}]}
         ).status_code
         == 422
     )
     assert (
         client.post(
-            "/orders/price", json={"outlet_id": 1, "lines": [{**line, "options": [pick(1, 0)]}]}
+            "/orders/price", json={"outlet": OUTLET, "lines": [{**line, "options": [pick(1, 0)]}]}
         ).status_code
         == 422
     )

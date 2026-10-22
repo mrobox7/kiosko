@@ -12,20 +12,16 @@ from app.api.voice import BUSY, NOT_HEARD, SILENCE
 from app.domain.messages import ToolCall
 from app.llm.base import LLMResponse
 from app.llm.fake import FakeLLM
-from app.session.factory import Runtime
 from app.session.session import Session
 from app.speech.base import SpeechError, Transcript
 from app.speech.fake import FAKE_MIME, FakeSpeechToText, FakeStreamingTextToSpeech
-from tests.support.builders import chat_texts, clock, make_loop
-from tests.support.fake_backend import FakeBackend
+from tests.support.builders import chat_texts, make_runtime
 
-SLOT = "2030-06-10T19:30:00"
-PRIYA = {"phone": "+91-9876543210"}
-HEARD = Transcript(text="book a table", language="en-IN")
+HEARD = Transcript(text="a burger please", language="en-IN")
 
 
 class Rig:
-    """A client, a logged-in session and the fakes behind it."""
+    """A client, a started session and the fakes behind it."""
 
     def __init__(
         self,
@@ -35,15 +31,9 @@ class Rig:
     ) -> None:
         self.stt = FakeSpeechToText(heard)
         self.tts = tts or FakeStreamingTextToSpeech()
-        runtime = Runtime(
-            backend=FakeBackend().client,
-            loop=make_loop(FakeLLM(llm_steps)),
-            clock=clock,
-            stt=self.stt,
-            tts_stream=self.tts,
-        )
+        runtime = make_runtime(FakeLLM(llm_steps), stt=self.stt, tts_stream=self.tts)
         self.client = TestClient(create_app(runtime))
-        self.sid = self.client.post("/api/login", json=PRIYA).json()["session_id"]
+        self.sid = self.client.post("/api/sessions").json()["session_id"]
 
     @property
     def url(self) -> str:
@@ -55,7 +45,7 @@ class Rig:
 
 
 def without_voice() -> TestClient:
-    runtime = Runtime(backend=FakeBackend().client, loop=make_loop(FakeLLM([])), clock=clock)
+    runtime = make_runtime(FakeLLM([]))
     return TestClient(create_app(runtime))
 
 
@@ -73,7 +63,11 @@ def test_one_utterance_streams_what_was_heard_the_audio_and_the_reply() -> None:
     rig = Rig([LLMResponse(text="Booked. See you then!")], [HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_bytes(b"RIFF-clip")
-        assert ws.receive_json() == {"type": "heard", "text": "book a table", "language": "en-IN"}
+        assert ws.receive_json() == {
+            "type": "heard",
+            "text": "a burger please",
+            "language": "en-IN",
+        }
         assert ws.receive_json() == {"type": "audio_start", "mime": FAKE_MIME}
         assert [ws.receive_bytes(), ws.receive_bytes()] == [b"Booked.", b"See you then!"]
         done = ws.receive_json()
@@ -81,7 +75,7 @@ def test_one_utterance_streams_what_was_heard_the_audio_and_the_reply() -> None:
     assert done["stop_reason"] == "answered" and done["speech_error"] is None
     assert isinstance(done["first_audio_ms"], int) and done["trace"][0]["event"] == "GuardDecided"
     assert chat_texts(rig.session.history) == [
-        ("user", "book a table"),
+        ("user", "a burger please"),
         ("assistant", "Booked. See you then!"),
     ]
 
@@ -97,23 +91,17 @@ def test_the_clip_goes_to_speech_to_text_as_wav_and_the_language_to_the_voice() 
     assert rig.tts.language == "hi-IN" and rig.tts.spoken == ["Hi."]
 
 
-def test_a_voice_turn_can_book_and_the_booking_shows_in_the_session() -> None:
-    book = LLMResponse(
-        tool_calls=[
-            ToolCall(
-                id="c",
-                name="create_reservation",
-                arguments={"slot_datetime": SLOT, "party_size": 4, "location": "outdoor"},
-            )
-        ]
+def test_a_voice_turn_can_order_and_the_order_shows_in_the_session() -> None:
+    order = LLMResponse(
+        tool_calls=[ToolCall(id="c", name="add_to_order", arguments={"dish_id": 4, "quantity": 2})]
     )
-    rig = Rig([book, LLMResponse(text="Booked for four.")], [HEARD])
+    rig = Rig([order, LLMResponse(text="Two tikki burgers.")], [HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_bytes(b"clip")
         events = until_reply(ws)
-    assert events[-1]["text"] == "Booked for four."
-    upcoming = rig.client.get(f"/api/sessions/{rig.sid}").json()["upcoming"]
-    assert [(b["party_size"], b["slot_datetime"]) for b in upcoming] == [(4, SLOT)]
+    assert events[-1]["text"] == "Two tikki burgers."
+    shown = rig.client.get(f"/api/sessions/{rig.sid}").json()["order"]
+    assert [(i["name"], i["quantity"]) for i in shown["lines"]] == [("McAloo Tikki", 2)]
 
 
 def test_a_clip_that_cannot_be_transcribed_is_reported_and_the_socket_stays_open() -> None:
@@ -165,14 +153,14 @@ def test_a_speech_failure_still_delivers_the_reply_text() -> None:
     assert events[-1]["text"] == "Done." and events[-1]["speech_error"] == "tts down"
 
 
-def test_login_says_whether_the_page_can_offer_the_microphone() -> None:
-    assert without_voice().post("/api/login", json=PRIYA).json()["voice"] is False
-    assert Rig([], []).client.post("/api/login", json=PRIYA).json()["voice"] is True
+def test_starting_a_session_says_whether_the_page_can_offer_the_microphone() -> None:
+    assert without_voice().post("/api/sessions").json()["voice"] is False
+    assert Rig([], []).client.post("/api/sessions").json()["voice"] is True
 
 
 def test_the_socket_is_refused_when_voice_is_not_set_up_or_the_session_is_unknown() -> None:
     plain = without_voice()
-    sid = plain.post("/api/login", json=PRIYA).json()["session_id"]
+    sid = plain.post("/api/sessions").json()["session_id"]
     with (
         pytest.raises(WebSocketDisconnect) as no_voice,
         plain.websocket_connect(f"/api/sessions/{sid}/voice"),

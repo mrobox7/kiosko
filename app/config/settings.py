@@ -9,8 +9,9 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    backend_url: str = "http://localhost:8000"
+    backend_url: str = "http://localhost:8010"
     backend_timeout_s: float = 10
+    outlet_code: str = ""  # which restaurant this drive-thru takes orders for; set at install
     llm_base_url: str = "https://api.groq.com/openai/v1"
     llm_api_key: SecretStr = SecretStr("")
     llm_model: str = "openai/gpt-oss-120b"
@@ -24,15 +25,21 @@ class Settings(BaseSettings):
     sarvam_tts_speaker: str = "shubh"
     sarvam_tts_pace: float = 1.0
     sarvam_tts_temperature: float = 0.6
-    max_iterations: int = 8
-    max_tool_calls_per_turn: int = 12
+    max_iterations: int = 16
+    max_tool_calls_per_turn: int = 24
     tool_result_max_chars: int = 4000
     max_message_chars: int = 1000
     summary_turns: int = 3
     rate_limit_turns_per_min: int = 10
     session_token_budget: int = 200_000
+    idle_timeout_s: float = 180  # seconds; an idle chat is ended and its draft cancelled
     restaurant_timezone: str = "Asia/Kolkata"
     log_level: str = "INFO"
+
+    def require_outlet(self) -> None:
+        """Raise if this drive-thru has not been told which outlet it is."""
+        if not self.outlet_code:
+            raise ValueError("OUTLET_CODE must be set (see .env.example)")
 
     def require_llm(self) -> None:
         """Raise if the LLM settings needed to run the agent are missing."""

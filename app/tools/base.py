@@ -1,18 +1,15 @@
 """Tool base class and the context tools run in."""
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import ClassVar
 
 from pydantic import BaseModel
 
 from app.backend.client import BackendClient
 from app.domain.results import ToolResult
-from app.domain.state import Clock, LedgerAction, LedgerEntry, WorkingState
-
-
-class NotPermitted(Exception):
-    """The acting customer does not own the entity, or it does not exist."""
+from app.domain.state import ActiveOrder, Caller, Clock
+from app.menu.menu import Menu
 
 
 @dataclass(frozen=True)
@@ -20,30 +17,16 @@ class ToolContext:
     """Built by the Session. The model never sees it."""
 
     backend: BackendClient
-    customer_id: int | None
     clock: Clock
+    outlet_code: str = ""
+    order: ActiveOrder = field(default_factory=ActiveOrder)
+    caller: Caller = field(default_factory=Caller)
+    menu: Menu = field(kw_only=True)  # the whole menu, for names, ids, choices and filters
 
-    def require_customer(self) -> int:
-        """The bound customer id; the model never supplies it."""
-        if self.customer_id is None:
-            raise NotPermitted("No customer is identified")
-        return self.customer_id
-
-    def ledger(
-        self,
-        tool: str,
-        action: LedgerAction,
-        entity_id: int,
-        state: WorkingState | None = None,
-    ) -> LedgerEntry:
-        """A ledger entry stamped with the injected clock."""
-        return LedgerEntry(
-            tool=tool,
-            action=action,
-            entity_id=entity_id,
-            timestamp=self.clock(),
-            state=state,
-        )
+    @property
+    def customer_id(self) -> int | None:
+        """The customer, once they have given a phone number."""
+        return self.caller.customer.id if self.caller.customer else None
 
 
 class Tool[A: BaseModel](ABC):
@@ -54,6 +37,7 @@ class Tool[A: BaseModel](ABC):
     args_model: ClassVar[type[BaseModel]]
     mutating: ClassVar[bool] = False
     destructive: ClassVar[bool] = False
+    shown_in_order: ClassVar[bool] = False  # a success shows in the order the context carries
 
     @abstractmethod
     def run(self, ctx: ToolContext, args: A) -> ToolResult:

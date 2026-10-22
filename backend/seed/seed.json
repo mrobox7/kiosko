@@ -1,12 +1,11 @@
 {
   "generated": "2026-10-20",
-  "money_unit": "rupees, before tax",
   "outlets": [
     {
       "id": 1,
+      "code": "JPR-013-7429",
       "name": "McDonald's Nemi Nagar",
-      "address": "Ground & first floor, plot no.A4 & A5 Nemi Nagar, Gandhi Path West, Vaishali Nagar Jaipur 302021",
-      "source_ref": "1162375"
+      "address": "Ground & first floor, plot no.A4 & A5 Nemi Nagar, Gandhi Path West, Vaishali Nagar Jaipur 302021"
     }
   ],
   "categories": [
@@ -72,19 +71,23 @@
       "image_key": "images/180910792.png",
       "nutrition": {
         "serving_size": "146gm",
-        "calories_kcal": 339.52
+        "calories_kcal": 339.52,
+        "protein_g": 8.6,
+        "fat_g": 14.5,
+        "carbs_g": 43.7,
+        "sugar_g": 4.2,
+        "sodium_mg": 580
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [
         "bestseller"
       ],
       "is_active": true,
-      "sort_order": 0,
-      "source_ref": "180910792"
+      "sort_order": 0
     },
     {
       "id": 2,
@@ -98,17 +101,22 @@
       "image_key": "images/180910790.png",
       "nutrition": {
         "serving_size": "168gm",
-        "calories_kcal": 402.05
+        "calories_kcal": 402.05,
+        "protein_g": 11.1,
+        "fat_g": 17.1,
+        "carbs_g": 51.0,
+        "sugar_g": 4.9,
+        "sodium_mg": 712
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 1,
-      "source_ref": "180910790"
+      "sort_order": 1
     },
     {
       "id": 3,
@@ -122,20 +130,24 @@
       "image_key": "images/180910797.png",
       "nutrition": {
         "serving_size": "186gm",
-        "calories_kcal": 451.92
+        "calories_kcal": 451.92,
+        "protein_g": 22.6,
+        "fat_g": 20.2,
+        "carbs_g": 44.9,
+        "sugar_g": 4.4,
+        "sodium_mg": 1077
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true,
-        "i egg products": true
-      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [
         "bestseller"
       ],
       "is_active": true,
-      "sort_order": 2,
-      "source_ref": "180910797"
+      "sort_order": 2
     },
     {
       "id": 4,
@@ -149,18 +161,22 @@
       "image_key": "images/180910798.png",
       "nutrition": {
         "serving_size": "173gm",
-        "calories_kcal": 400.8
+        "calories_kcal": 400.8,
+        "protein_g": 20.0,
+        "fat_g": 18.3,
+        "carbs_g": 39.0,
+        "sugar_g": 4.1,
+        "sodium_mg": 842
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true,
-        "i egg products": true
-      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 3,
-      "source_ref": "180910798"
+      "sort_order": 3
     },
     {
       "id": 5,
@@ -174,17 +190,21 @@
       "image_key": "images/180910789.png",
       "nutrition": {
         "serving_size": "199gm",
-        "calories_kcal": 652.76
+        "calories_kcal": 652.76,
+        "protein_g": 17.7,
+        "fat_g": 27.5,
+        "carbs_g": 83.6,
+        "sugar_g": 8.1,
+        "sodium_mg": 1098
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabeans products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 4,
-      "source_ref": "180910789"
+      "sort_order": 4
     },
     {
       "id": 6,
@@ -198,17 +218,21 @@
       "image_key": "images/180910799.png",
       "nutrition": {
         "serving_size": "142gm",
-        "calories_kcal": 274.17
+        "calories_kcal": 274.17,
+        "protein_g": 13.6,
+        "fat_g": 12.6,
+        "carbs_g": 26.6,
+        "sugar_g": 2.6,
+        "sodium_mg": 628
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 5,
-      "source_ref": "180910799"
+      "sort_order": 5
     },
     {
       "id": 7,
@@ -222,17 +246,21 @@
       "image_key": "images/180910788.png",
       "nutrition": {
         "serving_size": "306gm",
-        "calories_kcal": 832.67
+        "calories_kcal": 832.67,
+        "protein_g": 23.7,
+        "fat_g": 34.9,
+        "carbs_g": 106.0,
+        "sugar_g": 11.3,
+        "sodium_mg": 1518
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 6,
-      "source_ref": "180910788"
+      "sort_order": 6
     },
     {
       "id": 8,
@@ -246,17 +274,21 @@
       "image_key": "images/180910795.png",
       "nutrition": {
         "serving_size": "296gm",
-        "calories_kcal": 689.12
+        "calories_kcal": 689.12,
+        "protein_g": 34.4,
+        "fat_g": 32.0,
+        "carbs_g": 65.8,
+        "sugar_g": 7.2,
+        "sodium_mg": 1364
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 7,
-      "source_ref": "180910795"
+      "sort_order": 7
     },
     {
       "id": 9,
@@ -270,19 +302,23 @@
       "image_key": "images/180910796.png",
       "nutrition": {
         "serving_size": "136gm",
-        "calories_kcal": 348.11
+        "calories_kcal": 348.11,
+        "protein_g": 18.2,
+        "fat_g": 16.1,
+        "carbs_g": 32.6,
+        "sugar_g": 3.0,
+        "sodium_mg": 710
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true,
-        "i eggs products": true,
-        "i fish products": true
-      },
+      "allergens": [
+        "egg",
+        "fish",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 8,
-      "source_ref": "180910796"
+      "sort_order": 8
     },
     {
       "id": 10,
@@ -296,17 +332,21 @@
       "image_key": "images/180910793.png",
       "nutrition": {
         "serving_size": "142gm",
-        "calories_kcal": 382.26
+        "calories_kcal": 382.26,
+        "protein_g": 10.6,
+        "fat_g": 14.9,
+        "carbs_g": 51.5,
+        "sugar_g": 5.2,
+        "sodium_mg": 675
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 9,
-      "source_ref": "180910793"
+      "sort_order": 9
     },
     {
       "id": 11,
@@ -320,18 +360,22 @@
       "image_key": "images/180910801.png",
       "nutrition": {
         "serving_size": "115gm",
-        "calories_kcal": 265
+        "calories_kcal": 265,
+        "protein_g": 13.2,
+        "fat_g": 12.0,
+        "carbs_g": 26.1,
+        "sugar_g": 2.7,
+        "sodium_mg": 536
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true,
-        "i eggs products": true
-      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 10,
-      "source_ref": "180910801"
+      "sort_order": 10
     },
     {
       "id": 12,
@@ -345,17 +389,21 @@
       "image_key": "images/180910794.png",
       "nutrition": {
         "serving_size": "132gm",
-        "calories_kcal": 313.44
+        "calories_kcal": 313.44,
+        "protein_g": 8.2,
+        "fat_g": 13.8,
+        "carbs_g": 39.1,
+        "sugar_g": 4.2,
+        "sodium_mg": 578
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 11,
-      "source_ref": "180910794"
+      "sort_order": 11
     },
     {
       "id": 13,
@@ -369,18 +417,23 @@
       "image_key": "images/200565028.png",
       "nutrition": {
         "serving_size": "115gm",
-        "calories_kcal": 322.9
+        "calories_kcal": 322.9,
+        "protein_g": 16.6,
+        "fat_g": 15.1,
+        "carbs_g": 30.3,
+        "sugar_g": 2.9,
+        "sodium_mg": 640
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true,
-        "i fish products": true
-      },
+      "allergens": [
+        "egg",
+        "fish",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 12,
-      "source_ref": "200565028"
+      "sort_order": 12
     },
     {
       "id": 14,
@@ -394,16 +447,20 @@
       "image_key": "images/180910874.png",
       "nutrition": {
         "serving_size": "320gm",
-        "calories_kcal": 806.1
+        "calories_kcal": 806.1,
+        "protein_g": 42.7,
+        "fat_g": 44.8,
+        "carbs_g": 58.1,
+        "sugar_g": 1.2,
+        "sodium_mg": 1573
       },
-      "allergens": {
-        "i gluten": true,
-        "i fish products": true
-      },
+      "allergens": [
+        "fish",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 13,
-      "source_ref": "180910874"
+      "sort_order": 13
     },
     {
       "id": 15,
@@ -417,15 +474,19 @@
       "image_key": "images/180910868.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 289.91
+        "calories_kcal": 289.91,
+        "protein_g": 3.6,
+        "fat_g": 13.9,
+        "carbs_g": 37.5,
+        "sugar_g": 0.4,
+        "sodium_mg": 163
       },
-      "allergens": {
-        "i milk products": true
-      },
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 14,
-      "source_ref": "180910868"
+      "sort_order": 14
     },
     {
       "id": 16,
@@ -439,16 +500,20 @@
       "image_key": "images/180910876.png",
       "nutrition": {
         "serving_size": "96gm",
-        "calories_kcal": 254.52
+        "calories_kcal": 254.52,
+        "protein_g": 14.6,
+        "fat_g": 13.4,
+        "carbs_g": 18.8,
+        "sugar_g": 0.4,
+        "sodium_mg": 500
       },
-      "allergens": {
-        "i gluten": true,
-        "i fish products": true
-      },
+      "allergens": [
+        "fish",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 15,
-      "source_ref": "180910876"
+      "sort_order": 15
     },
     {
       "id": 17,
@@ -462,13 +527,17 @@
       "image_key": "images/180910871.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 224.59
+        "calories_kcal": 224.59,
+        "protein_g": 3.1,
+        "fat_g": 11.0,
+        "carbs_g": 28.4,
+        "sugar_g": 0.3,
+        "sodium_mg": 125
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 16,
-      "source_ref": "180910871"
+      "sort_order": 16
     },
     {
       "id": 18,
@@ -482,16 +551,20 @@
       "image_key": "images/180910875.png",
       "nutrition": {
         "serving_size": "144gm",
-        "calories_kcal": 381.77
+        "calories_kcal": 381.77,
+        "protein_g": 21.7,
+        "fat_g": 20.8,
+        "carbs_g": 26.9,
+        "sugar_g": 0.6,
+        "sodium_mg": 764
       },
-      "allergens": {
-        "i gluten": true,
-        "i fish products": true
-      },
+      "allergens": [
+        "fish",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 17,
-      "source_ref": "180910875"
+      "sort_order": 17
     },
     {
       "id": 19,
@@ -505,15 +578,19 @@
       "image_key": "images/180910869.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 317.92
+        "calories_kcal": 317.92,
+        "protein_g": 3.6,
+        "fat_g": 14.8,
+        "carbs_g": 42.6,
+        "sugar_g": 0.5,
+        "sodium_mg": 196
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [
         "bestseller"
       ],
       "is_active": true,
-      "sort_order": 18,
-      "source_ref": "180910869"
+      "sort_order": 18
     },
     {
       "id": 20,
@@ -527,17 +604,21 @@
       "image_key": "images/200565030.png",
       "nutrition": {
         "serving_size": "170gm",
-        "calories_kcal": 586.4
+        "calories_kcal": 586.4,
+        "protein_g": 33.1,
+        "fat_g": 31.8,
+        "carbs_g": 42.1,
+        "sugar_g": 0.8,
+        "sodium_mg": 1142
       },
-      "allergens": {
-        "i gluten": true,
-        "i fish products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "fish",
+        "gluten",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 19,
-      "source_ref": "200565030"
+      "sort_order": 19
     },
     {
       "id": 21,
@@ -551,16 +632,20 @@
       "image_key": null,
       "nutrition": {
         "serving_size": "64gm",
-        "calories_kcal": 169.68
+        "calories_kcal": 169.68,
+        "protein_g": 9.5,
+        "fat_g": 9.3,
+        "carbs_g": 12.0,
+        "sugar_g": 0.2,
+        "sodium_mg": 322
       },
-      "allergens": {
-        "i gluten": true,
-        "i fish products": true
-      },
+      "allergens": [
+        "fish",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 20,
-      "source_ref": "203460969"
+      "sort_order": 20
     },
     {
       "id": 22,
@@ -574,17 +659,21 @@
       "image_key": "images/200565029.png",
       "nutrition": {
         "serving_size": "85gm",
-        "calories_kcal": 293.2
+        "calories_kcal": 293.2,
+        "protein_g": 16.6,
+        "fat_g": 16.5,
+        "carbs_g": 19.6,
+        "sugar_g": 0.4,
+        "sodium_mg": 609
       },
-      "allergens": {
-        "i gluten": true,
-        "i fish products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "fish",
+        "gluten",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 21,
-      "source_ref": "200565029"
+      "sort_order": 21
     },
     {
       "id": 23,
@@ -598,17 +687,21 @@
       "image_key": "images/180910736.png",
       "nutrition": {
         "serving_size": "80gm",
-        "calories_kcal": 212.6
+        "calories_kcal": 212.6,
+        "protein_g": 5.0,
+        "fat_g": 9.0,
+        "carbs_g": 28.0,
+        "sugar_g": 2.6,
+        "sodium_mg": 342
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 22,
-      "source_ref": "180910736"
+      "sort_order": 22
     },
     {
       "id": 24,
@@ -622,13 +715,17 @@
       "image_key": "images/180910873.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 60,
+        "protein_g": 0.3,
+        "fat_g": 3.7,
+        "carbs_g": 6.5,
+        "sugar_g": 3.1,
+        "sodium_mg": 348
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 23,
-      "source_ref": "180910873"
+      "sort_order": 23
     },
     {
       "id": 25,
@@ -642,13 +739,20 @@
       "image_key": "images/180910720.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 349,
+        "protein_g": 7.3,
+        "fat_g": 8.4,
+        "carbs_g": 61.1,
+        "sugar_g": 42.0,
+        "sodium_mg": 133
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 24,
-      "source_ref": "180910720"
+      "sort_order": 24
     },
     {
       "id": 26,
@@ -662,13 +766,19 @@
       "image_key": "images/180910718.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 316,
+        "protein_g": 7.1,
+        "fat_g": 7.7,
+        "carbs_g": 54.7,
+        "sugar_g": 45.0,
+        "sodium_mg": 121
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 25,
-      "source_ref": "180910718"
+      "sort_order": 25
     },
     {
       "id": 27,
@@ -682,13 +792,19 @@
       "image_key": "images/197534667.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 181,
+        "protein_g": 9.4,
+        "fat_g": 7.0,
+        "carbs_g": 20.1,
+        "sugar_g": 11.1,
+        "sodium_mg": 89
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 26,
-      "source_ref": "197534667"
+      "sort_order": 26
     },
     {
       "id": 28,
@@ -702,13 +818,19 @@
       "image_key": "images/180910719.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 324,
+        "protein_g": 6.8,
+        "fat_g": 7.8,
+        "carbs_g": 56.5,
+        "sugar_g": 41.8,
+        "sodium_mg": 115
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 27,
-      "source_ref": "180910719"
+      "sort_order": 27
     },
     {
       "id": 29,
@@ -722,13 +844,19 @@
       "image_key": "images/204413815.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 160,
+        "protein_g": 7.8,
+        "fat_g": 6.3,
+        "carbs_g": 18.0,
+        "sugar_g": 10.5,
+        "sodium_mg": 86
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 28,
-      "source_ref": "204413815"
+      "sort_order": 28
     },
     {
       "id": 30,
@@ -742,13 +870,19 @@
       "image_key": "images/180910735.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 241,
+        "protein_g": 5.8,
+        "fat_g": 10.5,
+        "carbs_g": 30.9,
+        "sugar_g": 2.9,
+        "sodium_mg": 345
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 29,
-      "source_ref": "180910735"
+      "sort_order": 29
     },
     {
       "id": 31,
@@ -762,13 +896,17 @@
       "image_key": "images/180910729.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 115,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 28.8,
+        "sugar_g": 27.8,
+        "sodium_mg": 25
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 30,
-      "source_ref": "180910729"
+      "sort_order": 30
     },
     {
       "id": 32,
@@ -782,13 +920,19 @@
       "image_key": "images/180910727.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 165,
+        "protein_g": 7.7,
+        "fat_g": 6.4,
+        "carbs_g": 19.1,
+        "sugar_g": 10.9,
+        "sodium_mg": 74
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 31,
-      "source_ref": "180910727"
+      "sort_order": 31
     },
     {
       "id": 33,
@@ -802,13 +946,19 @@
       "image_key": "images/180910730.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 175,
+        "protein_g": 8.8,
+        "fat_g": 6.9,
+        "carbs_g": 19.4,
+        "sugar_g": 10.8,
+        "sodium_mg": 83
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 32,
-      "source_ref": "180910730"
+      "sort_order": 32
     },
     {
       "id": 34,
@@ -822,13 +972,19 @@
       "image_key": "images/180910716.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 208,
+        "protein_g": 10.0,
+        "fat_g": 7.8,
+        "carbs_g": 24.6,
+        "sugar_g": 14.7,
+        "sodium_mg": 96
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 33,
-      "source_ref": "180910716"
+      "sort_order": 33
     },
     {
       "id": 35,
@@ -842,13 +998,17 @@
       "image_key": "images/201530216.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 9,
+        "protein_g": 0.3,
+        "fat_g": 0.1,
+        "carbs_g": 1.8,
+        "sugar_g": 1.0,
+        "sodium_mg": 27
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 34,
-      "source_ref": "201530216"
+      "sort_order": 34
     },
     {
       "id": 36,
@@ -862,13 +1022,19 @@
       "image_key": "images/180910726.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 178,
+        "protein_g": 8.7,
+        "fat_g": 6.8,
+        "carbs_g": 20.5,
+        "sugar_g": 13.5,
+        "sodium_mg": 95
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 35,
-      "source_ref": "180910726"
+      "sort_order": 35
     },
     {
       "id": 37,
@@ -882,13 +1048,19 @@
       "image_key": "images/201530217.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 188,
+        "protein_g": 9.6,
+        "fat_g": 7.4,
+        "carbs_g": 20.7,
+        "sugar_g": 11.3,
+        "sodium_mg": 87
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 36,
-      "source_ref": "201530217"
+      "sort_order": 36
     },
     {
       "id": 38,
@@ -902,13 +1074,19 @@
       "image_key": "images/180910732.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 178,
+        "protein_g": 9.0,
+        "fat_g": 6.7,
+        "carbs_g": 20.5,
+        "sugar_g": 12.4,
+        "sodium_mg": 93
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 37,
-      "source_ref": "180910732"
+      "sort_order": 37
     },
     {
       "id": 39,
@@ -922,13 +1100,17 @@
       "image_key": "images/180910728.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 10,
+        "protein_g": 0.4,
+        "fat_g": 0.1,
+        "carbs_g": 2.0,
+        "sugar_g": 1.0,
+        "sodium_mg": 28
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 38,
-      "source_ref": "180910728"
+      "sort_order": 38
     },
     {
       "id": 40,
@@ -942,13 +1124,19 @@
       "image_key": "images/203675007.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 159,
+        "protein_g": 8.1,
+        "fat_g": 6.1,
+        "carbs_g": 17.9,
+        "sugar_g": 11.1,
+        "sodium_mg": 79
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 39,
-      "source_ref": "203675007"
+      "sort_order": 39
     },
     {
       "id": 41,
@@ -962,13 +1150,19 @@
       "image_key": "images/203675006.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 181,
+        "protein_g": 9.4,
+        "fat_g": 7.2,
+        "carbs_g": 19.7,
+        "sugar_g": 10.9,
+        "sodium_mg": 86
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 40,
-      "source_ref": "203675006"
+      "sort_order": 40
     },
     {
       "id": 42,
@@ -982,13 +1176,19 @@
       "image_key": "images/180910725.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 165,
+        "protein_g": 8.9,
+        "fat_g": 6.4,
+        "carbs_g": 17.9,
+        "sugar_g": 10.8,
+        "sodium_mg": 80
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 41,
-      "source_ref": "180910725"
+      "sort_order": 41
     },
     {
       "id": 43,
@@ -1002,13 +1202,17 @@
       "image_key": "images/180910717.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 118,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 29.5,
+        "sugar_g": 28.1,
+        "sodium_mg": 24
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 42,
-      "source_ref": "180910717"
+      "sort_order": 42
     },
     {
       "id": 44,
@@ -1022,13 +1226,17 @@
       "image_key": "images/199269175.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 104,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 26.0,
+        "sugar_g": 23.1,
+        "sodium_mg": 19
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 43,
-      "source_ref": "199269175"
+      "sort_order": 43
     },
     {
       "id": 45,
@@ -1042,13 +1250,17 @@
       "image_key": "images/180910731.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 10,
+        "protein_g": 0.4,
+        "fat_g": 0.1,
+        "carbs_g": 2.0,
+        "sugar_g": 1.0,
+        "sodium_mg": 31
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 44,
-      "source_ref": "180910731"
+      "sort_order": 44
     },
     {
       "id": 46,
@@ -1062,17 +1274,22 @@
       "image_key": "images/180910689.png",
       "nutrition": {
         "serving_size": "227gm",
-        "calories_kcal": 507.72
+        "calories_kcal": 507.72,
+        "protein_g": 26.0,
+        "fat_g": 23.5,
+        "carbs_g": 48.1,
+        "sugar_g": 4.9,
+        "sodium_mg": 1197
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 45,
-      "source_ref": "180910689"
+      "sort_order": 45
     },
     {
       "id": 47,
@@ -1086,17 +1303,21 @@
       "image_key": "images/201530210.png",
       "nutrition": {
         "serving_size": "300gm",
-        "calories_kcal": 691.9
+        "calories_kcal": 691.9,
+        "protein_g": 27.0,
+        "fat_g": 29.2,
+        "carbs_g": 80.3,
+        "sugar_g": 6.7,
+        "sodium_mg": 1303
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 46,
-      "source_ref": "201530210"
+      "sort_order": 46
     },
     {
       "id": 48,
@@ -1110,17 +1331,21 @@
       "image_key": "images/201530204.png",
       "nutrition": {
         "serving_size": "260gm",
-        "calories_kcal": 558.72
+        "calories_kcal": 558.72,
+        "protein_g": 29.3,
+        "fat_g": 25.0,
+        "carbs_g": 54.2,
+        "sugar_g": 5.2,
+        "sodium_mg": 1175
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 47,
-      "source_ref": "201530204"
+      "sort_order": 47
     },
     {
       "id": 49,
@@ -1134,17 +1359,21 @@
       "image_key": "images/201530207.png",
       "nutrition": {
         "serving_size": "290gm",
-        "calories_kcal": 651.8
+        "calories_kcal": 651.8,
+        "protein_g": 23.9,
+        "fat_g": 27.4,
+        "carbs_g": 77.5,
+        "sugar_g": 5.6,
+        "sodium_mg": 1358
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 48,
-      "source_ref": "201530207"
+      "sort_order": 48
     },
     {
       "id": 50,
@@ -1158,17 +1387,21 @@
       "image_key": "images/201530201.png",
       "nutrition": {
         "serving_size": "250gm",
-        "calories_kcal": 533.33
+        "calories_kcal": 533.33,
+        "protein_g": 14.5,
+        "fat_g": 23.0,
+        "carbs_g": 67.2,
+        "sugar_g": 6.9,
+        "sodium_mg": 1010
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 49,
-      "source_ref": "201530201"
+      "sort_order": 49
     },
     {
       "id": 51,
@@ -1182,17 +1415,21 @@
       "image_key": "images/180910686.png",
       "nutrition": {
         "serving_size": "212gm",
-        "calories_kcal": 482.33
+        "calories_kcal": 482.33,
+        "protein_g": 13.3,
+        "fat_g": 20.9,
+        "carbs_g": 60.3,
+        "sugar_g": 5.9,
+        "sodium_mg": 867
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 50,
-      "source_ref": "180910686"
+      "sort_order": 50
     },
     {
       "id": 52,
@@ -1206,17 +1443,21 @@
       "image_key": "images/180910891.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 237.23
+        "calories_kcal": 237.23,
+        "protein_g": 11.1,
+        "fat_g": 9.4,
+        "carbs_g": 27.1,
+        "sugar_g": 17.2,
+        "sodium_mg": 109
       },
-      "allergens": {
-        "i milk products": true
-      },
+      "allergens": [
+        "milk"
+      ],
       "tags": [
         "bestseller"
       ],
       "is_active": true,
-      "sort_order": 51,
-      "source_ref": "180910891"
+      "sort_order": 51
     },
     {
       "id": 53,
@@ -1230,13 +1471,17 @@
       "image_key": "images/180910897.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 109.56
+        "calories_kcal": 109.56,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 27.4,
+        "sugar_g": 26.8,
+        "sodium_mg": 15
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 52,
-      "source_ref": "180910897"
+      "sort_order": 52
     },
     {
       "id": 54,
@@ -1250,13 +1495,17 @@
       "image_key": "images/180910899.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 119.52
+        "calories_kcal": 119.52,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 29.9,
+        "sugar_g": 29.4,
+        "sodium_mg": 18
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 53,
-      "source_ref": "180910899"
+      "sort_order": 53
     },
     {
       "id": 55,
@@ -1270,13 +1519,17 @@
       "image_key": "images/180910898.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 129.48
+        "calories_kcal": 129.48,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 32.4,
+        "sugar_g": 32.4,
+        "sodium_mg": 19
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 54,
-      "source_ref": "180910898"
+      "sort_order": 54
     },
     {
       "id": 56,
@@ -1290,13 +1543,17 @@
       "image_key": "images/200397002.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 215.12
+        "calories_kcal": 215.12,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 53.8,
+        "sugar_g": 53.0,
+        "sodium_mg": 35
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 55,
-      "source_ref": "200397002"
+      "sort_order": 55
     },
     {
       "id": 57,
@@ -1310,13 +1567,17 @@
       "image_key": "images/200397003.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 188.09
+        "calories_kcal": 188.09,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 47.0,
+        "sugar_g": 46.5,
+        "sodium_mg": 26
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 56,
-      "source_ref": "200397003"
+      "sort_order": 56
     },
     {
       "id": 58,
@@ -1330,15 +1591,19 @@
       "image_key": null,
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 307.58
+        "calories_kcal": 307.58,
+        "protein_g": 6.8,
+        "fat_g": 7.5,
+        "carbs_g": 53.1,
+        "sugar_g": 41.8,
+        "sodium_mg": 104
       },
-      "allergens": {
-        "milk products": true
-      },
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 57,
-      "source_ref": "198266534"
+      "sort_order": 57
     },
     {
       "id": 59,
@@ -1352,13 +1617,17 @@
       "image_key": "images/180910741.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 1,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 0.0,
+        "sugar_g": 0.0,
+        "sodium_mg": 20
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 58,
-      "source_ref": "180910741"
+      "sort_order": 58
     },
     {
       "id": 60,
@@ -1372,13 +1641,17 @@
       "image_key": "images/180910895.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": 79.68
+        "calories_kcal": 79.68,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 19.9,
+        "sugar_g": 19.2,
+        "sodium_mg": 16
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 59,
-      "source_ref": "180910895"
+      "sort_order": 59
     },
     {
       "id": 61,
@@ -1392,13 +1665,17 @@
       "image_key": "images/180910894.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 112,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 28.0,
+        "sugar_g": 24.8,
+        "sodium_mg": 23
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 60,
-      "source_ref": "180910894"
+      "sort_order": 60
     },
     {
       "id": 62,
@@ -1412,13 +1689,19 @@
       "image_key": "images/180910893.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 343,
+        "protein_g": 8.1,
+        "fat_g": 8.4,
+        "carbs_g": 58.6,
+        "sugar_g": 46.6,
+        "sodium_mg": 110
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 61,
-      "source_ref": "180910893"
+      "sort_order": 61
     },
     {
       "id": 63,
@@ -1432,13 +1715,17 @@
       "image_key": "images/180910906.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 0,
+        "protein_g": 0.0,
+        "fat_g": 0.0,
+        "carbs_g": 0.0,
+        "sugar_g": 0.0,
+        "sodium_mg": 0
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 62,
-      "source_ref": "180910906"
+      "sort_order": 62
     },
     {
       "id": 64,
@@ -1452,18 +1739,22 @@
       "image_key": "images/180910807.png",
       "nutrition": {
         "serving_size": "257gm",
-        "calories_kcal": 567.19
+        "calories_kcal": 567.19,
+        "protein_g": 21.4,
+        "fat_g": 25.4,
+        "carbs_g": 63.4,
+        "sugar_g": 5.2,
+        "sodium_mg": 1106
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true,
-        "i egg products": true
-      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 63,
-      "source_ref": "180910807"
+      "sort_order": 63
     },
     {
       "id": 65,
@@ -1477,19 +1768,23 @@
       "image_key": "images/180910803.png",
       "nutrition": {
         "serving_size": "250gm",
-        "calories_kcal": 674.68
+        "calories_kcal": 674.68,
+        "protein_g": 23.2,
+        "fat_g": 28.9,
+        "carbs_g": 80.5,
+        "sugar_g": 5.9,
+        "sodium_mg": 1441
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [
         "bestseller"
       ],
       "is_active": true,
-      "sort_order": 64,
-      "source_ref": "180910803"
+      "sort_order": 64
     },
     {
       "id": 69,
@@ -1503,16 +1798,20 @@
       "image_key": "images/180910806.png",
       "nutrition": {
         "serving_size": "147gm",
-        "calories_kcal": 372.43
+        "calories_kcal": 372.43,
+        "protein_g": 15.2,
+        "fat_g": 16.7,
+        "carbs_g": 40.4,
+        "sugar_g": 3.0,
+        "sodium_mg": 777
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 68,
-      "source_ref": "180910806"
+      "sort_order": 68
     },
     {
       "id": 70,
@@ -1526,17 +1825,21 @@
       "image_key": "images/180910810.png",
       "nutrition": {
         "serving_size": "137gm",
-        "calories_kcal": 313.1
+        "calories_kcal": 313.1,
+        "protein_g": 11.9,
+        "fat_g": 14.5,
+        "carbs_g": 33.7,
+        "sugar_g": 2.8,
+        "sodium_mg": 638
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i soyabean products": true
-      },
+      "allergens": [
+        "gluten",
+        "milk",
+        "soy"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 69,
-      "source_ref": "180910810"
+      "sort_order": 69
     },
     {
       "id": 71,
@@ -1550,17 +1853,21 @@
       "image_key": "images/180910811.png",
       "nutrition": {
         "serving_size": "132gm",
-        "calories_kcal": 295.78
+        "calories_kcal": 295.78,
+        "protein_g": 11.4,
+        "fat_g": 13.0,
+        "carbs_g": 33.5,
+        "sugar_g": 2.5,
+        "sodium_mg": 588
       },
-      "allergens": {
-        "i gluten": true,
-        "i milk products": true,
-        "i egg products": true
-      },
+      "allergens": [
+        "egg",
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 70,
-      "source_ref": "180910811"
+      "sort_order": 70
     },
     {
       "id": 72,
@@ -1574,13 +1881,20 @@
       "image_key": "images/211995742.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 541,
+        "protein_g": 28.4,
+        "fat_g": 25.1,
+        "carbs_g": 50.3,
+        "sugar_g": 5.2,
+        "sodium_mg": 1099
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 71,
-      "source_ref": "211995742"
+      "sort_order": 71
     },
     {
       "id": 73,
@@ -1594,13 +1908,20 @@
       "image_key": "images/211995743.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 533,
+        "protein_g": 26.1,
+        "fat_g": 24.5,
+        "carbs_g": 52.0,
+        "sugar_g": 4.7,
+        "sodium_mg": 1206
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 72,
-      "source_ref": "211995743"
+      "sort_order": 72
     },
     {
       "id": 74,
@@ -1614,13 +1935,20 @@
       "image_key": "images/211995739.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 472,
+        "protein_g": 13.0,
+        "fat_g": 19.6,
+        "carbs_g": 60.9,
+        "sugar_g": 6.6,
+        "sodium_mg": 852
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 73,
-      "source_ref": "211995739"
+      "sort_order": 73
     },
     {
       "id": 75,
@@ -1634,13 +1962,20 @@
       "image_key": "images/211995753.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 640,
+        "protein_g": 16.5,
+        "fat_g": 27.4,
+        "carbs_g": 81.9,
+        "sugar_g": 8.6,
+        "sodium_mg": 1038
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 74,
-      "source_ref": "211995753"
+      "sort_order": 74
     },
     {
       "id": 76,
@@ -1654,13 +1989,20 @@
       "image_key": "images/211995752.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 656,
+        "protein_g": 17.2,
+        "fat_g": 29.2,
+        "carbs_g": 81.1,
+        "sugar_g": 7.9,
+        "sodium_mg": 1282
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 75,
-      "source_ref": "211995752"
+      "sort_order": 75
     },
     {
       "id": 77,
@@ -1674,13 +2016,20 @@
       "image_key": "images/211995757.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 780,
+        "protein_g": 38.5,
+        "fat_g": 34.3,
+        "carbs_g": 79.3,
+        "sugar_g": 7.9,
+        "sodium_mg": 1751
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 76,
-      "source_ref": "211995757"
+      "sort_order": 76
     },
     {
       "id": 78,
@@ -1694,13 +2043,20 @@
       "image_key": "images/211995756.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 821,
+        "protein_g": 40.5,
+        "fat_g": 38.5,
+        "carbs_g": 78.0,
+        "sugar_g": 7.9,
+        "sodium_mg": 1633
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 77,
-      "source_ref": "211995756"
+      "sort_order": 77
     },
     {
       "id": 79,
@@ -1714,13 +2070,20 @@
       "image_key": "images/211995746.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 470,
+        "protein_g": 12.1,
+        "fat_g": 18.7,
+        "carbs_g": 63.4,
+        "sugar_g": 6.1,
+        "sodium_mg": 876
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 78,
-      "source_ref": "211995746"
+      "sort_order": 78
     },
     {
       "id": 80,
@@ -1734,13 +2097,20 @@
       "image_key": "images/211995747.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 471,
+        "protein_g": 13.0,
+        "fat_g": 18.5,
+        "carbs_g": 63.1,
+        "sugar_g": 6.2,
+        "sodium_mg": 909
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 79,
-      "source_ref": "211995747"
+      "sort_order": 79
     },
     {
       "id": 81,
@@ -1754,13 +2124,20 @@
       "image_key": "images/211995750.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 542,
+        "protein_g": 28.5,
+        "fat_g": 25.0,
+        "carbs_g": 50.7,
+        "sugar_g": 5.3,
+        "sodium_mg": 1116
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 80,
-      "source_ref": "211995750"
+      "sort_order": 80
     },
     {
       "id": 82,
@@ -1774,13 +2151,20 @@
       "image_key": "images/211995751.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 535,
+        "protein_g": 25.6,
+        "fat_g": 25.2,
+        "carbs_g": 51.4,
+        "sugar_g": 5.1,
+        "sodium_mg": 1121
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 81,
-      "source_ref": "211995751"
+      "sort_order": 81
     },
     {
       "id": 83,
@@ -1794,13 +2178,20 @@
       "image_key": "images/180910853.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 406,
+        "protein_g": 5.2,
+        "fat_g": 19.7,
+        "carbs_g": 52.1,
+        "sugar_g": 0.5,
+        "sodium_mg": 227
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 82,
-      "source_ref": "180910853"
+      "sort_order": 82
     },
     {
       "id": 84,
@@ -1814,13 +2205,17 @@
       "image_key": "images/180910854.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 337,
+        "protein_g": 4.3,
+        "fat_g": 14.5,
+        "carbs_g": 47.3,
+        "sugar_g": 0.4,
+        "sodium_mg": 220
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 83,
-      "source_ref": "180910854"
+      "sort_order": 83
     },
     {
       "id": 85,
@@ -1834,13 +2229,20 @@
       "image_key": "images/180910855.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 443,
+        "protein_g": 5.6,
+        "fat_g": 20.7,
+        "carbs_g": 58.6,
+        "sugar_g": 0.6,
+        "sodium_mg": 276
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 84,
-      "source_ref": "180910855"
+      "sort_order": 84
     },
     {
       "id": 86,
@@ -1854,13 +2256,19 @@
       "image_key": "images/180910856.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 338,
+        "protein_g": 4.2,
+        "fat_g": 15.8,
+        "carbs_g": 44.7,
+        "sugar_g": 0.5,
+        "sodium_mg": 222
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 85,
-      "source_ref": "180910856"
+      "sort_order": 85
     },
     {
       "id": 87,
@@ -1874,13 +2282,20 @@
       "image_key": "images/180910883.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 280,
+        "protein_g": 4.7,
+        "fat_g": 9.0,
+        "carbs_g": 45.1,
+        "sugar_g": 31.2,
+        "sodium_mg": 105
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 86,
-      "source_ref": "180910883"
+      "sort_order": 86
     },
     {
       "id": 88,
@@ -1894,13 +2309,20 @@
       "image_key": "images/180910884.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 272,
+        "protein_g": 4.0,
+        "fat_g": 8.7,
+        "carbs_g": 44.4,
+        "sugar_g": 30.3,
+        "sodium_mg": 104
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 87,
-      "source_ref": "180910884"
+      "sort_order": 87
     },
     {
       "id": 89,
@@ -1914,13 +2336,20 @@
       "image_key": "images/180910878.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 240,
+        "protein_g": 3.7,
+        "fat_g": 7.8,
+        "carbs_g": 38.6,
+        "sugar_g": 28.4,
+        "sodium_mg": 100
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 88,
-      "source_ref": "180910878"
+      "sort_order": 88
     },
     {
       "id": 90,
@@ -1934,13 +2363,19 @@
       "image_key": "images/180910881.jpg",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 253,
+        "protein_g": 3.8,
+        "fat_g": 8.5,
+        "carbs_g": 40.3,
+        "sugar_g": 26.2,
+        "sodium_mg": 108
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 89,
-      "source_ref": "180910881"
+      "sort_order": 89
     },
     {
       "id": 91,
@@ -1954,13 +2389,19 @@
       "image_key": null,
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 266,
+        "protein_g": 3.7,
+        "fat_g": 8.5,
+        "carbs_g": 43.8,
+        "sugar_g": 29.5,
+        "sodium_mg": 114
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 90,
-      "source_ref": "203460970"
+      "sort_order": 90
     },
     {
       "id": 92,
@@ -1974,15 +2415,21 @@
       "image_key": "images/180910882.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 241,
+        "protein_g": 3.9,
+        "fat_g": 7.6,
+        "carbs_g": 39.2,
+        "sugar_g": 25.5,
+        "sodium_mg": 89
       },
-      "allergens": {},
+      "allergens": [
+        "milk"
+      ],
       "tags": [
         "bestseller"
       ],
       "is_active": true,
-      "sort_order": 91,
-      "source_ref": "180910882"
+      "sort_order": 91
     },
     {
       "id": 93,
@@ -1996,13 +2443,20 @@
       "image_key": "images/207157253.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 620,
+        "protein_g": 20.6,
+        "fat_g": 28.2,
+        "carbs_g": 71.0,
+        "sugar_g": 8.8,
+        "sodium_mg": 1099
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 92,
-      "source_ref": "207157253"
+      "sort_order": 92
     },
     {
       "id": 94,
@@ -2016,13 +2470,20 @@
       "image_key": "images/207157248.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 679,
+        "protein_g": 25.8,
+        "fat_g": 28.7,
+        "carbs_g": 79.5,
+        "sugar_g": 9.2,
+        "sodium_mg": 1210
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 93,
-      "source_ref": "207157248"
+      "sort_order": 93
     },
     {
       "id": 95,
@@ -2036,13 +2497,20 @@
       "image_key": "images/207157254.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 650,
+        "protein_g": 20.8,
+        "fat_g": 27.3,
+        "carbs_g": 80.2,
+        "sugar_g": 10.3,
+        "sodium_mg": 1144
       },
-      "allergens": {},
+      "allergens": [
+        "egg",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 94,
-      "source_ref": "207157254"
+      "sort_order": 94
     },
     {
       "id": 96,
@@ -2056,13 +2524,20 @@
       "image_key": "images/207157249.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 701,
+        "protein_g": 23.4,
+        "fat_g": 30.8,
+        "carbs_g": 82.6,
+        "sugar_g": 10.3,
+        "sodium_mg": 1223
       },
-      "allergens": {},
+      "allergens": [
+        "egg",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 95,
-      "source_ref": "207157249"
+      "sort_order": 95
     },
     {
       "id": 97,
@@ -2076,13 +2551,19 @@
       "image_key": "images/207157251.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 701,
+        "protein_g": 26.8,
+        "fat_g": 30.8,
+        "carbs_g": 79.1,
+        "sugar_g": 9.5,
+        "sodium_mg": 1152
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 96,
-      "source_ref": "207157251"
+      "sort_order": 96
     },
     {
       "id": 98,
@@ -2096,13 +2577,19 @@
       "image_key": "images/207157250.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 683,
+        "protein_g": 23.0,
+        "fat_g": 27.5,
+        "carbs_g": 85.8,
+        "sugar_g": 10.3,
+        "sodium_mg": 1152
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 97,
-      "source_ref": "207157250"
+      "sort_order": 97
     },
     {
       "id": 99,
@@ -2116,13 +2603,20 @@
       "image_key": "images/207157255.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 618,
+        "protein_g": 21.9,
+        "fat_g": 25.7,
+        "carbs_g": 74.6,
+        "sugar_g": 8.8,
+        "sodium_mg": 1114
       },
-      "allergens": {},
+      "allergens": [
+        "egg",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 98,
-      "source_ref": "207157255"
+      "sort_order": 98
     },
     {
       "id": 100,
@@ -2136,13 +2630,19 @@
       "image_key": "images/180910785.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 423,
+        "protein_g": 14.0,
+        "fat_g": 18.2,
+        "carbs_g": 50.8,
+        "sugar_g": 7.6,
+        "sodium_mg": 573
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 99,
-      "source_ref": "180910785"
+      "sort_order": 99
     },
     {
       "id": 101,
@@ -2156,13 +2656,19 @@
       "image_key": "images/180910784.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 442,
+        "protein_g": 16.1,
+        "fat_g": 16.7,
+        "carbs_g": 56.9,
+        "sugar_g": 7.9,
+        "sodium_mg": 657
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 100,
-      "source_ref": "180910784"
+      "sort_order": 100
     },
     {
       "id": 102,
@@ -2176,13 +2682,19 @@
       "image_key": "images/180910787.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 423,
+        "protein_g": 14.3,
+        "fat_g": 16.4,
+        "carbs_g": 54.4,
+        "sugar_g": 8.1,
+        "sodium_mg": 568
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 101,
-      "source_ref": "180910787"
+      "sort_order": 101
     },
     {
       "id": 103,
@@ -2196,13 +2708,19 @@
       "image_key": "images/180910783.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 435,
+        "protein_g": 14.5,
+        "fat_g": 16.5,
+        "carbs_g": 57.1,
+        "sugar_g": 9.2,
+        "sodium_mg": 580
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 102,
-      "source_ref": "180910783"
+      "sort_order": 102
     },
     {
       "id": 104,
@@ -2216,13 +2734,19 @@
       "image_key": "images/207481122.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 570,
+        "protein_g": 20.6,
+        "fat_g": 23.6,
+        "carbs_g": 68.8,
+        "sugar_g": 8.6,
+        "sodium_mg": 1051
       },
-      "allergens": {},
+      "allergens": [
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 103,
-      "source_ref": "207481122"
+      "sort_order": 103
     },
     {
       "id": 105,
@@ -2236,13 +2760,20 @@
       "image_key": "images/207481121.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 591,
+        "protein_g": 20.6,
+        "fat_g": 24.7,
+        "carbs_g": 71.5,
+        "sugar_g": 8.7,
+        "sodium_mg": 1005
       },
-      "allergens": {},
+      "allergens": [
+        "egg",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 104,
-      "source_ref": "207481121"
+      "sort_order": 104
     },
     {
       "id": 106,
@@ -2256,13 +2787,17 @@
       "image_key": "images/207481119.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 427,
+        "protein_g": 5.0,
+        "fat_g": 19.3,
+        "carbs_g": 58.4,
+        "sugar_g": 0.6,
+        "sodium_mg": 253
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 105,
-      "source_ref": "207481119"
+      "sort_order": 105
     },
     {
       "id": 107,
@@ -2276,13 +2811,20 @@
       "image_key": "images/207481120.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 586,
+        "protein_g": 20.2,
+        "fat_g": 23.5,
+        "carbs_g": 73.5,
+        "sugar_g": 8.4,
+        "sodium_mg": 971
       },
-      "allergens": {},
+      "allergens": [
+        "egg",
+        "gluten"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 106,
-      "source_ref": "207481120"
+      "sort_order": 106
     },
     {
       "id": 108,
@@ -2296,13 +2838,20 @@
       "image_key": "images/207481118.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 242,
+        "protein_g": 6.2,
+        "fat_g": 9.4,
+        "carbs_g": 33.1,
+        "sugar_g": 3.6,
+        "sodium_mg": 361
       },
-      "allergens": {},
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
       "tags": [],
       "is_active": true,
-      "sort_order": 107,
-      "source_ref": "207481118"
+      "sort_order": 107
     },
     {
       "id": 109,
@@ -2316,13 +2865,17 @@
       "image_key": "images/180910910.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 58,
+        "protein_g": 0.3,
+        "fat_g": 3.6,
+        "carbs_g": 6.2,
+        "sugar_g": 2.9,
+        "sodium_mg": 331
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 108,
-      "source_ref": "180910910"
+      "sort_order": 108
     },
     {
       "id": 110,
@@ -2336,13 +2889,17 @@
       "image_key": "images/180910909.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 58,
+        "protein_g": 0.3,
+        "fat_g": 3.5,
+        "carbs_g": 6.4,
+        "sugar_g": 3.0,
+        "sodium_mg": 317
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 109,
-      "source_ref": "180910909"
+      "sort_order": 109
     },
     {
       "id": 111,
@@ -2356,13 +2913,17 @@
       "image_key": null,
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 63,
+        "protein_g": 0.3,
+        "fat_g": 3.9,
+        "carbs_g": 6.6,
+        "sugar_g": 3.4,
+        "sodium_mg": 410
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 110,
-      "source_ref": "180910911"
+      "sort_order": 110
     },
     {
       "id": 112,
@@ -2376,13 +2937,17 @@
       "image_key": "images/180910907.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 61,
+        "protein_g": 0.3,
+        "fat_g": 3.7,
+        "carbs_g": 6.7,
+        "sugar_g": 3.3,
+        "sodium_mg": 331
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 111,
-      "source_ref": "180910907"
+      "sort_order": 111
     },
     {
       "id": 113,
@@ -2396,13 +2961,17 @@
       "image_key": "images/180910908.png",
       "nutrition": {
         "serving_size": null,
-        "calories_kcal": null
+        "calories_kcal": 59,
+        "protein_g": 0.3,
+        "fat_g": 3.6,
+        "carbs_g": 6.3,
+        "sugar_g": 3.2,
+        "sodium_mg": 355
       },
-      "allergens": {},
+      "allergens": [],
       "tags": [],
       "is_active": true,
-      "sort_order": 112,
-      "source_ref": "180910908"
+      "sort_order": 112
     }
   ],
   "option_groups": [
@@ -2815,7 +3384,7 @@
       "group_id": 1,
       "name": "Complimentary Ketchup",
       "price_delta": 0.0,
-      "is_default": false,
+      "is_default": true,
       "sort_order": 0,
       "linked_product_id": null
     },
@@ -6230,384 +6799,336 @@
       "size": "Medium",
       "price_delta": 133.33,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910753"
+      "drink_group_id": 67
     },
     {
       "product_id": 48,
       "size": "Medium",
       "price_delta": 133.34,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "201530206"
+      "drink_group_id": 67
     },
     {
       "product_id": 5,
       "size": "Medium",
       "price_delta": 146.67,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910745"
+      "drink_group_id": 67
     },
     {
       "product_id": 2,
       "size": "Medium",
       "price_delta": 138.1,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910746"
+      "drink_group_id": 67
     },
     {
       "product_id": 3,
       "size": "Medium",
       "price_delta": 144.77,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910755"
+      "drink_group_id": 67
     },
     {
       "product_id": 46,
       "size": "Medium",
       "price_delta": 133.33,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910690"
+      "drink_group_id": 67
     },
     {
       "product_id": 47,
       "size": "Medium",
       "price_delta": 132.38,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "201530212"
+      "drink_group_id": 67
     },
     {
       "product_id": 18,
       "size": "Medium",
       "price_delta": 140.96,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910754"
+      "drink_group_id": 67
     },
     {
       "product_id": 51,
       "size": "Medium",
       "price_delta": 133.34,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910687"
+      "drink_group_id": 67
     },
     {
       "product_id": 7,
       "size": "Medium",
       "price_delta": 133.33,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910743"
+      "drink_group_id": 67
     },
     {
       "product_id": 49,
       "size": "Medium",
       "price_delta": 131.43,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "201530209"
+      "drink_group_id": 67
     },
     {
       "product_id": 64,
       "size": "Medium",
       "price_delta": 138.09,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910752"
+      "drink_group_id": 67
     },
     {
       "product_id": 65,
       "size": "Medium",
       "price_delta": 130.47,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910744"
+      "drink_group_id": 67
     },
     {
       "product_id": 9,
       "size": "Medium",
       "price_delta": 122.86,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910756"
+      "drink_group_id": 67
     },
     {
       "product_id": 1,
       "size": "Medium",
       "price_delta": 148.57,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910751"
+      "drink_group_id": 67
     },
     {
       "product_id": 50,
       "size": "Medium",
       "price_delta": 133.33,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "201530203"
+      "drink_group_id": 67
     },
     {
       "product_id": 4,
       "size": "Medium",
       "price_delta": 130.47,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910758"
+      "drink_group_id": 67
     },
     {
       "product_id": 16,
       "size": "Medium",
       "price_delta": 145.71,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910757"
+      "drink_group_id": 67
     },
     {
       "product_id": 6,
       "size": "Medium",
       "price_delta": 144.76,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910759"
+      "drink_group_id": 67
     },
     {
       "product_id": 11,
       "size": "Medium",
       "price_delta": 132.38,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910760"
+      "drink_group_id": 67
     },
     {
       "product_id": 10,
       "size": "Medium",
       "price_delta": 136.19,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910747"
+      "drink_group_id": 67
     },
     {
       "product_id": 12,
       "size": "Medium",
       "price_delta": 140.0,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910748"
+      "drink_group_id": 67
     },
     {
       "product_id": 23,
       "size": "Medium",
       "price_delta": 140.0,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "180910737"
+      "drink_group_id": 67
     },
     {
       "product_id": 13,
       "size": "Medium",
       "price_delta": 140.0,
       "side_group_id": 27,
-      "drink_group_id": 67,
-      "source_ref": "200565026"
+      "drink_group_id": 67
     },
     {
       "product_id": 47,
       "size": "Large",
       "price_delta": 160.95,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "201530211"
+      "drink_group_id": 68
     },
     {
       "product_id": 8,
       "size": "Large",
       "price_delta": 160.0,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910771"
+      "drink_group_id": 68
     },
     {
       "product_id": 3,
       "size": "Large",
       "price_delta": 170.48,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910774"
+      "drink_group_id": 68
     },
     {
       "product_id": 5,
       "size": "Large",
       "price_delta": 173.34,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910763"
+      "drink_group_id": 68
     },
     {
       "product_id": 46,
       "size": "Large",
       "price_delta": 160.95,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910691"
+      "drink_group_id": 68
     },
     {
       "product_id": 48,
       "size": "Large",
       "price_delta": 160.96,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "201530205"
+      "drink_group_id": 68
     },
     {
       "product_id": 49,
       "size": "Large",
       "price_delta": 160.95,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "201530208"
+      "drink_group_id": 68
     },
     {
       "product_id": 64,
       "size": "Large",
       "price_delta": 163.81,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910770"
+      "drink_group_id": 68
     },
     {
       "product_id": 18,
       "size": "Large",
       "price_delta": 166.67,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910772"
+      "drink_group_id": 68
     },
     {
       "product_id": 7,
       "size": "Large",
       "price_delta": 159.04,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910761"
+      "drink_group_id": 68
     },
     {
       "product_id": 50,
       "size": "Large",
       "price_delta": 160.95,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "201530202"
+      "drink_group_id": 68
     },
     {
       "product_id": 9,
       "size": "Large",
       "price_delta": 150.48,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910775"
+      "drink_group_id": 68
     },
     {
       "product_id": 65,
       "size": "Large",
       "price_delta": 157.14,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910762"
+      "drink_group_id": 68
     },
     {
       "product_id": 4,
       "size": "Large",
       "price_delta": 157.14,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910777"
+      "drink_group_id": 68
     },
     {
       "product_id": 2,
       "size": "Large",
       "price_delta": 165.72,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910764"
+      "drink_group_id": 68
     },
     {
       "product_id": 16,
       "size": "Large",
       "price_delta": 172.38,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910776"
+      "drink_group_id": 68
     },
     {
       "product_id": 51,
       "size": "Large",
       "price_delta": 160.96,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910688"
+      "drink_group_id": 68
     },
     {
       "product_id": 6,
       "size": "Large",
       "price_delta": 170.48,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910778"
+      "drink_group_id": 68
     },
     {
       "product_id": 1,
       "size": "Large",
       "price_delta": 176.19,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910768"
+      "drink_group_id": 68
     },
     {
       "product_id": 11,
       "size": "Large",
       "price_delta": 159.05,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910779"
+      "drink_group_id": 68
     },
     {
       "product_id": 10,
       "size": "Large",
       "price_delta": 155.24,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910766"
+      "drink_group_id": 68
     },
     {
       "product_id": 23,
       "size": "Large",
       "price_delta": 167.62,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910738"
+      "drink_group_id": 68
     },
     {
       "product_id": 12,
       "size": "Large",
       "price_delta": 168.57,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "180910765"
+      "drink_group_id": 68
     },
     {
       "product_id": 13,
       "size": "Large",
       "price_delta": 168.57,
       "side_group_id": null,
-      "drink_group_id": 68,
-      "source_ref": "200565027"
+      "drink_group_id": 68
     }
   ]
 }

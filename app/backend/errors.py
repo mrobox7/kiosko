@@ -1,13 +1,30 @@
 """Exceptions raised by BackendClient (PLAN.md section 4)."""
 
+from typing import Any
+
 
 class BackendError(Exception):
-    """Base class. The message is safe to show the model verbatim."""
+    """Base class. The message is safe to show the model verbatim.
 
-    def __init__(self, message: str, status: int | None = None) -> None:
+    A refusal from the ordering server also carries its `code` (`not_found`, `order_closed`,
+    `empty_order`, `invalid_line`, `cannot_confirm`) and, for a cart, the `missing` and `problems`
+    lists as the server sent them, each entry with its own `code`."""
+
+    def __init__(
+        self,
+        message: str,
+        status: int | None = None,
+        *,
+        code: str | None = None,
+        missing: list[dict[str, Any]] | None = None,
+        problems: list[dict[str, Any]] | None = None,
+    ) -> None:
         super().__init__(message)
         self.message = message
         self.status = status
+        self.code = code
+        self.missing = missing or []
+        self.problems = problems or []
 
 
 class BackendNotFound(BackendError):

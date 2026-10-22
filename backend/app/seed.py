@@ -7,13 +7,14 @@ Rows that are no longer in the file are left alone."""
 import json
 from decimal import Decimal
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
+from sqlalchemy import Table, func, select
 from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.orm import Session
 
-from app import models
-from app.database import Base, SessionLocal, engine
+from app.database import Base, SessionLocal, create_tables, engine
+from app.menu import models
 
 SEED_PATH = Path(__file__).resolve().parent.parent / "seed" / "seed.json"
 
@@ -29,14 +30,14 @@ TABLES: list[tuple[str, type[Base], tuple[str, ...]]] = [
 ]
 
 
-# The money column of each seed table.
-MONEY = {"products": "base_price", "options": "price_delta", "meal_offers": "price_delta"}
+# The price field of each seed table.
+PRICE_FIELDS = {"products": "base_price", "options": "price_delta", "meal_offers": "price_delta"}
 
 
 def read_seed(path: Path = SEED_PATH) -> dict[str, Any]:
     """Prices are turned into exact decimals, never kept as floats."""
     data: dict[str, Any] = json.loads(path.read_text())
-    for key, field in MONEY.items():
+    for key, field in PRICE_FIELDS.items():
         for row in data[key]:
             row[field] = Decimal(str(row[field]))
     return data
@@ -54,12 +55,24 @@ def load_seed(db: Session, data: dict[str, Any]) -> dict[str, int]:
         statement = pg_insert(model).values(rows)
         changes = {c: statement.excluded[c] for c in rows[0] if c not in identity}
         db.execute(statement.on_conflict_do_update(index_elements=list(identity), set_=changes))
+        if identity == ("id",):
+            _continue_ids_after_the_highest(db, model)
     db.commit()
     return counts
 
 
+def _continue_ids_after_the_highest(db: Session, model: type[Base]) -> None:
+    """Rows were inserted with their own ids, so the database's id counter did not move. Without
+    this, the next row added without an id would try to take id 1 again."""
+    table = cast(Table, model.__table__)
+    sequence = db.scalar(func.pg_get_serial_sequence(table.name, "id"))
+    top = db.scalar(select(func.max(table.c.id)))
+    if sequence and top:
+        db.execute(select(func.setval(sequence, top)))
+
+
 def main() -> None:
-    Base.metadata.create_all(engine)
+    create_tables(engine)
     with SessionLocal() as db:
         for table, count in load_seed(db, read_seed()).items():
             print(f"{table}: {count}")

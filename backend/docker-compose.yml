@@ -4,13 +4,13 @@ services:
     environment:
       POSTGRES_USER: menu
       POSTGRES_PASSWORD: menu
-      POSTGRES_DB: menu
+      POSTGRES_DB: restaurant
     ports:
       - "5434:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U menu -d menu"]
+      test: ["CMD-SHELL", "pg_isready -U menu -d restaurant"]
       interval: 2s
       timeout: 5s
       retries: 15

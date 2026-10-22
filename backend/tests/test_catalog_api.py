@@ -4,7 +4,7 @@ from typing import Any
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app import models
+from app.menu.models import Product, ProductOptionGroup
 
 Json = dict[str, Any]
 
@@ -28,13 +28,6 @@ def group(detail: Json, name: str) -> Json:
     assert len(found) == 1, name
     result: Json = found[0]
     return result
-
-
-def test_categories_in_menu_order(client: TestClient) -> None:
-    categories = client.get("/categories").json()
-    assert [c["slug"] for c in categories][:2] == ["burgers", "wraps"]
-    assert len(categories) == 8
-    assert set(categories[0]) == {"id", "slug", "name"}
 
 
 def test_products_list_everything_active(client: TestClient) -> None:
@@ -93,11 +86,7 @@ def test_detail_has_the_choices_for_a_burger(client: TestClient) -> None:
 
 
 def test_product_limits_replace_the_group_limits(client: TestClient, db: Session) -> None:
-    link = (
-        db.query(models.ProductOptionGroup)
-        .filter(models.ProductOptionGroup.max_select.is_not(None))
-        .first()
-    )
+    link = db.query(ProductOptionGroup).filter(ProductOptionGroup.max_select.is_not(None)).first()
     assert link is not None
     detail = client.get(f"/products/{link.product_id}").json()
     shown = next(g for g in detail["option_groups"] if g["id"] == link.group_id)
@@ -130,7 +119,7 @@ def test_unknown_product_is_404(client: TestClient) -> None:
 
 
 def test_inactive_product_is_hidden(client: TestClient, db: Session) -> None:
-    product = db.get(models.Product, 1)
+    product = db.get(Product, 1)
     assert product is not None
     product.is_active = False
     db.commit()
@@ -151,10 +140,19 @@ def test_catalog_matches_the_other_endpoints(client: TestClient) -> None:
         assert client.get(f"/products/{entry['id']}").json() == entry
 
 
+def test_the_version_endpoint_agrees_with_the_catalog(client: TestClient) -> None:
+    from tests.helpers import OUTLET
+
+    for params in ({}, {"outlet": OUTLET}):
+        version = client.get("/catalog/version", params=params).json()
+        assert version == {"version": client.get("/catalog", params=params).json()["version"]}
+    assert client.get("/catalog/version", params={"outlet": "nope"}).status_code == 404
+
+
 def test_catalog_version_changes_with_the_menu(client: TestClient, db: Session) -> None:
     first = client.get("/catalog").json()["version"]
     assert client.get("/catalog").json()["version"] == first
-    product = db.get(models.Product, 1)
+    product = db.get(Product, 1)
     assert product is not None
     original = product.base_price
     product.base_price = original + Decimal("1.00")
@@ -176,3 +174,54 @@ def test_every_image_url_serves_a_picture(client: TestClient) -> None:
         kind = "image/jpeg" if p["image_url"].endswith(".jpg") else "image/png"
         assert response.status_code == 200 and response.headers["content-type"] == kind
     assert client.get("/images/nope.png").status_code == 404
+
+
+def test_the_seeded_outlet_has_a_code(db: Session) -> None:
+    from app.menu.models import Outlet
+
+    assert [o.code for o in db.query(Outlet).all()] == ["JPR-013-7429"]
+
+
+def test_the_menu_leaves_out_what_the_outlet_is_not_selling(
+    client: TestClient, db: Session
+) -> None:
+    from app.menu.models import Product, UnavailableProduct
+    from tests.helpers import OUTLET
+
+    hidden = db.query(Product).filter(Product.name == "McSpicy® Paneer").one()
+    row = UnavailableProduct(outlet_id=1, product_id=hidden.id)
+    db.add(row)
+    db.commit()
+    try:
+        everyone = client.get("/catalog").json()["products"]
+        assert hidden.id in {p["id"] for p in everyone}  # no outlet: nothing applied
+
+        ours = client.get("/catalog", params={"outlet": OUTLET}).json()
+        assert hidden.id not in {p["id"] for p in ours["products"]}
+
+        listed = client.get("/products", params={"outlet": OUTLET}).json()
+        assert hidden.id not in {p["id"] for p in listed}
+        assert client.get(f"/products/{hidden.id}", params={"outlet": OUTLET}).status_code == 404
+        assert client.get(f"/products/{hidden.id}").status_code == 200
+
+        assert ours["version"] != client.get("/catalog").json()["version"]
+    finally:
+        db.delete(row)
+        db.commit()
+    assert client.get(f"/products/{hidden.id}", params={"outlet": OUTLET}).status_code == 200
+
+
+def test_an_unknown_outlet_is_not_found(client: TestClient) -> None:
+    for path in ("/catalog", "/products", "/products/1"):
+        assert client.get(path, params={"outlet": "no-such-outlet"}).status_code == 404
+
+
+def test_an_outlet_is_known_by_its_code_with_name_and_address(client: TestClient) -> None:
+    from tests.helpers import OUTLET
+
+    found = client.get(f"/outlets/{OUTLET}")
+    assert found.status_code == 200
+    body = found.json()
+    assert body["code"] == OUTLET and body["name"] and body["address"]
+    assert set(body) == {"code", "name", "address"}
+    assert client.get("/outlets/nope").status_code == 404

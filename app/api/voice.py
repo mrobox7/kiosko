@@ -87,6 +87,7 @@ async def _turn(
     if not chat.lock.acquire(blocking=False):
         await ws.send_json({"type": "error", "message": BUSY})
         return
+    chat.touch()
     try:
         await _utterance(ws, chat, stt, tts, clip, stop)
     except WebSocketDisconnect, RuntimeError:
@@ -94,6 +95,7 @@ async def _turn(
     except Exception:
         logger.exception("Voice turn failed")
     finally:
+        chat.touch()
         chat.lock.release()
 
 

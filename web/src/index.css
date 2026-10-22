@@ -1,7 +1,99 @@
 @import 'tailwindcss';
 
+/* The kiosk's look lives here, as named values ("design tokens"). Components use the names
+   (bg-page, text-ink, bg-accent), never raw colours, so a theme is only a second set of values for
+   the same names. Values follow the reference kiosk redesign; the dark and green ones were read by
+   eye from its mockups. */
+
+/* Colours that change with the theme. */
+:root {
+  --page: #ffffff; /* the screen */
+  --panel: #fbfbf9; /* the order panel */
+  --tile: #f8f8f7; /* tiles, inputs, quiet surfaces */
+  --canvas: #efece5; /* behind the start screen */
+  --surface: #ffffff; /* sheets and dialogs */
+  --ink: #000000;
+  --muted: #7c7a73;
+  --line: #ece9e1;
+  --accent-soft: #fff3d1;
+}
+
+:root[data-theme='dark'] {
+  --page: #000000;
+  --panel: #090909;
+  --tile: #1b1b1b;
+  --canvas: #0b0b0b;
+  --surface: #101010;
+  --ink: #ffffff;
+  --muted: #8e8e8a;
+  --line: #2a2a2a;
+  --accent-soft: #2a2209;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-panel: var(--panel);
+  --color-tile: var(--tile);
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent-soft: var(--accent-soft);
+}
+
+/* Colours that stay the same in both themes. */
+@theme {
+  --font-sans: 'Montserrat Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: ui-serif, Georgia, 'Times New Roman', serif; /* the small "Total" and "Take Out" labels */
+  --color-accent: #ffca40; /* every main button, the plus on steppers, prices */
+  --color-accent-deep: #f2b627;
+  --color-on-accent: #000000; /* text and icons on the accent */
+  --color-promo: #c8161d; /* a highlighted tile, a chip, a chosen category */
+  --color-review: #2b7b3b; /* the order review screen */
+  --color-veg: #1e8e3e;
+  --color-nonveg: #c8161d;
+  --radius-tile: 1.5rem;
+  --radius-key: 0.875rem; /* the rounded-rectangle buttons */
+  --shadow-card: 0 2px 10px rgb(0 0 0 / 0.08);
+  --shadow-lift: 0 10px 30px rgb(0 0 0 / 0.25);
+}
+
 html,
 body,
 #root {
   height: 100%;
+}
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+}
+
+/* Scrolling works by touch and wheel; the bars themselves are hidden, as on a kiosk. */
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

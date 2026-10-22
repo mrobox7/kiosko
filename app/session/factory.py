@@ -10,13 +10,13 @@ from sarvamai import AsyncSarvamAI
 
 from app.agent.loop import AgentLoop
 from app.backend.client import BackendClient
-from app.backend.models import Customer
+from app.backend.errors import BackendError
+from app.backend.models import Outlet
 from app.config import settings
 from app.domain.state import Clock
 from app.guards.rules import RulesGuard
 from app.llm.openai_compat import OpenAICompatLLM
-from app.memory.service import MemoryService
-from app.session.identification import identify
+from app.menu.menu import Menu
 from app.session.session import Session
 from app.speech.base import SpeechToText, StreamingTextToSpeech, TextToSpeech
 from app.speech.sarvam import SarvamSpeechToText, SarvamTextToSpeech, sarvam_http
@@ -32,38 +32,51 @@ class Runtime:
     backend: BackendClient
     loop: AgentLoop
     clock: Clock
+    menu: Menu  # the outlet's whole menu, shared by every chat
+    outlet: Outlet  # its name and address, for the greeting and the prompt
     stt: SpeechToText | None = None  # None when no Sarvam key is set: the UI hides the mic
     tts: TextToSpeech | None = None
     tts_stream: StreamingTextToSpeech | None = None  # speaks sentences as they are written
 
-    def start_session(self, customer: Customer) -> Session:
-        """A fresh chat for an identified customer."""
+    def start_session(self) -> Session:
+        """A fresh chat for the next customer at the lane: one order, nobody identified yet."""
+        self.menu.refresh()  # picks up a menu change before this customer starts
         return Session(
-            customer=customer,
             loop=self.loop,
-            ctx=ToolContext(backend=self.backend, customer_id=customer.id, clock=self.clock),
+            ctx=ToolContext(
+                backend=self.backend,
+                clock=self.clock,
+                outlet_code=settings.outlet_code,
+                menu=self.menu,
+            ),
             guard=RulesGuard(
                 max_chars=settings.max_message_chars,
                 turns_per_min=settings.rate_limit_turns_per_min,
                 token_budget=settings.session_token_budget,
             ),
             clock=self.clock,
-            memory=MemoryService(self.backend),
             summary_turns=settings.summary_turns,
+            menu_outline=self.menu.outline,
+            outlet=self.outlet,
         )
-
-    def login(self, *, name: str = "", phone: str = "", email: str = "") -> Session:
-        """Identify the customer (look up or create) and start their chat."""
-        return self.start_session(identify(self.backend, name=name, phone=phone, email=email))
 
 
 def build_runtime() -> Runtime:
     """Create the shared dependencies from the environment settings."""
     settings.require_llm()
+    settings.require_outlet()
     tz = ZoneInfo(settings.restaurant_timezone)
     backend = BackendClient(
         httpx.Client(base_url=settings.backend_url, timeout=settings.backend_timeout_s)
     )
+    menu = Menu(backend, settings.outlet_code)
+    try:
+        outlet = backend.get_outlet(settings.outlet_code)
+        menu.refresh()  # a wrong OUTLET_CODE or a dead backend stops startup here
+    except BackendError as exc:
+        raise RuntimeError(
+            f"Cannot load outlet {settings.outlet_code} from the backend: {exc}"
+        ) from exc
     llm = OpenAICompatLLM(
         OpenAI(
             base_url=settings.llm_base_url,
@@ -107,4 +120,6 @@ def build_runtime() -> Runtime:
         stt=stt,
         tts=tts,
         tts_stream=tts_stream,
+        menu=menu,
+        outlet=outlet,
     )
