@@ -8,14 +8,14 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, WebSocket
 
+from app.agent.prompts import greeting
 from app.api.kiosk import kiosk_router
 from app.api.schemas import MessageIn, ReplyOut, SessionOut, session_out, trace_of
-from app.api.sessions import Chat, SessionStore
 from app.api.voice import run_voice
 from app.config import settings
-from app.session.factory import Runtime
-from app.session.prompts import greeting
+from app.runtime import Runtime
 from app.session.session import Session, SessionClosed
+from app.session.store import Chat, SessionStore
 
 logger = logging.getLogger(__name__)
 

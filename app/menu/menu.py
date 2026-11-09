@@ -5,27 +5,24 @@ from dataclasses import dataclass
 
 from app.backend.client import BackendClient
 from app.backend.errors import BackendError
-from app.backend.models import MenuCategory, MenuDish
-from app.menu.outline import render_outline
+from app.backend.models import Category, Dish
 
 
 @dataclass(frozen=True)
 class _Loaded:
     version: str
-    categories: tuple[MenuCategory, ...]
-    dishes: tuple[MenuDish, ...]
-    by_id: dict[int, MenuDish]
-    outline: str
+    categories: tuple[Category, ...]
+    dishes: tuple[Dish, ...]
+    by_id: dict[int, Dish]
 
 
 class Menu:
-    """Every dish this outlet is selling, with its questions, meals, nutrition and allergens, and
-    the outline written from it. One `Menu` is shared by all chats. It is reloaded only when the
-    server says the menu changed, so checking it at the start of a chat costs one small request.
+    """Every dish this outlet is selling, with its questions, meals, nutrition and allergens. One
+    `Menu` is shared by all chats. It is reloaded only when the server says the menu changed, so
+    checking it at the start of a chat costs one small request.
 
-    The tools read it for names, ids, choices and filters. The model sees only the outline and
-    whatever a tool returns from it. The server still checks every order, so a dish switched off
-    since the last reload is refused there."""
+    The tools read it for names, ids, choices and filters. The server still checks every order, so
+    a dish switched off since the last reload is refused there."""
 
     def __init__(self, backend: BackendClient, outlet_code: str) -> None:
         self._backend = backend
@@ -45,7 +42,6 @@ class Menu:
                     tuple(catalog.categories),
                     dishes,
                     {d.id: d for d in dishes},
-                    render_outline(dishes),
                 )
         except BackendError:
             if self._loaded is None:
@@ -63,20 +59,15 @@ class Menu:
         return self._held().version
 
     @property
-    def categories(self) -> Sequence[MenuCategory]:
+    def categories(self) -> Sequence[Category]:
         """The menu sections, in menu order."""
         return self._held().categories
 
     @property
-    def dishes(self) -> Sequence[MenuDish]:
+    def dishes(self) -> Sequence[Dish]:
         """Every dish, in menu order. No request, except the very first time."""
         return self._held().dishes
 
-    def dish(self, dish_id: int) -> MenuDish | None:
+    def dish(self, dish_id: int) -> Dish | None:
         """The dish with this id, or None if the outlet is not selling it."""
         return self._held().by_id.get(dish_id)
-
-    @property
-    def outline(self) -> str:
-        """The outline for the system prompt, as of the last reload."""
-        return self._held().outline

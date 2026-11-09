@@ -1,22 +1,23 @@
-"""Owner of chat state: the order, who is ordering, history, usage. One session is one order."""
+"""One chat, over the graph: sends the customer's messages in, reads the order and status out, and
+runs the taps on the kiosk screen. The chat's state lives in the graph's saver, keyed by the
+session's thread id; nothing about the chat is held here."""
 
 import logging
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Literal
+from typing import Any, Literal, cast
 
-from app.agent.events import GuardDecided, LLMCalled, TraceEvent
-from app.agent.loop import AgentLoop
+from langchain_core.runnables import RunnableConfig
+from langgraph.checkpoint.memory import InMemorySaver
+
+from app.agent.graph import Graph
+from app.agent.services import Services
+from app.agent.state import Input, State
+from app.agent.tool_context import run_tool, state_of, tool_context
+from app.agent.trace import TraceEvent
 from app.backend.errors import BackendError
-from app.backend.models import Customer, Outlet
-from app.domain.messages import Message
-from app.domain.results import ToolResult
-from app.domain.state import ActiveOrder, Clock
-from app.guards.base import Guard
-from app.session.context_builder import build_context
-from app.session.prompts import FALLBACK_REPLIES, system_prompt
-from app.session.summary import TurnSummary, render_summary, split_turns, summarise_turn
-from app.tools.base import ToolContext
+from app.backend.models import Customer, Order
+from app.tools.contract import ToolResult
 
 logger = logging.getLogger(__name__)
 
@@ -37,123 +38,83 @@ class Reply:
 
 
 class Session:
-    """One chat. A turn is committed to history only if it ended normally."""
+    """One chat. The API holds a lock around it, so it handles one request at a time."""
 
     def __init__(
-        self,
-        *,
-        loop: AgentLoop,
-        ctx: ToolContext,
-        guard: Guard,
-        clock: Clock,
-        summary_turns: int,
-        menu_outline: str = "",
-        outlet: Outlet | None = None,
+        self, graph: Graph, saver: InMemorySaver, services: Services, thread_id: str
     ) -> None:
-        self.history: list[Message] = []
-        self.tokens_used = 0
-        self._abandoned = False
-        self._loop = loop
-        self._ctx = ctx
-        self._guard = guard
-        self._clock = clock
-        self._summary_turns = summary_turns
-        self._menu_outline = menu_outline  # the menu outline, fixed for this chat
-        self._outlet = outlet
-        self.summary: list[TurnSummary] = []
+        self._graph = graph
+        self._saver = saver
+        self._services = services
+        self._thread_id = thread_id
+        self._final: Status | None = None  # the status the chat ended with, once closed
+        self._config: RunnableConfig = {"configurable": {"thread_id": thread_id}}
+        start: Input = {"kind": "start"}
+        graph.invoke(start, self._config)
+
+    def _state(self) -> State:
+        return cast(State, self._graph.get_state(self._config).values)
 
     @property
-    def order(self) -> ActiveOrder:
-        return self._ctx.order
+    def order(self) -> Order | None:
+        """The order as the ordering server last reported it; None until the first dish."""
+        return self._state().get("order")
 
     @property
     def customer(self) -> Customer | None:
         """Who is ordering, once they have given a phone number."""
-        return self._ctx.caller.customer
+        return self._state().get("customer")
 
     @property
     def status(self) -> Status:
-        """`placed` once the order is confirmed, `abandoned` once the customer left."""
-        if self._ctx.order.placed:
-            return "placed"
-        return "abandoned" if self._abandoned else "open"
+        return self._final or self._state().get("status", "open")
 
     def abandon(self) -> None:
         """The customer left or timed out. Cancels the draft so it is not left open on the
         server. Safe to repeat; a placed order is left alone."""
-        if self.status != "open":
+        state = self._state()
+        if state.get("status", "open") != "open":
             return
-        self._abandoned = True
-        order_id = self._ctx.order.order_id
-        if order_id is None:
-            return
-        try:
-            self._ctx.order.latest = self._ctx.backend.cancel_order(order_id)
-        except BackendError:
-            logger.warning("Could not cancel order %s when its chat ended", order_id)
+        changes: dict[str, Any] = {"status": "abandoned"}
+        order = state.get("order")
+        if order is not None:
+            try:
+                changes["order"] = self._services.backend.cancel_order(order.id)
+            except BackendError:
+                logger.warning("Could not cancel order %s when its chat ended", order.id)
+        self._graph.update_state(self._config, changes, as_node="commit")
+
+    def close(self) -> None:
+        """Forget the chat's saved state. The chat keeps its final status."""
+        self._final = self.status
+        self._saver.delete_thread(self._thread_id)
 
     def act(self, tool: str, args: dict[str, Any]) -> ToolResult:
-        """Run a tool for a touch on the kiosk screen, with no model call. The order the chat
-        shows the model comes from the same state, so the next message already sees the change."""
-        if self.status != "open":
-            raise SessionClosed(self.status)
-        return self._loop.act(tool, args, self._ctx)
+        """Run a tool for a touch on the kiosk screen, with no model call and no history entry.
+        The state is updated the way a turn would, so the next message already sees the change."""
+        state = self._state()
+        if (status := state.get("status", "open")) != "open":
+            raise SessionClosed(status)
+        result, ctx = run_tool(tool, args, tool_context(state, self._services))
+        changes = state_of(ctx)
+        if tool == "place_order" and result.ok:
+            changes |= {"status": "placed", "items": []}
+        self._graph.update_state(self._config, changes, as_node="commit")
+        return result
 
     def send(
         self, text: str, *, spoken: bool = False, on_text: Callable[[str], None] | None = None
     ) -> Reply:
         """Answer one customer message. `spoken` marks dictated text that will be read aloud.
         With `on_text`, reply text is passed on as it is written, before the turn ends."""
-        if self.status != "open":
-            raise SessionClosed(self.status)
-        events: list[TraceEvent] = []
-        now = self._clock()
-        decision = self._guard.check(text, now=now, tokens_used=self.tokens_used)
-        events.append(GuardDecided(action=decision.action, reason=decision.reason))
-        if decision.action == "refuse":
-            return Reply(text=decision.reply, events=events, stop_reason="refused")
-
-        user = Message(role="user", text=text)
-        earlier, messages = self._context()
-        # The context is its own system message right before the customer's text. It is sent
-        # to the model but never stored in history.
-        context = Message(
-            role="system",
-            text=build_context(now, self._ctx.order, self._ctx.caller, earlier, spoken),
+        if (status := self.status) != "open":
+            raise SessionClosed(status)
+        message: Input = {"kind": "message", "user_text": text, "spoken": spoken}
+        out = self._graph.invoke(
+            message,
+            self._config,
+            context={"on_text": on_text} if on_text else None,
         )
-        result = self._loop.run(
-            system_prompt(self._menu_outline, self._outlet),
-            [*messages, context, user],
-            self._ctx,
-            events.append,
-            on_text,
+        return Reply(
+            text=out["reply"].strip(), events=out["events"], stop_reason=out["stop_reason"]
         )
-
-        self.tokens_used += sum(
-            e.input_tokens + e.output_tokens for e in events if isinstance(e, LLMCalled)
-        )
-        if result.stop_reason == "answered" and result.text.strip():
-            self.history.extend([user, *result.new_messages])
-            self.summary.append(
-                summarise_turn(len(self.summary) + 1, text, result.new_messages, result.text)
-            )
-            return Reply(text=result.text.strip(), events=events, stop_reason="answered")
-
-        # Failed turn: drop it, but never hide writes that already happened.
-        reply = FALLBACK_REPLIES[result.stop_reason]
-        if result.changes:
-            reply = f"{reply} Changes already made: {'; '.join(result.changes)}."
-        return Reply(text=reply, events=events, stop_reason=result.stop_reason)
-
-    def _context(self) -> tuple[str, list[Message]]:
-        """History as the model sees it: of the last k turns before the latest, those that called
-        tools become summary entries and chat-only ones stay word for word (they are cheap, and an
-        answer stays next to its question). The latest turn is always word for word."""
-        turns = split_turns(self.history)
-        if not turns:
-            return "", []
-        earlier, latest = turns[:-1], turns[-1]
-        recent = range(max(0, len(earlier) - self._summary_turns), len(earlier))
-        summarised = [self.summary[i] for i in recent if self.summary[i].used_tools]
-        verbatim = [m for i in recent if not self.summary[i].used_tools for m in earlier[i]]
-        return render_summary(summarised), [*verbatim, *latest]

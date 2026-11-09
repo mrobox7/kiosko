@@ -7,16 +7,17 @@ import pytest
 from fastapi.testclient import TestClient
 from starlette.websockets import WebSocketDisconnect
 
+from app.agent.nodes.respond import CLOSING
 from app.api.app import create_app
 from app.api.voice import BUSY, NOT_HEARD, SILENCE
-from app.domain.messages import ToolCall
-from app.llm.base import LLMResponse
-from app.llm.fake import FakeLLM
+from app.llm.contract import LLMResponse
 from app.session.session import Session
-from app.speech.base import SpeechError, Transcript
-from app.speech.fake import FAKE_MIME, FakeSpeechToText, FakeStreamingTextToSpeech
-from tests.support.builders import chat_texts, make_runtime
+from app.speech.contract import SpeechError, Transcript
+from tests.support.builders import make_runtime, plan, say
+from tests.support.fake_llm import FakeLLM
+from tests.support.fake_speech import FAKE_MIME, FakeSpeechToText, FakeStreamingTextToSpeech
 
+CHAT = {"type": "chat"}
 HEARD = Transcript(text="a burger please", language="en-IN")
 
 
@@ -60,7 +61,7 @@ def until_reply(ws: Any) -> list[dict[str, Any]]:
 
 
 def test_one_utterance_streams_what_was_heard_the_audio_and_the_reply() -> None:
-    rig = Rig([LLMResponse(text="Booked. See you then!")], [HEARD])
+    rig = Rig([plan(CHAT), say("Booked. See you then!")], [HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_bytes(b"RIFF-clip")
         assert ws.receive_json() == {
@@ -74,14 +75,12 @@ def test_one_utterance_streams_what_was_heard_the_audio_and_the_reply() -> None:
     assert done["type"] == "reply" and done["text"] == "Booked. See you then!"
     assert done["stop_reason"] == "answered" and done["speech_error"] is None
     assert isinstance(done["first_audio_ms"], int) and done["trace"][0]["event"] == "GuardDecided"
-    assert chat_texts(rig.session.history) == [
-        ("user", "a burger please"),
-        ("assistant", "Booked. See you then!"),
-    ]
+    turn = rig.session._state()["history"][-1]
+    assert (turn.user, turn.reply) == ("a burger please", "Booked. See you then!")
 
 
 def test_the_clip_goes_to_speech_to_text_as_wav_and_the_language_to_the_voice() -> None:
-    rig = Rig([LLMResponse(text="Hi.")], [Transcript(text="namaste", language="hi-IN")])
+    rig = Rig([plan(CHAT), say("Hi.")], [Transcript(text="namaste", language="hi-IN")])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_bytes(b"clip-bytes")
         until_reply(ws)
@@ -92,20 +91,21 @@ def test_the_clip_goes_to_speech_to_text_as_wav_and_the_language_to_the_voice() 
 
 
 def test_a_voice_turn_can_order_and_the_order_shows_in_the_session() -> None:
-    order = LLMResponse(
-        tool_calls=[ToolCall(id="c", name="add_to_order", arguments={"dish_id": 4, "quantity": 2})]
-    )
-    rig = Rig([order, LLMResponse(text="Two tikki burgers.")], [HEARD])
+    order = plan({"type": "add_item", "dish": "McAloo Tikki Burger", "quantity": 2})
+    rig = Rig([order, say("Two tikki burgers.")], [HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_bytes(b"clip")
         events = until_reply(ws)
-    assert events[-1]["text"] == "Two tikki burgers."
+    assert events[-1]["text"] == (  # the words are the model's, the summary after them is code's
+        "Two tikki burgers. You have two McAloo Tikki. The total is one hundred sixty rupees. "
+        + CLOSING
+    )
     shown = rig.client.get(f"/api/sessions/{rig.sid}").json()["order"]
     assert [(i["name"], i["quantity"]) for i in shown["lines"]] == [("McAloo Tikki", 2)]
 
 
 def test_a_clip_that_cannot_be_transcribed_is_reported_and_the_socket_stays_open() -> None:
-    rig = Rig([LLMResponse(text="Hello.")], [SpeechError("bad audio"), HEARD])
+    rig = Rig([plan(CHAT), say("Hello.")], [SpeechError("bad audio"), HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_bytes(b"noise")
         assert ws.receive_json() == {"type": "error", "message": NOT_HEARD}
@@ -121,7 +121,7 @@ def test_an_empty_transcript_is_reported_as_silence() -> None:
 
 
 def test_text_frames_are_ignored() -> None:
-    rig = Rig([LLMResponse(text="Hi.")], [HEARD])
+    rig = Rig([plan(CHAT), say("Hi.")], [HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_text("hello?")
         ws.send_bytes(b"clip")
@@ -142,7 +142,7 @@ def test_an_utterance_while_a_reply_is_being_written_is_turned_away() -> None:
 
 def test_a_speech_failure_still_delivers_the_reply_text() -> None:
     rig = Rig(
-        [LLMResponse(text="Done.")],
+        [plan(CHAT), say("Done.")],
         [HEARD],
         FakeStreamingTextToSpeech(error=SpeechError("tts down")),
     )
@@ -181,7 +181,7 @@ HEARD_AGAIN = Transcript(text="make it eight", language="en-IN")
 
 def test_an_interrupt_cuts_the_speech_off_and_the_reply_text_still_arrives() -> None:
     rig = Rig(
-        [LLMResponse(text="One. Two. Three.")],
+        [plan(CHAT), say("One. Two. Three.")],
         [HEARD],
         FakeStreamingTextToSpeech(hang_after=1),  # a slow voice: stalls after the first sentence
     )
@@ -195,7 +195,7 @@ def test_an_interrupt_cuts_the_speech_off_and_the_reply_text_still_arrives() -> 
     assert done["type"] == "reply" and done["interrupted"] is True
     assert done["text"] == "One. Two. Three."  # the turn itself finished and is shown
     assert rig.tts.closed
-    assert chat_texts(rig.session.history)[-1] == ("assistant", "One. Two. Three.")
+    assert rig.session._state()["history"][-1].reply == "One. Two. Three."
 
 
 def next_event(ws: Any) -> dict[str, Any]:
@@ -210,7 +210,7 @@ def test_a_clip_sent_right_after_an_interrupt_waits_for_the_cut_off_turn_instead
     None
 ):
     rig = Rig(
-        [LLMResponse(text="One. Two."), LLMResponse(text="Eight it is.")],
+        [plan(CHAT), say("One. Two."), plan(CHAT), say("Eight it is.")],
         [HEARD, HEARD_AGAIN],
         FakeStreamingTextToSpeech(hang_after=1),
     )
@@ -230,7 +230,7 @@ def test_a_clip_sent_right_after_an_interrupt_waits_for_the_cut_off_turn_instead
 
 
 def test_an_interrupt_when_nothing_is_running_is_ignored() -> None:
-    rig = Rig([LLMResponse(text="Hi.")], [HEARD])
+    rig = Rig([plan(CHAT), say("Hi.")], [HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_json({"type": "interrupt"})
         ws.send_text("not json at all")
@@ -240,7 +240,7 @@ def test_an_interrupt_when_nothing_is_running_is_ignored() -> None:
 
 
 def test_an_interrupt_does_not_carry_over_to_the_next_turn() -> None:
-    rig = Rig([LLMResponse(text="Hi.")], [HEARD])
+    rig = Rig([plan(CHAT), say("Hi.")], [HEARD])
     with rig.client.websocket_connect(rig.url) as ws:
         ws.send_json({"type": "interrupt"})  # nothing to interrupt yet
         ws.send_bytes(b"clip")

@@ -13,10 +13,10 @@ from app.backend.errors import (
     BackendUnavailable,
 )
 from app.backend.models import (
+    Catalog,
     Customer,
-    DriveThruOrder,
     Favourite,
-    MenuCatalog,
+    Order,
     Outlet,
 )
 
@@ -97,10 +97,6 @@ class BackendClient:
         except ValueError as exc:
             raise BackendError("Backend returned invalid JSON", status) from exc
 
-    def get_customer(self, customer_id: int) -> Customer:
-        """GET /customers/{id}."""
-        return Customer.model_validate(self._request("GET", f"/customers/{customer_id}"))
-
     def patch_preferences(self, customer_id: int, preferences: dict[str, Any]) -> Customer:
         """PATCH /customers/{id}/preferences. The backend merges shallowly, so callers
         send every top-level key they want to keep."""
@@ -108,32 +104,32 @@ class BackendClient:
         data = self._request("PATCH", f"/customers/{customer_id}/preferences", body=body)
         return Customer.model_validate(data)
 
-    def create_order(self, outlet_code: str, customer_id: int | None = None) -> DriveThruOrder:
+    def create_order(self, outlet_code: str, customer_id: int | None = None) -> Order:
         """POST /orders: start an empty draft order, for a customer if one is known."""
         body: dict[str, Any] = {"outlet": outlet_code}
         if customer_id is not None:
             body["customer_id"] = customer_id
-        return DriveThruOrder.model_validate(self._request("POST", "/orders", body=body))
+        return Order.model_validate(self._request("POST", "/orders", body=body))
 
-    def get_order(self, order_id: int) -> DriveThruOrder:
+    def get_order(self, order_id: int) -> Order:
         """GET /orders/{id}: the order as it stands, whatever its status."""
-        return DriveThruOrder.model_validate(self._request("GET", f"/orders/{order_id}"))
+        return Order.model_validate(self._request("GET", f"/orders/{order_id}"))
 
-    def cancel_order(self, order_id: int) -> DriveThruOrder:
+    def cancel_order(self, order_id: int) -> Order:
         """DELETE /orders/{id}: abandon a draft. Safe to repeat; a placed order is a conflict."""
-        return DriveThruOrder.model_validate(self._request("DELETE", f"/orders/{order_id}"))
+        return Order.model_validate(self._request("DELETE", f"/orders/{order_id}"))
 
-    def set_line_quantity(self, order_id: int, line_id: int, quantity: int) -> DriveThruOrder:
+    def set_line_quantity(self, order_id: int, line_id: int, quantity: int) -> Order:
         """PATCH /orders/{id}/lines/{line_id}: change how many; the line keeps its id."""
         body = {"quantity": quantity}
         path = f"/orders/{order_id}/lines/{line_id}"
-        return DriveThruOrder.model_validate(self._request("PATCH", path, body=body))
+        return Order.model_validate(self._request("PATCH", path, body=body))
 
-    def attach_customer(self, order_id: int, customer_id: int) -> DriveThruOrder:
+    def attach_customer(self, order_id: int, customer_id: int) -> Order:
         """PUT /orders/{id}/customer: put a draft on a customer identified after it began."""
         body = {"customer_id": customer_id}
         path = f"/orders/{order_id}/customer"
-        return DriveThruOrder.model_validate(self._request("PUT", path, body=body))
+        return Order.model_validate(self._request("PUT", path, body=body))
 
     def find_or_add_customer(self, phone: str) -> Customer:
         """POST /customers: the customer with this mobile number, added if new. Only the number
@@ -145,19 +141,19 @@ class BackendClient:
         data = self._request("GET", f"/customers/{customer_id}/favourites", params={"limit": limit})
         return [Favourite.model_validate(f) for f in data]
 
-    def add_order_line(self, order_id: int, line: dict[str, Any]) -> DriveThruOrder:
+    def add_order_line(self, order_id: int, line: dict[str, Any]) -> Order:
         """POST /orders/{id}/lines. A 422 carries `missing` and `problems` in its message."""
         data = self._request("POST", f"/orders/{order_id}/lines", body=line)
-        return DriveThruOrder.model_validate(data)
+        return Order.model_validate(data)
 
-    def remove_order_line(self, order_id: int, line_id: int) -> DriveThruOrder:
+    def remove_order_line(self, order_id: int, line_id: int) -> Order:
         """DELETE /orders/{id}/lines/{line_id}."""
         data = self._request("DELETE", f"/orders/{order_id}/lines/{line_id}")
-        return DriveThruOrder.model_validate(data)
+        return Order.model_validate(data)
 
-    def confirm_order(self, order_id: int) -> DriveThruOrder:
+    def confirm_order(self, order_id: int) -> Order:
         """POST /orders/{id}/confirm: freeze the draft and give it its number."""
-        return DriveThruOrder.model_validate(self._request("POST", f"/orders/{order_id}/confirm"))
+        return Order.model_validate(self._request("POST", f"/orders/{order_id}/confirm"))
 
     def get_outlet(self, outlet_code: str) -> Outlet:
         """GET /outlets/{code}: the outlet's name and address."""
@@ -168,8 +164,8 @@ class BackendClient:
         data = self._request("GET", "/catalog/version", params={"outlet": outlet_code})
         return str(data["version"])
 
-    def get_catalog(self, outlet_code: str) -> MenuCatalog:
+    def get_catalog(self, outlet_code: str) -> Catalog:
         """GET /catalog: what this outlet is selling now, every dish with its questions, meals,
         nutrition and allergens, and the menu's version."""
         data = self._request("GET", "/catalog", params={"outlet": outlet_code})
-        return MenuCatalog.model_validate(data)
+        return Catalog.model_validate(data)

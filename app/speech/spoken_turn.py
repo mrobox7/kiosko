@@ -10,7 +10,7 @@ from collections.abc import AsyncIterator, Awaitable, Callable
 from dataclasses import dataclass
 
 from app.session.session import Reply, Session
-from app.speech.base import Audio, SpeechError, StreamingTextToSpeech
+from app.speech.contract import Audio, SpeechError, StreamingTextToSpeech
 from app.speech.sentences import SentenceFeed
 
 logger = logging.getLogger(__name__)

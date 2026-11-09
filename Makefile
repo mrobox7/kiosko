@@ -1,4 +1,4 @@
-.PHONY: install api web check lint types test fmt request
+.PHONY: install api web check lint types test fmt
 .DEFAULT_GOAL := help
 
 help:  ## Show targets
@@ -26,6 +26,3 @@ types:  ## Mypy
 
 test:  ## Pytest (offline)
 	uv run pytest -q
-
-request:  ## Print a scripted order's model requests with token counts: make request CATALOG=catalog.json
-	uv run --with tiktoken python -m tests.show_request $(CATALOG)

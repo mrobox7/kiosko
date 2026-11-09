@@ -5,10 +5,9 @@ import time
 from fastapi.testclient import TestClient
 
 from app.api.app import create_app
-from app.domain.messages import ToolCall
-from app.llm.base import LLMResponse
-from app.llm.fake import FakeLLM
-from tests.support.builders import make_runtime
+from app.llm.contract import LLMResponse
+from tests.support.builders import make_runtime, plan, say
+from tests.support.fake_llm import FakeLLM
 from tests.support.fake_order_server import FakeOrderServer
 
 TIKKI = {"dish_id": 4, "options": [{"option_id": 1}]}  # McAloo Tikki with ketchup
@@ -96,7 +95,7 @@ def test_an_unknown_session_is_not_found() -> None:
 
 
 def test_the_assistant_sees_what_was_tapped_and_no_model_call_is_made() -> None:
-    client, sid, llm = kiosk(LLMResponse(text="Two, then."))
+    client, sid, llm = kiosk(plan({"type": "chat"}), say("Two, then."))
     client.post(f"/api/sessions/{sid}/lines", json=TIKKI)
     assert llm.calls == []  # a tap never calls the model
     client.post(f"/api/sessions/{sid}/messages", json={"text": "what do I have?"})
@@ -105,16 +104,8 @@ def test_the_assistant_sees_what_was_tapped_and_no_model_call_is_made() -> None:
 
 
 def test_a_tap_and_a_chat_change_the_same_order() -> None:
-    add = LLMResponse(
-        tool_calls=[
-            ToolCall(
-                id="c",
-                name="add_to_order",
-                arguments={"dish_id": 6, "options": [{"option_id": 60}]},
-            )
-        ]
-    )
-    client, sid, _ = kiosk(add, LLMResponse(text="Added."))
+    add = plan({"type": "add_item", "dish": "Float", "options": ["Flavour 0"]})
+    client, sid, _ = kiosk(add, say("Added."))
     client.post(f"/api/sessions/{sid}/lines", json=TIKKI)
     client.post(f"/api/sessions/{sid}/messages", json={"text": "and a float"})
     lines = client.get(f"/api/sessions/{sid}").json()["order"]["lines"]

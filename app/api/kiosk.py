@@ -7,10 +7,10 @@ from typing import Any
 from fastapi import APIRouter, HTTPException
 
 from app.api.schemas import LineIn, MenuOut, QuantityIn, SessionOut
-from app.api.sessions import Chat
-from app.domain.results import BACKEND_UNAVAILABLE
-from app.session.factory import Runtime
+from app.runtime import Runtime
 from app.session.session import Session, SessionClosed
+from app.session.store import Chat
+from app.tools.contract import BACKEND_UNAVAILABLE
 
 
 def kiosk_router(

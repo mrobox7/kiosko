@@ -1,4 +1,4 @@
-"""Exceptions raised by BackendClient (PLAN.md section 4)."""
+"""Exceptions raised by BackendClient."""
 
 from typing import Any
 

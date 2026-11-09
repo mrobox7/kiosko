@@ -1,4 +1,4 @@
-"""Settings read from the environment (see PLAN.md section 3)."""
+"""Settings read from the environment."""
 
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -25,11 +25,7 @@ class Settings(BaseSettings):
     sarvam_tts_speaker: str = "shubh"
     sarvam_tts_pace: float = 1.0
     sarvam_tts_temperature: float = 0.6
-    max_iterations: int = 16
-    max_tool_calls_per_turn: int = 24
-    tool_result_max_chars: int = 4000
     max_message_chars: int = 1000
-    summary_turns: int = 3
     rate_limit_turns_per_min: int = 10
     session_token_budget: int = 200_000
     idle_timeout_s: float = 180  # seconds; an idle chat is ended and its draft cancelled

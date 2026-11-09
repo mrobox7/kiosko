@@ -5,10 +5,9 @@ import time
 from fastapi.testclient import TestClient
 
 from app.api.app import create_app
-from app.domain.messages import ToolCall
-from app.llm.base import LLMResponse
-from app.llm.fake import FakeLLM
-from tests.support.builders import make_runtime
+from app.llm.contract import LLMResponse
+from tests.support.builders import make_runtime, plan, say
+from tests.support.fake_llm import FakeLLM
 from tests.support.fake_order_server import FakeOrderServer
 
 
@@ -34,20 +33,20 @@ def test_starting_a_session_needs_no_login_and_greets_an_unknown_customer() -> N
 
 
 def test_a_message_gets_a_reply_and_a_trace() -> None:
-    client, _ = client_with(LLMResponse(text="Hello."))
+    client, _ = client_with(plan({"type": "chat"}), say("Hello."))
     sid = start(client)["session_id"]
     response = client.post(f"/api/sessions/{sid}/messages", json={"text": "hi"})
     body = response.json()
     assert response.status_code == 200 and body["text"] == "Hello."
     assert body["stop_reason"] == "answered"
-    assert [e["event"] for e in body["trace"]][:2] == ["GuardDecided", "TurnStarted"]
+    events = [e["event"] for e in body["trace"]]
+    assert events[:2] == ["GuardDecided", "LLMCalled"] and "ItemsRecorded" in events
+    assert events[-1] == "TurnEnded"
 
 
 def test_an_order_shows_up_in_the_session_afterwards() -> None:
-    add = LLMResponse(
-        tool_calls=[ToolCall(id="c", name="add_to_order", arguments={"dish_id": 4, "quantity": 2})]
-    )
-    client, _ = client_with(add, LLMResponse(text="Added."))
+    add = plan({"type": "add_item", "dish": "McAloo Tikki Burger", "quantity": 2})
+    client, _ = client_with(add, say("Added."))
     sid = start(client)["session_id"]
     assert client.get(f"/api/sessions/{sid}").json()["order"] is None
     client.post(f"/api/sessions/{sid}/messages", json={"text": "two tikki burgers"})
@@ -60,13 +59,14 @@ def test_an_order_shows_up_in_the_session_afterwards() -> None:
 
 def test_a_placed_order_closes_the_session_and_shows_its_number() -> None:
     steps = [
-        LLMResponse(tool_calls=[ToolCall(id="a", name="add_to_order", arguments={"dish_id": 4})]),
-        LLMResponse(tool_calls=[ToolCall(id="p", name="place_order", arguments={})]),
-        LLMResponse(text="Your number is 14."),
-    ]
+        plan({"type": "add_item", "dish": "McAloo Tikki Burger"}), say("Added."),
+        plan({"type": "read_back"}), say("Shall I place it?"),
+        plan({"type": "place_order"}), say("Your number is 14."),
+    ]  # fmt: skip
     client, _ = client_with(*steps)
     sid = start(client)["session_id"]
-    client.post(f"/api/sessions/{sid}/messages", json={"text": "one tikki, place it"})
+    for text in ("one tikki", "that's all", "yes"):
+        client.post(f"/api/sessions/{sid}/messages", json={"text": text})
     shown = client.get(f"/api/sessions/{sid}").json()
     assert shown["status"] == "placed" and shown["order"]["order_number"] == 14
     again = client.post(f"/api/sessions/{sid}/messages", json={"text": "and a coke"})
@@ -78,7 +78,7 @@ def test_an_empty_message_is_rejected_and_a_blank_one_is_refused_by_the_guard() 
     sid = start(client)["session_id"]
     assert client.post(f"/api/sessions/{sid}/messages", json={"text": ""}).status_code == 422
     blank = client.post(f"/api/sessions/{sid}/messages", json={"text": "   "}).json()
-    assert blank["stop_reason"] == "refused"
+    assert blank["stop_reason"] == "empty"
 
 
 def test_unknown_sessions_are_not_found() -> None:
@@ -88,7 +88,7 @@ def test_unknown_sessions_are_not_found() -> None:
 
 
 def test_a_second_message_while_a_reply_is_being_written_is_turned_away() -> None:
-    client, _ = client_with(LLMResponse(text="x"))
+    client, _ = client_with(plan({"type": "chat"}), say("x"))
     sid = start(client)["session_id"]
     lock = client.app.state.store.get(sid).lock
     lock.acquire()  # what a running turn holds
@@ -107,8 +107,8 @@ def test_each_customer_gets_their_own_session_and_order() -> None:
 
 
 def test_ending_a_session_cancels_its_draft_and_forgets_it() -> None:
-    add = LLMResponse(tool_calls=[ToolCall(id="c", name="add_to_order", arguments={"dish_id": 4})])
-    client, server = client_with(add, LLMResponse(text="Added."))
+    add = plan({"type": "add_item", "dish": "McAloo Tikki Burger"})
+    client, server = client_with(add, say("Added."))
     sid = start(client)["session_id"]
     client.post(f"/api/sessions/{sid}/messages", json={"text": "one tikki"})
     assert client.delete(f"/api/sessions/{sid}").status_code == 204

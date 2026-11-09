@@ -5,8 +5,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
-from app.agent.events import TraceEvent
-from app.backend.models import MenuCategory, MenuDish, Outlet
+from app.agent.trace import TraceEvent
+from app.backend.models import Category, Dish, Outlet
 from app.session.session import Session
 
 
@@ -82,7 +82,7 @@ def session_out(
     greeting: str | None = None,
 ) -> SessionOut:
     """Describe a chat's session for the page."""
-    customer, latest = session.customer, session.order.latest
+    customer, latest = session.customer, session.order
     return SessionOut(
         session_id=session_id,
         status=session.status,
@@ -147,5 +147,5 @@ class MenuOut(BaseModel):
 
     version: str
     outlet: Outlet
-    categories: list[MenuCategory]
-    dishes: list[MenuDish]
+    categories: list[Category]
+    dishes: list[Dish]

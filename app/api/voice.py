@@ -23,8 +23,8 @@ from typing import Any
 from fastapi import WebSocket, WebSocketDisconnect
 
 from app.api.schemas import trace_of
-from app.api.sessions import Chat
-from app.speech.base import Audio, SpeechError, SpeechToText, StreamingTextToSpeech
+from app.session.store import Chat
+from app.speech.contract import Audio, SpeechError, SpeechToText, StreamingTextToSpeech
 from app.speech.spoken_turn import speak_turn
 
 logger = logging.getLogger(__name__)

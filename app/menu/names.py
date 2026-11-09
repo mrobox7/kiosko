@@ -1,4 +1,5 @@
-"""How dish and option names are written for the model and compared when it sends them back."""
+"""Helper functions for menu text: how dish and option names are written for the model, and compared
+when it sends them back."""
 
 import re
 

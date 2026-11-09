@@ -16,7 +16,7 @@ from sarvamai.types.error_response import ErrorResponse
 from sarvamai.types.event_response import EventResponse
 from websockets.exceptions import WebSocketException
 
-from app.speech.base import Audio, SpeechError
+from app.speech.contract import Audio, SpeechError
 from app.speech.sarvam import DEFAULT_TTS_LANGUAGE, TTS_MAX_CHARS
 
 logger = logging.getLogger(__name__)

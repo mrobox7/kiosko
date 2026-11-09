@@ -9,7 +9,7 @@ from typing import Any
 
 import httpx
 
-from app.speech.base import Audio, SpeechError, Transcript
+from app.speech.contract import Audio, SpeechError, Transcript
 
 logger = logging.getLogger(__name__)
 

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -13,6 +13,18 @@ class Customer(BaseModel):
     preferences: dict[str, Any] = Field(default_factory=dict)
 
 
+# The allergens the menu data lists, in the server's words (milk is dairy).
+Allergen = Literal["milk", "gluten", "egg", "soy", "fish"]
+
+
+def allergies_on_file(customer: Customer | None) -> list[str]:
+    """The allergies saved on a customer's record, as words such as "milk"."""
+    if customer is None:
+        return []
+    saved = customer.preferences.get("allergies", [])
+    return [saved] if isinstance(saved, str) else [str(a) for a in saved]
+
+
 class Favourite(BaseModel):
     """A dish this customer has ordered before (the server's Favourite)."""
 
@@ -22,7 +34,7 @@ class Favourite(BaseModel):
     total_quantity: int
 
 
-class DriveThruLine(BaseModel):
+class Line(BaseModel):
     """One line of a drive-thru order: a dish with its choices (the server's order line)."""
 
     id: int
@@ -35,20 +47,20 @@ class DriveThruLine(BaseModel):
     line_total: float  # for the whole line, before tax
 
 
-class DriveThruOrder(BaseModel):
+class Order(BaseModel):
     """A drive-thru order, draft or placed."""
 
     id: int
     status: str  # draft | confirmed | cancelled
     customer_id: int | None = None
     order_number: int | None = None
-    lines: list[DriveThruLine] = Field(default_factory=list)
+    lines: list[Line] = Field(default_factory=list)
     subtotal: float
     gst: float
     total: float
 
 
-class MenuOption(BaseModel):
+class Option(BaseModel):
     """One answer to a question about a dish (a sauce, a meal side, a drink)."""
 
     id: int
@@ -57,26 +69,26 @@ class MenuOption(BaseModel):
     is_default: bool = False  # taken when a required question is left unanswered
 
 
-class MenuOptionGroup(BaseModel):
+class OptionGroup(BaseModel):
     """A question about a dish. `min_select` of 1 or more means it must be answered."""
 
     id: int
     name: str
     min_select: int
     max_select: int
-    options: list[MenuOption]
+    options: list[Option]
 
 
-class MenuMealOffer(BaseModel):
+class MealOffer(BaseModel):
     """'Make it a meal': a size, its extra price, and the side and drink questions it adds."""
 
     size: str  # Medium | Large
     price_delta: float
-    side: MenuOptionGroup | None = None  # a Large meal has no side question
-    drink: MenuOptionGroup
+    side: OptionGroup | None = None  # a Large meal has no side question
+    drink: OptionGroup
 
 
-class MenuDish(BaseModel):
+class Dish(BaseModel):
     """One dish with everything the customer can choose, as the server's catalog lists it."""
 
     id: int
@@ -89,8 +101,8 @@ class MenuDish(BaseModel):
     tags: list[str] = Field(default_factory=list)  # e.g. "bestseller"
     nutrition: dict[str, Any] = Field(default_factory=dict)  # calories_kcal, protein_g, ...
     allergens: list[str] = Field(default_factory=list)  # empty means none listed
-    option_groups: list[MenuOptionGroup] = Field(default_factory=list)
-    meal_offers: list[MenuMealOffer] = Field(default_factory=list)
+    option_groups: list[OptionGroup] = Field(default_factory=list)
+    meal_offers: list[MealOffer] = Field(default_factory=list)
     image_url: str | None = None  # a path on the ordering server, for the kiosk screen only
 
 
@@ -102,16 +114,16 @@ class Outlet(BaseModel):
     address: str
 
 
-class MenuCategory(BaseModel):
+class Category(BaseModel):
     """A menu section. `slug` is what a dish's `category` holds."""
 
     slug: str
     name: str
 
 
-class MenuCatalog(BaseModel):
+class Catalog(BaseModel):
     """The outlet's whole menu (GET /catalog). `version` changes whenever anything in it does."""
 
     version: str
-    categories: list[MenuCategory] = Field(default_factory=list)
-    dishes: list[MenuDish] = Field(alias="products")
+    categories: list[Category] = Field(default_factory=list)
+    dishes: list[Dish] = Field(alias="products")
