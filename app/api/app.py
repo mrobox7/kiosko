@@ -46,7 +46,7 @@ def create_app(runtime: Runtime, idle_timeout_s: float | None = None) -> FastAPI
         yield
         sweeper.cancel()
 
-    app = FastAPI(title="DishPatch", lifespan=lifespan)
+    app = FastAPI(title="Kiosko", lifespan=lifespan)
     stt, tts = runtime.stt, runtime.tts_stream
     voice = stt is not None and tts is not None
     app.state.store = store  # for tests and tooling

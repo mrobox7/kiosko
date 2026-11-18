@@ -1,4 +1,4 @@
-# DishPatch
+# Kiosko
 
 Drive-thru ordering agent. Each customer message runs one LangGraph turn (`app/agent/graph.py`):
 guard (plain code), supervisor (one model call that records what the customer asked for as typed
@@ -47,7 +47,7 @@ Packages depend one way: `llm`, `backend` -> `menu` -> `tools` -> `agent` -> `se
 The page is a drive-thru kiosk styled after the reference redesign (`~/Downloads/mcd_ui_ref`): touch
 to start, a home screen with category tiles and popular dishes, "My Order" always beside the menu,
 a sheet per dish for its meal and options, then a green review screen before the order is placed.
-"Ask DishPatch" opens the chat and voice assistant over the same order, so taps and talk can be
+"Ask Kiosko" opens the chat and voice assistant over the same order, so taps and talk can be
 mixed. It works in landscape and portrait, in light and dark (dark at night by the clock, or the
 switch on the start screen). Colours, radii and fonts are named values in `web/src/index.css`;
 the logo is `web/public/logo.png`.

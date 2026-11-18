@@ -1,4 +1,4 @@
-# DishPatch: rules for Claude
+# Kiosko: rules for Claude
 
 ## Never without explicit permission
 Ask first, say what the action will touch, and wait for a yes. A yes covers that one action, not later ones.

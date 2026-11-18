@@ -6,7 +6,7 @@ import { Avatar } from './Avatar'
 import { Composer, type VoiceControls } from './Composer'
 import { MessageList } from './MessageList'
 
-/** DishPatch, the assistant: ask about the menu or say what you want, by typing or by voice.
+/** Kiosko, the assistant: ask about the menu or say what you want, by typing or by voice.
  * It works on the same order as the touch screen. */
 export function AssistantPanel({
   open,
@@ -28,12 +28,12 @@ export function AssistantPanel({
   onClose: () => void
 }) {
   return (
-    <Sheet open={open} label="Ask DishPatch" onClose={onClose}>
+    <Sheet open={open} label="Ask Kiosko" onClose={onClose}>
       <div className="flex h-[85dvh] flex-col landscape:h-[80dvh]">
         <header className="flex items-center gap-3 border-b border-line px-4 py-3">
           <Avatar who="assistant" />
           <div className="flex-1 leading-tight">
-            <h2 className="text-lg font-bold">Ask DishPatch</h2>
+            <h2 className="text-lg font-bold">Ask Kiosko</h2>
             <p className="text-sm text-muted">Your order is the same as on the screen</p>
           </div>
           <IconButton label="Close assistant" onClick={onClose}>

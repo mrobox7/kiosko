@@ -176,4 +176,4 @@ def outlet_line(outlet: Outlet) -> str:
 
 def greeting(outlet_name: str) -> str:
     """The opening line of a new chat. Shown by the page only; the model never sees it."""
-    return f"Welcome to {outlet_name}! I'm DishPatch. What can I get for you?"
+    return f"Welcome to {outlet_name}! I'm Kiosko. What can I get for you?"

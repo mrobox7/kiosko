@@ -3,7 +3,7 @@ function initials(name: string) {
   return ((words[0]?.[0] ?? '') + (words.length > 1 ? words[words.length - 1][0] : '')).toUpperCase() || '?'
 }
 
-/** The round picture before a message: the DishPatch badge, or the customer's initials. */
+/** The round picture before a message: the Kiosko badge, or the customer's initials. */
 export function Avatar({ who, name = '' }: { who: 'assistant' | 'user'; name?: string }) {
   if (who === 'assistant') {
     return (

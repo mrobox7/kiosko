@@ -4,7 +4,7 @@ import { ChatIcon, ChevronLeftIcon, RetryIcon } from '../ui/Icons'
 import { IconButton } from '../ui/IconButton'
 import { Brand } from './Brand'
 
-/** The logo, or "Back" while a category is open; "Ask DishPatch"; and a round button that starts
+/** The logo, or "Back" while a category is open; "Ask Kiosko"; and a round button that starts
  * the order over. */
 export function TopBar({
   outletName,
@@ -40,7 +40,7 @@ export function TopBar({
       <div className="flex items-center gap-2">
         <Button onClick={onAsk}>
           <ChatIcon width={20} height={20} />
-          Ask DishPatch
+          Ask Kiosko
         </Button>
         <IconButton label="Start over" className="bg-tile" onClick={onStartOver}>
           <RetryIcon width={22} height={22} />
